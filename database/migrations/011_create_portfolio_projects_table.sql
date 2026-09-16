@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS portfolio_projects (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    title VARCHAR(200) NOT NULL,
+    slug VARCHAR(220) NOT NULL,
+    category_id INT UNSIGNED NULL,
+    industry VARCHAR(120) NULL,
+    summary VARCHAR(400) NULL,
+    challenge TEXT NULL,
+    solution TEXT NULL,
+    outcome TEXT NULL,
+    technologies VARCHAR(255) NULL,
+    featured_image VARCHAR(255) NULL,
+    gallery TEXT NULL,
+    status ENUM('draft', 'published') NOT NULL DEFAULT 'draft',
+    is_demo TINYINT(1) NOT NULL DEFAULT 1,
+    sort_order SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_portfolio_slug (slug),
+    KEY idx_portfolio_status (status),
+    CONSTRAINT fk_portfolio_category FOREIGN KEY (category_id) REFERENCES service_categories (id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

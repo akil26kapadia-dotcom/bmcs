@@ -1,0 +1,18 @@
+<?php
+
+use App\Core\View;
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= View::e($title ?? 'Admin Login') ?> | BMCS Admin</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" href="/assets/images/logo-placeholder.svg" type="image/svg+xml">
+    <link rel="stylesheet" href="/assets/css/app.css">
+</head>
+<body class="bg-navy-950 min-h-screen flex items-center justify-center px-6">
+    <?= $content ?? '' ?>
+</body>
+</html>

@@ -1,0 +1,22 @@
+{
+  "name": "bmcs-website",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Tailwind CSS + JS build pipeline for the Bright Mind Computer Solutions website",
+  "scripts": {
+    "dev:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css --watch",
+    "dev:js": "esbuild resources/js/app.js --bundle --outfile=public/assets/js/app.js --watch",
+    "dev:admin-js": "esbuild resources/js/admin.js --bundle --outfile=public/assets/js/admin.js --watch",
+    "dev": "npm run dev:css & npm run dev:js & npm run dev:admin-js",
+    "build:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css --minify",
+    "build:js": "esbuild resources/js/app.js --bundle --minify --outfile=public/assets/js/app.js",
+    "build:admin-js": "esbuild resources/js/admin.js --bundle --minify --outfile=public/assets/js/admin.js",
+    "build": "npm run build:css && npm run build:js && npm run build:admin-js"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.13",
+    "autoprefixer": "^10.4.20",
+    "postcss": "^8.4.47",
+    "esbuild": "^0.24.0"
+  }
+}

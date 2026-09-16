@@ -1,0 +1,57 @@
+<?php
+
+use App\Core\View;
+use App\Helpers\SEO;
+use App\Helpers\SiteConfig;
+use App\Helpers\Url;
+
+$siteName = SiteConfig::get('site_name');
+$pageTitle = $title ?? $siteName;
+$metaDescription = $description ?? SiteConfig::get('default_seo_description', 'BMCS delivers enterprise IT infrastructure, networking, security, cloud and digital solutions across Dubai and the UAE.');
+$currentPath = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/', '/');
+$canonicalUrl = $canonicalOverride ?? Url::full($currentPath);
+$fullTitle = $pageTitle === $siteName ? $siteName : $pageTitle . ' | ' . $siteName;
+
+$ogImagePath = $ogImage ?? null;
+$schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $schema : [$schema]) : [];
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= View::e($fullTitle) ?></title>
+    <meta name="description" content="<?= View::e($metaDescription) ?>">
+    <link rel="canonical" href="<?= View::e($canonicalUrl) ?>">
+
+    <?= SEO::openGraph([
+        'title' => $ogTitle ?? $fullTitle,
+        'description' => $ogDescription ?? $metaDescription,
+        'url' => $canonicalUrl,
+        'image' => $ogImagePath ? Url::full($ogImagePath) : null,
+        'type' => $ogType ?? 'website',
+    ]) ?>
+
+    <link rel="icon" href="/assets/images/logo-placeholder.svg" type="image/svg+xml">
+
+    <link rel="preload" href="/assets/fonts/inter/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="stylesheet" href="/assets/css/app.css">
+
+    <?php foreach ($schemaList as $schemaItem): ?>
+        <?= SEO::schema($schemaItem) ?>
+    <?php endforeach; ?>
+</head>
+<body class="bg-white">
+    <a href="#main-content" class="skip-link">Skip to content</a>
+
+    <?= View::capture('components/navbar', ['currentPath' => $currentPath]) ?>
+
+    <main id="main-content">
+        <?= $content ?? '' ?>
+    </main>
+
+    <?= View::capture('components/footer') ?>
+
+    <script src="/assets/js/app.js" defer></script>
+</body>
+</html>

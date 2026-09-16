@@ -1,0 +1,18 @@
+# Defense in depth: this directory should only ever contain images (enforced
+# server-side by FileUpload, which writes files under server-generated names
+# with extensions from a fixed allow-list). This blocks script execution and
+# directory listing even if that assumption is ever violated.
+#
+# Uses Require/Deny (not php_flag) so it works whether PHP runs as an Apache
+# module or via PHP-FPM/CGI — php_flag would cause a 500 error under FPM.
+<FilesMatch "\.(php|phtml|php\d?|pl|py|cgi|asp|aspx|sh|exe)$">
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
+</FilesMatch>
+
+Options -Indexes

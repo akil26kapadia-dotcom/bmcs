@@ -1,0 +1,22 @@
+CREATE TABLE IF NOT EXISTS services (
+    id INT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
+    category_id INT UNSIGNED NULL,
+    name VARCHAR(150) NOT NULL,
+    slug VARCHAR(170) NOT NULL,
+    short_description VARCHAR(300) NULL,
+    description LONGTEXT NULL,
+    icon VARCHAR(60) NULL,
+    featured_image VARCHAR(255) NULL,
+    is_featured TINYINT(1) NOT NULL DEFAULT 0,
+    sort_order SMALLINT UNSIGNED NOT NULL DEFAULT 0,
+    meta_title VARCHAR(200) NULL,
+    meta_description VARCHAR(300) NULL,
+    canonical_url VARCHAR(255) NULL,
+    status ENUM('draft', 'published') NOT NULL DEFAULT 'published',
+    created_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+    UNIQUE KEY uq_services_slug (slug),
+    KEY idx_services_category (category_id),
+    KEY idx_services_status (status),
+    CONSTRAINT fk_services_category FOREIGN KEY (category_id) REFERENCES service_categories (id) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
