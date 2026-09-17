@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\View;
+use App\Helpers\Asset;
 use App\Helpers\SEO;
 use App\Helpers\SiteConfig;
 use App\Helpers\Url;
@@ -38,7 +39,7 @@ $schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $s
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
 
     <link rel="preload" href="/assets/fonts/inter/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
-    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="<?= View::e(Asset::versioned('/assets/css/app.css')) ?>">
     <noscript><style>#site-preloader{display:none}</style></noscript>
 
     <?php foreach ($schemaList as $schemaItem): ?>
@@ -60,6 +61,6 @@ $schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $s
 
     <?= View::capture('components/footer') ?>
 
-    <script src="/assets/js/app.js" defer></script>
+    <script src="<?= View::e(Asset::versioned('/assets/js/app.js')) ?>" defer></script>
 </body>
 </html>

@@ -11,6 +11,19 @@ use App\Core\View;
  */
 class Asset
 {
+    /**
+     * Appends a cache-busting query string (the file's mtime) to a public
+     * asset path, so browsers and the host's CDN always fetch the current
+     * build after a deploy instead of serving a stale cached copy.
+     */
+    public static function versioned(string $path): string
+    {
+        $fullPath = __DIR__ . '/../../public' . $path;
+        $version = is_file($fullPath) ? filemtime($fullPath) : time();
+
+        return $path . '?v=' . $version;
+    }
+
     public static function img(
         string $src,
         string $alt,

@@ -230,6 +230,15 @@
     @apply opacity-100 visible translate-y-0;
   }
 
+  /* --- Navbar search panel --- */
+  [data-search-panel] {
+    @apply opacity-0 invisible translate-y-2 transition-all duration-200 ease-premium z-50;
+  }
+
+  [data-search-panel].is-open {
+    @apply opacity-100 visible translate-y-0;
+  }
+
   /* --- Mobile menu panel --- */
   [data-mobile-menu] {
     @apply translate-x-full transition-transform duration-300 ease-premium;
@@ -445,6 +454,10 @@
   }
 
   /* --- Dubai skyline silhouette (hero sections) --- */
+  .skyline-sunglow {
+    background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(232, 184, 75, 0.22), rgba(201, 122, 52, 0.08) 45%, transparent 75%);
+  }
+
   .skyline-horizon {
     stroke: rgba(232, 184, 75, 0.45);
     stroke-width: 1;

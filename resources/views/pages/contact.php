@@ -6,7 +6,7 @@ use App\Core\View;
     'items' => [['label' => 'Home', 'href' => '/'], ['label' => 'Contact', 'href' => null]],
 ]) ?>
 
-<section class="relative bg-navy-950 overflow-hidden">
+<section class="relative bg-gradient-to-b from-navy-950 via-navy-900 to-[#241a35] overflow-hidden">
     <div class="absolute inset-0 hero-grid opacity-50 pointer-events-none" aria-hidden="true"></div>
     <?= View::capture('components/dubai-skyline') ?>
     <div class="relative container-custom py-16 md:py-20 text-center">

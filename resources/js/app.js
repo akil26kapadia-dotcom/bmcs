@@ -95,6 +95,37 @@
     if (e.key === 'Escape') closeAllDropdowns();
   });
 
+  /* ---------------- Navbar search panel ---------------- */
+  var searchToggle = document.querySelector('[data-search-toggle]');
+  var searchPanel = document.querySelector('[data-search-panel]');
+
+  if (searchToggle && searchPanel) {
+    var searchInput = searchPanel.querySelector('[data-search-input]');
+
+    var closeSearch = function () {
+      searchPanel.classList.remove('is-open');
+      searchToggle.setAttribute('aria-expanded', 'false');
+    };
+
+    searchToggle.addEventListener('click', function (e) {
+      e.stopPropagation();
+      var isOpen = searchPanel.classList.contains('is-open');
+      closeAllDropdowns();
+      searchPanel.classList.toggle('is-open', !isOpen);
+      searchToggle.setAttribute('aria-expanded', String(!isOpen));
+      if (!isOpen && searchInput) searchInput.focus();
+    });
+
+    searchPanel.addEventListener('click', function (e) {
+      e.stopPropagation();
+    });
+
+    document.addEventListener('click', closeSearch);
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') closeSearch();
+    });
+  }
+
   /* ---------------- Category filter + optional search (services, portfolio, etc.) ---------------- */
   document.querySelectorAll('[data-filter-group]').forEach(function (group) {
     var targetSelector = group.getAttribute('data-filter-group');

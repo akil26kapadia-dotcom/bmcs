@@ -104,9 +104,19 @@ $email = SiteConfig::get('site_email');
             </nav>
 
             <div class="hidden lg:flex items-center gap-3">
-                <a href="/search" aria-label="Search the site" class="inline-flex items-center justify-center w-10 h-10 rounded-md text-ink-700 hover:bg-navy-950/5 hover:text-navy-950">
-                    <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M18 18l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
-                </a>
+                <div class="relative">
+                    <button type="button" data-search-toggle aria-label="Search the site" aria-expanded="false" aria-controls="nav-search-panel" class="inline-flex items-center justify-center w-10 h-10 rounded-md text-ink-700 hover:bg-navy-950/5 hover:text-navy-950">
+                        <svg class="w-5 h-5" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M18 18l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                    </button>
+                    <div id="nav-search-panel" data-search-panel class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-card-hover border border-ink-900/[0.06] p-3">
+                        <form action="/search" method="GET" class="relative">
+                            <label for="nav-search-input" class="sr-only">Search the site</label>
+                            <input type="search" id="nav-search-input" name="q" data-search-input placeholder="Search services, portfolio, articles&hellip;"
+                                   class="w-full rounded-lg border border-ink-300 pl-9 pr-3 py-2.5 text-sm text-navy-950 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent">
+                            <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-ink-500" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M18 18l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+                        </form>
+                    </div>
+                </div>
                 <?= Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'primary', 'icon' => true]) ?>
             </div>
 

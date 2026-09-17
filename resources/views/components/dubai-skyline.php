@@ -13,6 +13,8 @@ use App\Core\View;
  */
 $heightClass = $heightClass ?? 'h-16 md:h-20 lg:h-24';
 ?>
+<div class="absolute inset-x-0 bottom-0 h-40 md:h-56 skyline-sunglow pointer-events-none" aria-hidden="true"></div>
+
 <svg class="absolute inset-x-0 bottom-0 w-full <?= View::e($heightClass) ?> pointer-events-none skyline-svg" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
     <defs>
         <linearGradient id="skylineFade" x1="0" y1="0" x2="0" y2="1">

@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\View;
+use App\Helpers\Asset;
 
 $pageTitle = $title ?? 'Admin';
 $currentPath = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/', '/');
@@ -14,7 +15,7 @@ $currentPath = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
-    <link rel="stylesheet" href="/assets/css/app.css">
+    <link rel="stylesheet" href="<?= View::e(Asset::versioned('/assets/css/app.css')) ?>">
 </head>
 <body class="bg-ink-100/40">
     <?= View::capture('components/admin/sidebar', ['currentPath' => $currentPath]) ?>
@@ -38,6 +39,6 @@ $currentPath = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '
         </main>
     </div>
 
-    <script src="/assets/js/admin.js" defer></script>
+    <script src="<?= View::e(Asset::versioned('/assets/js/admin.js')) ?>" defer></script>
 </body>
 </html>
