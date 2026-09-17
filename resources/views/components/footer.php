@@ -25,8 +25,11 @@ $quickLinks = [
     ['label' => 'Contact', 'href' => '/contact'],
 ];
 ?>
-<footer class="bg-navy-950 text-white/70">
-    <div class="container-custom section-py !py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
+<footer class="relative bg-navy-950 text-white/70 overflow-hidden">
+    <img src="/assets/images/footer/dubai-skyline-line.png" alt="" aria-hidden="true"
+         class="absolute top-0 inset-x-0 w-full h-32 md:h-40 lg:h-48 object-cover object-bottom mix-blend-multiply opacity-90 pointer-events-none select-none">
+
+    <div class="relative z-10 container-custom section-py !py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
         <div class="lg:col-span-4">
             <a href="/" class="flex items-center gap-3">
                 <img src="/assets/images/logo-mark.png" alt="Bright Mind Computer Solutions logo" width="38" height="48" class="h-12 w-auto logo-glow">
@@ -69,7 +72,7 @@ $quickLinks = [
         </div>
     </div>
 
-    <div class="border-t border-white/10">
+    <div class="relative z-10 border-t border-white/10">
         <div class="container-custom py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/50">
             <p>&copy; <?= date('Y') ?> Bright Mind Computer Solutions. All rights reserved.</p>
             <div class="flex items-center gap-6">
