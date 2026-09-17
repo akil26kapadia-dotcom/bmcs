@@ -53,8 +53,10 @@ $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class)
                 ['icon' => 'phone', 'label' => 'Telecommunication'],
                 ['icon' => 'monitor', 'label' => 'Digital Solutions'],
             ] as $i => $item): ?>
-                <div class="flex flex-col items-center text-center gap-2" data-animate="fade-up" data-delay="<?= $i * 60 ?>">
-                    <span class="text-gold-600"><?= $icon($item['icon'], 'w-7 h-7') ?></span>
+                <div class="group flex flex-col items-center text-center gap-3" data-animate="fade-up" data-delay="<?= $i * 60 ?>">
+                    <span class="icon-badge icon-badge-round">
+                        <?= $icon($item['icon'], 'w-6 h-6') ?>
+                    </span>
                     <span class="text-xs font-medium text-ink-700"><?= View::e($item['label']) ?></span>
                 </div>
             <?php endforeach; ?>
