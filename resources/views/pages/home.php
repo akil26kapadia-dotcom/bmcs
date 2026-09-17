@@ -46,7 +46,7 @@ $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class)
     <div class="container-custom py-10">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             <?php foreach ([
-                ['icon' => 'network', 'label' => 'IT Infrastructure'],
+                ['icon' => 'server', 'label' => 'IT Infrastructure'],
                 ['icon' => 'network', 'label' => 'Networking'],
                 ['icon' => 'shield', 'label' => 'Security'],
                 ['icon' => 'cloud', 'label' => 'Cloud'],

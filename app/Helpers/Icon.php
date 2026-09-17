@@ -9,7 +9,8 @@ namespace App\Helpers;
 class Icon
 {
     private const PATHS = [
-        'network' => '<path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 13a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-1 1H4a1 1 0 01-1-1v-3z"/>',
+        'network' => '<circle cx="4.5" cy="5" r="2.2"/><circle cx="15.5" cy="5" r="2.2"/><circle cx="10" cy="15.5" r="2.2"/><path d="M6.3 6.3L8.6 13M13.7 6.3L11.4 13M6.7 5H13.3" stroke="currentColor" stroke-width="1.4" fill="none" stroke-linecap="round"/>',
+        'server' => '<rect x="3" y="3" width="14" height="5" rx="1.2"/><rect x="3" y="12" width="14" height="5" rx="1.2"/><circle cx="6.2" cy="5.5" r="0.9" fill="#fff" fill-opacity="0.85"/><circle cx="6.2" cy="14.5" r="0.9" fill="#fff" fill-opacity="0.85"/>',
         'cloud' => '<path d="M5.5 13a3.5 3.5 0 01-.42-6.98A4.5 4.5 0 0113.9 7.3 3.5 3.5 0 0114 13H5.5z"/>',
         'shield' => '<path fill-rule="evenodd" d="M10 1l7 3v5c0 4.5-3 8.2-7 9-4-.8-7-4.5-7-9V4l7-3z" clip-rule="evenodd"/>',
         'phone' => '<path d="M3.5 3A1.5 1.5 0 002 4.5v.5c0 7.732 6.268 14 14 14h.5a1.5 1.5 0 001.5-1.5v-2.086a1.5 1.5 0 00-1.048-1.43l-3.176-1.058a1.5 1.5 0 00-1.638.44l-.72.84a11.04 11.04 0 01-5.124-5.124l.84-.72a1.5 1.5 0 00.44-1.638L6.516 3.048A1.5 1.5 0 005.086 2H3.5z"/>',
