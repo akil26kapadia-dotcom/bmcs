@@ -3,6 +3,24 @@
 
   var reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+  /* ---------------- Preloader ---------------- */
+  var preloader = document.getElementById('site-preloader');
+  if (preloader) {
+    var hidePreloader = function () {
+      preloader.classList.add('is-hidden');
+      window.setTimeout(function () {
+        if (preloader.parentNode) preloader.parentNode.removeChild(preloader);
+      }, 600);
+    };
+    if (document.readyState === 'complete') {
+      hidePreloader();
+    } else {
+      window.addEventListener('load', hidePreloader);
+    }
+    // Safety net: never let a slow/failed load event block the page.
+    window.setTimeout(hidePreloader, 2500);
+  }
+
   /* ---------------- Sticky navbar: compact on scroll ---------------- */
   var header = document.querySelector('[data-site-header]');
   if (header) {

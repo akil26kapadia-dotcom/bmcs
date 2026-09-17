@@ -15,6 +15,7 @@ $categories = $categories ?? [];
 
 <section class="relative bg-navy-950 overflow-hidden">
     <div class="absolute inset-0 hero-grid opacity-50 pointer-events-none" aria-hidden="true"></div>
+    <?= View::capture('components/dubai-skyline') ?>
     <div class="relative container-custom py-16 md:py-20 text-center">
         <span class="eyebrow-on-dark">IT Distribution</span>
         <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">IT Products &amp; Distribution</h1>

@@ -443,4 +443,86 @@
   @keyframes dash-flow {
     to { stroke-dashoffset: -160; }
   }
+
+  /* --- Dubai skyline silhouette (hero sections) --- */
+  .skyline-horizon {
+    stroke: rgba(232, 184, 75, 0.45);
+    stroke-width: 1;
+    filter: drop-shadow(0 0 6px rgba(232, 184, 75, 0.55));
+  }
+
+  .skyline-light circle {
+    fill: rgba(245, 215, 140, 0.95);
+    animation: skyline-twinkle 3.6s ease-in-out infinite;
+  }
+
+  @keyframes skyline-twinkle {
+    0%, 100% { opacity: 0.15; }
+    50% { opacity: 1; }
+  }
+
+  .skyline-beacon {
+    fill: #e8b84b;
+    filter: drop-shadow(0 0 5px rgba(232, 184, 75, 0.9));
+    animation: skyline-beacon 2s ease-in-out infinite;
+  }
+
+  @keyframes skyline-beacon {
+    0%, 100% { opacity: 0.35; }
+    50% { opacity: 1; }
+  }
+
+  /* --- Logo glow (navbar / preloader) --- */
+  .logo-glow {
+    filter: drop-shadow(0 0 0 rgba(232, 184, 75, 0));
+    transition: filter 0.3s ease-premium;
+  }
+
+  .group:hover .logo-glow,
+  a:hover .logo-glow {
+    filter: drop-shadow(0 0 10px rgba(232, 184, 75, 0.55));
+  }
+
+  /* --- Glowing pulse ring (hero primary CTA) --- */
+  .glow-pulse {
+    @apply relative;
+  }
+
+  .glow-pulse::before {
+    content: '';
+    @apply absolute inset-0 rounded-md pointer-events-none;
+    box-shadow: 0 0 0 0 rgba(232, 184, 75, 0.55);
+    animation: glow-pulse-ring 2.6s ease-out infinite;
+  }
+
+  @keyframes glow-pulse-ring {
+    0% { box-shadow: 0 0 0 0 rgba(232, 184, 75, 0.55); }
+    70% { box-shadow: 0 0 0 14px rgba(232, 184, 75, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(232, 184, 75, 0); }
+  }
+
+  /* --- Preloader --- */
+  #site-preloader {
+    @apply fixed inset-0 z-[200] flex items-center justify-center bg-navy-950 transition-opacity duration-500 ease-premium;
+  }
+
+  #site-preloader.is-hidden {
+    @apply opacity-0 pointer-events-none;
+  }
+
+  #site-preloader .preloader-logo {
+    animation: preloader-pulse 1.6s ease-in-out infinite;
+    filter: drop-shadow(0 0 16px rgba(232, 184, 75, 0.5));
+  }
+
+  @keyframes preloader-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.85; }
+    50% { transform: scale(1.08); opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    #site-preloader {
+      display: none;
+    }
+  }
 }

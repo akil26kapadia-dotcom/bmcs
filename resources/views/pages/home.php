@@ -35,7 +35,7 @@ $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class)
             businesses in Dubai and across the UAE operate smarter, safer and more efficiently.
         </p>
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="240">
-            <?= Html::button(['href' => '/solutions', 'label' => 'Explore Our Solutions', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= Html::button(['href' => '/solutions', 'label' => 'Explore Our Solutions', 'variant' => 'primary', 'icon' => true, 'class' => 'glow-pulse']) ?>
             <?= Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'outline-light']) ?>
         </div>
     </div>

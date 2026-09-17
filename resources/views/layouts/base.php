@@ -39,12 +39,17 @@ $schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $s
 
     <link rel="preload" href="/assets/fonts/inter/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/app.css">
+    <noscript><style>#site-preloader{display:none}</style></noscript>
 
     <?php foreach ($schemaList as $schemaItem): ?>
         <?= SEO::schema($schemaItem) ?>
     <?php endforeach; ?>
 </head>
 <body class="bg-white">
+    <div id="site-preloader" role="status" aria-label="Loading">
+        <img src="/assets/images/logo-mark.png" alt="" width="72" height="90" class="preloader-logo h-20 w-auto">
+    </div>
+
     <a href="#main-content" class="skip-link">Skip to content</a>
 
     <?= View::capture('components/navbar', ['currentPath' => $currentPath]) ?>

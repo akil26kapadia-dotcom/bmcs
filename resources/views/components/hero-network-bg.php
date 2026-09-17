@@ -1,4 +1,7 @@
 <?php
+
+use App\Core\View;
+
 /**
  * Purely decorative animated background for the hero: dot/line grid,
  * a soft gold glow, drifting "capability" glass cards, and a handful of
@@ -16,6 +19,8 @@
     <line class="network-line" x1="70%" y1="70%" x2="92%" y2="35%" />
     <line class="network-line" x1="55%" y1="30%" x2="80%" y2="15%" />
 </svg>
+
+<?= View::capture('components/dubai-skyline', ['heightClass' => 'h-24 md:h-36 lg:h-44']) ?>
 
 <div class="hero-float-card hero-float-1" aria-hidden="true">
     <svg class="w-4 h-4 text-gold-400" viewBox="0 0 20 20" fill="currentColor"><path d="M5.5 13a3.5 3.5 0 01-.42-6.98A4.5 4.5 0 0113.9 7.3 3.5 3.5 0 0114 13H5.5z"/></svg>
