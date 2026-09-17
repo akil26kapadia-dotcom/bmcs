@@ -75,10 +75,10 @@ $email = SiteConfig::get('site_email');
                                     data-dropdown-toggle
                                     aria-expanded="false"
                                     aria-controls="<?= View::e($item['dropdown']) ?>"
-                                    class="flex items-center gap-1 px-4 py-2 rounded-md text-sm font-medium transition-colors
-                                           <?= $isActive($item['href']) ? 'text-navy-950' : 'text-ink-700 hover:text-navy-950' ?>">
+                                    class="nav-link flex items-center gap-1 px-4 py-2 rounded-md text-sm font-medium transition-colors
+                                           <?= $isActive($item['href']) ? 'text-navy-950 is-active' : 'text-ink-700 hover:text-navy-950' ?>">
                                 <?= View::e($item['label']) ?>
-                                <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+                                <svg class="w-3.5 h-3.5 transition-transform duration-300 ease-premium" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                             </button>
                             <div id="<?= View::e($item['dropdown']) ?>" data-dropdown-menu
                                  class="absolute left-1/2 -translate-x-1/2 mt-2 w-[36rem] bg-white rounded-xl shadow-card-hover border border-ink-900/[0.06] p-6 grid grid-cols-2 gap-x-8 gap-y-1">
@@ -95,8 +95,8 @@ $email = SiteConfig::get('site_email');
                         </div>
                     <?php else: ?>
                         <a href="<?= View::e($item['href']) ?>"
-                           class="px-4 py-2 rounded-md text-sm font-medium transition-colors
-                                  <?= $isActive($item['href']) ? 'text-navy-950' : 'text-ink-700 hover:text-navy-950' ?>">
+                           class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-colors
+                                  <?= $isActive($item['href']) ? 'text-navy-950 is-active' : 'text-ink-700 hover:text-navy-950' ?>">
                             <?= View::e($item['label']) ?>
                         </a>
                     <?php endif; ?>
