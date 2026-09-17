@@ -27,7 +27,7 @@ $quickLinks = [
 ?>
 <footer class="relative bg-navy-950 text-white/70 overflow-hidden">
     <img src="/assets/images/footer/dubai-skyline-line.png" alt="" aria-hidden="true"
-         class="absolute bottom-0 inset-x-0 w-full h-32 md:h-40 lg:h-48 object-cover object-bottom invert mix-blend-screen opacity-80 pointer-events-none select-none">
+         class="absolute bottom-0 inset-x-0 w-full h-32 md:h-40 lg:h-48 object-cover object-bottom invert brightness-150 mix-blend-screen opacity-100 pointer-events-none select-none">
 
     <div class="relative z-10 container-custom section-py !py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
         <div class="lg:col-span-4">
