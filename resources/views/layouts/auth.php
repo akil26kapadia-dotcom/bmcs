@@ -9,7 +9,8 @@ use App\Core\View;
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= View::e($title ?? 'Admin Login') ?> | BMCS Admin</title>
     <meta name="robots" content="noindex, nofollow">
-    <link rel="icon" href="/assets/images/logo-placeholder.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
     <link rel="stylesheet" href="/assets/css/app.css">
 </head>
 <body class="bg-navy-950 min-h-screen flex items-center justify-center px-6">

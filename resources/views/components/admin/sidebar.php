@@ -20,7 +20,7 @@ $navItems = [
 
 <aside data-admin-sidebar class="admin-sidebar">
     <div class="px-5 py-6 flex items-center gap-3 border-b border-white/10">
-        <img src="/assets/images/logo-placeholder.svg" alt="BMCS" width="32" height="32" class="h-8 w-8">
+        <img src="/assets/images/logo-mark.png" alt="BMCS" width="26" height="32" class="h-8 w-auto">
         <span class="font-bold text-white tracking-tight">BMCS Admin</span>
     </div>
 

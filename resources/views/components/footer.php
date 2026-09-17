@@ -29,7 +29,7 @@ $quickLinks = [
     <div class="container-custom section-py !py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
         <div class="lg:col-span-4">
             <a href="/" class="flex items-center gap-3">
-                <img src="/assets/images/logo-placeholder.svg" alt="Bright Mind Computer Solutions logo" width="40" height="40" class="h-10 w-10">
+                <img src="/assets/images/logo-mark.png" alt="Bright Mind Computer Solutions logo" width="32" height="40" class="h-10 w-auto">
                 <span class="leading-tight">
                     <span class="block text-base font-bold text-white tracking-tight">BRIGHT MIND</span>
                     <span class="block text-[11px] font-medium text-white/50 tracking-wide uppercase">Computer Solutions</span>

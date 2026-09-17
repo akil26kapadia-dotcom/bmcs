@@ -32,7 +32,10 @@ $schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $s
         'type' => $ogType ?? 'website',
     ]) ?>
 
-    <link rel="icon" href="/assets/images/logo-placeholder.svg" type="image/svg+xml">
+    <link rel="icon" type="image/png" sizes="32x32" href="/assets/images/favicon-32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/assets/images/favicon-16.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
 
     <link rel="preload" href="/assets/fonts/inter/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
     <link rel="stylesheet" href="/assets/css/app.css">

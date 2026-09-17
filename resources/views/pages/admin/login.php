@@ -8,7 +8,7 @@ $error = $error ?? null;
 <div class="w-full max-w-sm hero-grid relative">
     <div class="relative bg-white rounded-2xl shadow-premium p-8">
         <div class="flex items-center gap-3 justify-center mb-6">
-            <img src="/assets/images/logo-placeholder.svg" alt="BMCS" width="40" height="40" class="h-10 w-10">
+            <img src="/assets/images/logo-mark.png" alt="BMCS" width="32" height="40" class="h-10 w-auto">
             <span class="font-bold text-navy-950 tracking-tight">BRIGHT MIND</span>
         </div>
         <h1 class="text-lg font-semibold text-navy-950 text-center">Admin Login</h1>
