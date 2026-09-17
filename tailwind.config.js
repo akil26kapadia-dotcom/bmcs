@@ -41,6 +41,7 @@ module.exports = {
         premium: "0 20px 60px -15px rgba(10, 20, 40, 0.35)",
         card: "0 1px 2px rgba(15, 23, 42, 0.04), 0 8px 24px -8px rgba(15, 23, 42, 0.08)",
         "card-hover": "0 1px 2px rgba(15, 23, 42, 0.06), 0 24px 48px -16px rgba(15, 23, 42, 0.18)",
+        glow: "0 0 0 1px rgba(232, 184, 75, 0.25), 0 16px 40px -12px rgba(232, 184, 75, 0.5)",
       },
       transitionTimingFunction: {
         premium: "cubic-bezier(0.16, 1, 0.3, 1)",

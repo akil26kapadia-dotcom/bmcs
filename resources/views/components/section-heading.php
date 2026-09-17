@@ -20,9 +20,12 @@ $eyebrowClass = $onDark ? 'eyebrow-on-dark' : 'eyebrow';
 ?>
 <div class="<?= $wrapClass ?> <?= $align === 'left' ? $maxWidth : '' ?>">
     <?php if ($eyebrow): ?>
-        <span class="<?= $eyebrowClass ?>"><?= View::e($eyebrow) ?></span>
+        <span class="<?= $eyebrowClass ?> inline-flex items-center gap-3 <?= $align === 'center' ? 'justify-center' : '' ?>">
+            <span class="h-px w-8 <?= $onDark ? 'bg-gold-400' : 'bg-gold-500' ?>"></span>
+            <?= View::e($eyebrow) ?>
+        </span>
     <?php endif; ?>
-    <h2 class="mt-3 text-3xl md:text-4xl font-semibold tracking-tight <?= $titleColor ?>">
+    <h2 class="mt-3 text-3xl md:text-4xl lg:text-[2.75rem] font-bold tracking-tight leading-[1.15] <?= $titleColor ?>">
         <?= View::e($title) ?>
     </h2>
     <?php if ($subtitle): ?>

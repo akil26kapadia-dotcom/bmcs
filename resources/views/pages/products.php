@@ -28,8 +28,8 @@ $categories = $categories ?? [];
 <section class="section-py bg-white">
     <div class="container-custom grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <?php foreach ($categories as $i => $category): ?>
-            <div class="card p-7" data-animate="fade-up" data-delay="<?= ($i % 4) * 80 ?>">
-                <span class="inline-flex items-center justify-center w-12 h-12 rounded-lg bg-navy-950 text-gold-400">
+            <div class="group card card-hover p-7" data-animate="fade-up" data-delay="<?= ($i % 4) * 80 ?>">
+                <span class="icon-badge">
                     <?= Icon::svg($category['icon'], 'w-6 h-6') ?>
                 </span>
                 <h3 class="mt-5 font-semibold text-navy-950"><?= View::e($category['name']) ?></h3>

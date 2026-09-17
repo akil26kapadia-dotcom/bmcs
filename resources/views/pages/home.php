@@ -63,8 +63,9 @@ $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class)
 </section>
 
 <!-- ============================== ABOUT ============================== -->
-<section class="section-py bg-white overflow-hidden">
-    <div class="container-custom grid lg:grid-cols-2 gap-14 items-center">
+<section class="relative section-py bg-white overflow-hidden">
+    <div class="section-blob w-[28rem] h-[28rem] -top-32 -right-32" aria-hidden="true"></div>
+    <div class="relative container-custom grid lg:grid-cols-2 gap-14 items-center">
         <div class="relative" data-animate="fade-right">
             <img src="/assets/images/about/about-technician.webp"
                  alt="BMCS technician working on server and network equipment"
@@ -99,8 +100,9 @@ $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class)
 </section>
 
 <!-- ============================== SERVICES ============================== -->
-<section class="section-py bg-ink-100/50">
-    <div class="container-custom">
+<section class="relative section-py bg-ink-100/50 bg-dot-grid overflow-hidden">
+    <div class="section-blob w-[26rem] h-[26rem] -bottom-40 -left-40" aria-hidden="true"></div>
+    <div class="relative container-custom">
         <?= View::capture('components/section-heading', [
             'eyebrow' => 'What We Do',
             'title' => 'A Complete Range of IT & Technology Services',
