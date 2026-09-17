@@ -19,8 +19,8 @@ $categories = $categories ?? [];
              alt="Dubai skyline at sunset with the Burj Khalifa"
              width="1920" height="776" decoding="async" fetchpriority="high"
              class="w-full h-full object-cover">
-        <div class="absolute inset-0 bg-navy-950 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-navy-950/40"></div>
+        <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-navy-950/25"></div>
     </div>
     <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 md:py-20 text-center">
