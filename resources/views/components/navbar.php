@@ -8,6 +8,7 @@ $currentPath = $currentPath ?? '';
 
 $navItems = [
     ['label' => 'Home', 'href' => '/'],
+    ['label' => 'Tally Solutions', 'href' => '/solutions/tally-solutions'],
     ['label' => 'About', 'href' => '/about'],
     ['label' => 'Services', 'href' => '/services', 'dropdown' => 'services-menu'],
     ['label' => 'Solutions', 'href' => '/solutions'],
@@ -38,6 +39,7 @@ $isActive = function (string $href) use ($currentPath): bool {
 
 $phone = SiteConfig::get('site_phone');
 $email = SiteConfig::get('site_email');
+$whatsapp = SiteConfig::get('whatsapp_number');
 ?>
 <!-- Top announcement bar -->
 <div class="hidden md:block bg-navy-950 text-white/80 text-sm">
@@ -51,8 +53,14 @@ $email = SiteConfig::get('site_email');
                 <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M2.94 4.94A2 2 0 014.5 4h11a2 2 0 011.56.94L10 10.06 2.94 4.94zM2 6.34V14a2 2 0 002 2h12a2 2 0 002-2V6.34l-7.4 5.28a1 1 0 01-1.2 0L2 6.34z"/></svg>
                 <?= View::e($email) ?>
             </a>
+            <?php if ($whatsapp): ?>
+                <a href="https://wa.me/<?= View::e(preg_replace('/[^0-9]/', '', $whatsapp)) ?>" target="_blank" rel="noopener" class="flex items-center gap-2 hover:text-gold-400">
+                    <svg class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2a8 8 0 00-6.9 12.02L2 18l4.1-1.07A8 8 0 1010 2zm0 14.4a6.4 6.4 0 01-3.26-.9l-.23-.14-2.43.64.65-2.37-.15-.24A6.4 6.4 0 1116.4 10 6.41 6.41 0 0110 16.4z"/></svg>
+                    <?= View::e($whatsapp) ?>
+                </a>
+            <?php endif; ?>
         </div>
-        <a href="/contact" class="text-gold-400 hover:text-gold-300 font-medium">Request a Consultation &rarr;</a>
+        <a href="/contact" class="text-gold-400 hover:text-gold-300 font-medium">Request a Quotation &rarr;</a>
     </div>
 </div>
 

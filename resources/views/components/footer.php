@@ -5,6 +5,7 @@ use App\Core\View;
 
 $phone = SiteConfig::get('site_phone');
 $email = SiteConfig::get('site_email');
+$whatsapp = SiteConfig::get('whatsapp_number');
 $footerText = SiteConfig::get('footer_text');
 
 $serviceLinks = [
@@ -70,6 +71,9 @@ $quickLinks = [
             <ul class="mt-5 space-y-3 text-sm">
                 <li><a href="tel:<?= View::e(preg_replace('/\s+/', '', $phone)) ?>" class="hover:text-gold-400"><?= View::e($phone) ?></a></li>
                 <li><a href="mailto:<?= View::e($email) ?>" class="hover:text-gold-400"><?= View::e($email) ?></a></li>
+                <?php if ($whatsapp): ?>
+                    <li><a href="https://wa.me/<?= View::e(preg_replace('/[^0-9]/', '', $whatsapp)) ?>" target="_blank" rel="noopener" class="hover:text-gold-400">WhatsApp: <?= View::e($whatsapp) ?></a></li>
+                <?php endif; ?>
             </ul>
         </div>
     </div>

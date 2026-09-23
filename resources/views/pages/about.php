@@ -125,9 +125,6 @@ $categories = $categories ?? [];
     </div>
 </section>
 
-<!-- PARTNERS -->
-<?= View::capture('components/partners-strip') ?>
-
 <!-- CTA -->
 <section class="section-py bg-white">
     <div class="container-custom text-center">

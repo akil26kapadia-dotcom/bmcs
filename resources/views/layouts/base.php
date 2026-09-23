@@ -13,8 +13,26 @@ $currentPath = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '
 $canonicalUrl = $canonicalOverride ?? Url::full($currentPath);
 $fullTitle = $pageTitle === $siteName ? $siteName : $pageTitle . ' | ' . $siteName;
 
-$ogImagePath = $ogImage ?? null;
+$ogImagePath = $ogImage ?? '/assets/images/hero/hero-datacenter-1920.webp';
 $schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $schema : [$schema]) : [];
+
+$whatsapp = SiteConfig::get('whatsapp_number');
+
+$schemaList[] = [
+    '@context' => 'https://schema.org',
+    '@type' => 'Organization',
+    'name' => $siteName,
+    'url' => Url::full(''),
+    'logo' => Url::full('/assets/images/logo-mark.png'),
+    'image' => Url::full('/assets/images/logo-mark.png'),
+    'telephone' => SiteConfig::get('site_phone'),
+    'email' => SiteConfig::get('site_email'),
+    'address' => [
+        '@type' => 'PostalAddress',
+        'addressLocality' => 'Dubai',
+        'addressCountry' => 'AE',
+    ],
+];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -60,6 +78,14 @@ $schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $s
     </main>
 
     <?= View::capture('components/footer') ?>
+
+    <?php if ($whatsapp): ?>
+        <a href="https://wa.me/<?= View::e(preg_replace('/[^0-9]/', '', $whatsapp)) ?>" target="_blank" rel="noopener"
+           aria-label="Chat with BMCS on WhatsApp"
+           class="fixed bottom-6 right-6 z-50 inline-flex items-center justify-center w-14 h-14 rounded-full bg-[#25D366] text-white shadow-premium hover:-translate-y-1 hover:shadow-glow transition-all duration-300 ease-premium">
+            <svg class="w-7 h-7" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 2a8 8 0 00-6.9 12.02L2 18l4.1-1.07A8 8 0 1010 2zm0 14.4a6.4 6.4 0 01-3.26-.9l-.23-.14-2.43.64.65-2.37-.15-.24A6.4 6.4 0 1116.4 10 6.41 6.41 0 0110 16.4z"/></svg>
+        </a>
+    <?php endif; ?>
 
     <script src="<?= View::e(Asset::versioned('/assets/js/app.js')) ?>" defer></script>
 </body>

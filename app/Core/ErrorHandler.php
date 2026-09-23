@@ -20,7 +20,7 @@ class ErrorHandler
             http_response_code(500);
 
             if ($debug) {
-                echo '<pre style="padding:2rem;background:#0a1428;color:#fff;white-space:pre-wrap;">';
+                echo '<pre style="padding:2rem;background:#0f2340;color:#fff;white-space:pre-wrap;">';
                 echo htmlspecialchars($e->getMessage() . "\n\n" . $e->getTraceAsString());
                 echo '</pre>';
                 return;

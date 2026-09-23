@@ -8,35 +8,62 @@ $serviceCategories = $serviceCategories ?? [];
 $portfolioProjects = $portfolioProjects ?? [];
 $latestPosts = $latestPosts ?? [];
 $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class);
+$whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
 ?>
 
 <!-- ============================== HERO ============================== -->
 <section class="relative bg-navy-950 overflow-hidden">
     <div class="absolute inset-0">
-        <img src="/assets/images/hero/hero-datacenter-1920.webp"
-             srcset="/assets/images/hero/hero-datacenter-960.webp 960w, /assets/images/hero/hero-datacenter-1920.webp 1920w"
+        <img src="/assets/images/hero/dubai-skyline-1920.jpg"
+             srcset="/assets/images/hero/dubai-skyline-960.jpg 960w, /assets/images/hero/dubai-skyline-1920.jpg 1920w"
              sizes="100vw"
-             alt="Data center server hardware with glowing cooling fans, representing BMCS IT infrastructure services"
-             width="1920" height="1080"
-             class="w-full h-full object-cover opacity-40"
+             alt="Dubai skyline at sunset with the Burj Khalifa, representing BMCS's home market"
+             width="1920" height="776"
+             class="w-full h-full object-cover"
              fetchpriority="high" decoding="async">
-        <div class="absolute inset-0 bg-gradient-to-b from-navy-950/95 via-navy-950/85 to-navy-950"></div>
+        <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/70 to-navy-950"></div>
     </div>
 
     <?= View::capture('components/hero-network-bg') ?>
 
     <div class="relative container-custom pt-20 pb-28 md:pt-28 md:pb-40 lg:pt-36 lg:pb-48 text-center">
-        <span class="eyebrow-on-dark" data-animate="fade-up">Empowering Effective Solutions</span>
+        <span class="eyebrow-on-dark" data-animate="fade-up">TallyPrime Partner &amp; Complete IT Solutions</span>
         <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white max-w-4xl mx-auto leading-[1.1]" data-animate="fade-up" data-delay="80">
-            Technology That Moves Your Business Forward
+            TallyPrime &amp; Complete IT Solutions for Businesses in Dubai
         </h1>
         <p class="mt-6 text-lg text-white/70 max-w-2xl mx-auto leading-relaxed" data-animate="fade-up" data-delay="160">
-            Reliable IT infrastructure, security, networking and digital solutions designed to help
-            businesses in Dubai and across the UAE operate smarter, safer and more efficiently.
+            TallyPrime sales, renewal, customization and cloud solutions, combined with reliable IT support,
+            networking, cybersecurity, servers, CCTV and business technology services across the UAE.
         </p>
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="240">
-            <?= Html::button(['href' => '/solutions', 'label' => 'Explore Our Solutions', 'variant' => 'primary', 'icon' => true, 'class' => 'glow-pulse']) ?>
-            <?= Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'outline-light']) ?>
+            <?= Html::button(['href' => '/contact', 'label' => 'Request a Quotation', 'variant' => 'primary', 'icon' => true, 'class' => 'glow-pulse']) ?>
+            <?php if ($whatsapp): ?>
+                <a href="https://wa.me/<?= View::e(preg_replace('/[^0-9]/', '', $whatsapp)) ?>" target="_blank" rel="noopener" class="btn-outline-light">WhatsApp Us</a>
+            <?php endif; ?>
+        </div>
+    </div>
+</section>
+
+<!-- ============================== TALLY SOLUTIONS ============================== -->
+<section class="relative section-py bg-white overflow-hidden">
+    <div class="section-blob w-96 h-96 -top-32 -right-20" aria-hidden="true"></div>
+    <div class="relative container-custom">
+        <?= View::capture('components/section-heading', [
+            'eyebrow' => 'Authorized TallyPrime Partner',
+            'title' => 'Complete TallyPrime Solutions for Your Business',
+            'subtitle' => 'From licensing and renewal to customization, cloud hosting and support — everything you need to run TallyPrime with confidence.',
+            'align' => 'center',
+        ]) ?>
+
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            <?php foreach ($tallyServices as $i => $service): ?>
+                <?= View::capture('components/service-card', ['service' => $service, 'icon' => 'coin', 'delay' => ($i % 6) * 60]) ?>
+            <?php endforeach; ?>
+        </div>
+
+        <div class="mt-12 text-center">
+            <?= Html::button(['href' => '/solutions/tally-solutions', 'label' => 'View All Tally Solutions', 'variant' => 'secondary', 'icon' => true]) ?>
         </div>
     </div>
 </section>
@@ -185,9 +212,6 @@ $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class)
         </div>
     </div>
 </section>
-
-<!-- ============================== PARTNERS ============================== -->
-<?= View::capture('components/partners-strip') ?>
 
 <!-- ============================== PORTFOLIO ============================== -->
 <section class="section-py bg-white">

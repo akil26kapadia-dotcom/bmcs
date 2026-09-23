@@ -18,8 +18,8 @@ $heightClass = $heightClass ?? 'h-16 md:h-20 lg:h-24';
 <svg class="absolute inset-x-0 bottom-0 w-full <?= View::e($heightClass) ?> pointer-events-none skyline-svg" viewBox="0 0 1440 220" preserveAspectRatio="none" aria-hidden="true">
     <defs>
         <linearGradient id="skylineFade" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#050c1a" stop-opacity="0" />
-            <stop offset="100%" stop-color="#050c1a" stop-opacity="1" />
+            <stop offset="0%" stop-color="#0a1830" stop-opacity="0" />
+            <stop offset="100%" stop-color="#0a1830" stop-opacity="1" />
         </linearGradient>
     </defs>
 
@@ -27,7 +27,7 @@ $heightClass = $heightClass ?? 'h-16 md:h-20 lg:h-24';
     <line x1="0" y1="176" x2="1440" y2="176" class="skyline-horizon" />
 
     <!-- back row (further, lighter) -->
-    <g fill="#0f1f3d" opacity="0.55">
+    <g fill="#15305a" opacity="0.55">
         <rect x="40" y="120" width="46" height="56" />
         <rect x="150" y="100" width="34" height="76" />
         <rect x="260" y="130" width="52" height="46" />
@@ -38,7 +38,7 @@ $heightClass = $heightClass ?? 'h-16 md:h-20 lg:h-24';
     </g>
 
     <!-- front row (closer, solid) -->
-    <g fill="#0a1428">
+    <g fill="#0f2340">
         <rect x="0" y="150" width="38" height="26" />
         <rect x="95" y="132" width="42" height="44" />
         <rect x="190" y="150" width="30" height="26" />
