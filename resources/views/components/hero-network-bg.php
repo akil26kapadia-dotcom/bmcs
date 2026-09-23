@@ -2,20 +2,27 @@
 
 /**
  * Purely decorative animated background for the hero: dot/line grid,
- * a soft gold glow, drifting "capability" glass cards, and a handful of
- * animated connection lines. No content lives here — safe to reorder
- * or remove without affecting page meaning. Respects prefers-reduced-motion
- * via the global CSS rule in app.css.
+ * a soft gold glow, a scattered twinkling dot field (echoing distant city
+ * lights against the night skyline photo), and drifting "capability" glass
+ * cards. No content lives here — safe to reorder or remove without
+ * affecting page meaning. Respects prefers-reduced-motion via the global
+ * CSS rule in app.css.
  */
 ?>
 <div class="absolute inset-0 hero-grid pointer-events-none" aria-hidden="true"></div>
 <div class="absolute -top-32 left-1/2 -translate-x-1/2 w-[640px] h-[640px] hero-glow pointer-events-none" aria-hidden="true"></div>
 
 <svg class="absolute inset-0 w-full h-full pointer-events-none" aria-hidden="true" preserveAspectRatio="none">
-    <line class="network-line" x1="8%" y1="20%" x2="30%" y2="55%" />
-    <line class="network-line" x1="30%" y1="55%" x2="55%" y2="30%" />
-    <line class="network-line" x1="70%" y1="70%" x2="92%" y2="35%" />
-    <line class="network-line" x1="55%" y1="30%" x2="80%" y2="15%" />
+    <circle class="hero-dot" cx="10%" cy="22%" r="1.6" style="animation-delay:0s" />
+    <circle class="hero-dot" cx="22%" cy="68%" r="1.3" style="animation-delay:0.5s" />
+    <circle class="hero-dot" cx="35%" cy="15%" r="1.8" style="animation-delay:1s" />
+    <circle class="hero-dot" cx="48%" cy="45%" r="1.3" style="animation-delay:1.5s" />
+    <circle class="hero-dot" cx="18%" cy="42%" r="1.4" style="animation-delay:2s" />
+    <circle class="hero-dot" cx="62%" cy="20%" r="1.6" style="animation-delay:0.8s" />
+    <circle class="hero-dot" cx="72%" cy="60%" r="1.3" style="animation-delay:2.4s" />
+    <circle class="hero-dot" cx="85%" cy="30%" r="1.8" style="animation-delay:1.2s" />
+    <circle class="hero-dot" cx="90%" cy="72%" r="1.4" style="animation-delay:1.8s" />
+    <circle class="hero-dot" cx="55%" cy="78%" r="1.3" style="animation-delay:0.3s" />
 </svg>
 
 <div class="hero-float-card hero-float-1" aria-hidden="true">
