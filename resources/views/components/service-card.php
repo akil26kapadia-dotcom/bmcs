@@ -3,9 +3,12 @@
 use App\Core\View;
 use App\Helpers\Icon;
 
-/** Expects $service (row from services table) and optional $icon override. */
+/**
+ * Expects $service (row from services table) and optional $icon fallback
+ * (used when the service itself has no icon set, e.g. its category icon).
+ */
 $service = $service ?? [];
-$iconName = $icon ?? 'network';
+$iconName = $service['icon'] ?? $icon ?? 'network';
 $delay = $delay ?? 0;
 ?>
 <a href="/services/<?= View::e($service['slug']) ?>" class="group card card-hover p-7 flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
