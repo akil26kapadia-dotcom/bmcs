@@ -468,6 +468,21 @@
 
   .hero-glow {
     background: radial-gradient(closest-side, rgba(232, 184, 75, 0.18), transparent);
+    animation: hero-glow-pulse 8s ease-in-out infinite;
+  }
+
+  @keyframes hero-glow-pulse {
+    0%, 100% { opacity: 0.6; transform: scale(1); }
+    50% { opacity: 1; transform: scale(1.15); }
+  }
+
+  .hero-bg-zoom {
+    animation: hero-bg-zoom 20s ease-in-out infinite alternate;
+  }
+
+  @keyframes hero-bg-zoom {
+    from { transform: scale(1); }
+    to { transform: scale(1.08); }
   }
 
   .hero-float-card {

@@ -19,7 +19,7 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
              sizes="100vw"
              alt="Dubai skyline at sunset with the Burj Khalifa, representing BMCS's home market"
              width="1920" height="776"
-             class="w-full h-full object-cover"
+             class="w-full h-full object-cover hero-bg-zoom"
              fetchpriority="high" decoding="async">
         <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/70 to-navy-950"></div>
