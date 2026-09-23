@@ -192,4 +192,33 @@ return [
             ['q' => 'Do you support the equipment after installation?', 'a' => 'We provide ongoing support for AV equipment we install.'],
         ],
     ],
+    'tally-solutions' => [
+        'description' => 'Genuine TallyPrime licences, renewal, customization, cloud hosting and support for businesses across Dubai and the UAE.',
+        'capabilities' => [
+            'TallyPrime single-user and multi-user licence sales',
+            'TallyPrime and TSS (Tally Software Services) renewal',
+            'Custom TDL add-ons, reports and print formats',
+            'Tally on Cloud hosting and remote access setup',
+            'Data migration from Tally.ERP 9 or other accounting systems',
+            'Ongoing technical support and Annual Maintenance Contracts (AMC)',
+        ],
+        'benefits' => [
+            'Work with a local, responsive Tally partner instead of a call center',
+            'Avoid lapsed updates and connected services with on-time renewal',
+            'A TallyPrime setup that matches your actual invoicing and reporting workflow',
+            'Access your accounts securely from anywhere with Tally on Cloud',
+        ],
+        'applications' => [
+            'New businesses setting up TallyPrime for the first time',
+            'Businesses migrating from Tally.ERP 9 or another accounting package',
+            'Teams that need remote or multi-location access to their accounts',
+            'Businesses needing custom reports or invoice formats Tally doesn\'t provide out of the box',
+        ],
+        'faq' => [
+            ['q' => 'Are your TallyPrime licences genuine?', 'a' => 'Yes, we supply and activate genuine TallyPrime licences directly, covering both single-user and multi-user editions.'],
+            ['q' => 'Can you migrate our data from Tally.ERP 9 to TallyPrime?', 'a' => 'Yes, we handle data migration from Tally.ERP 9 and other accounting systems, managing the process end to end to preserve your transaction history.'],
+            ['q' => 'What is Tally on Cloud and do we need it?', 'a' => 'Tally on Cloud hosts your TallyPrime data on a secure remote server so you and your accountant can access it from any device, anywhere. It\'s useful if your team works across multiple locations or remotely.'],
+            ['q' => 'Do you offer ongoing support after setup?', 'a' => 'Yes, we offer Annual Maintenance Contracts (AMC) with defined response times, as well as one-off support for specific issues.'],
+        ],
+    ],
 ];

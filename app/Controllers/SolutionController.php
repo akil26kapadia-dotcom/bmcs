@@ -28,15 +28,22 @@ class SolutionController extends Controller
             return;
         }
 
+        // Tally Solutions is a distinct product line, not just another IT
+        // service area — cross-linking the unrelated categories (CCTV, audio
+        // visual, etc.) here would dilute the dedicated positioning it needs.
+        $otherCategories = $params['slug'] === 'tally-solutions'
+            ? []
+            : array_values(array_filter(
+                ServiceCategory::allOrdered(),
+                fn ($c) => $c['id'] !== $category['id']
+            ));
+
         $this->view('pages/solutions/show', [
             'title' => $category['name'],
             'description' => $category['description'],
             'category' => $category,
             'services' => Service::byCategorySlug($params['slug']),
-            'otherCategories' => array_values(array_filter(
-                ServiceCategory::allOrdered(),
-                fn ($c) => $c['id'] !== $category['id']
-            )),
+            'otherCategories' => $otherCategories,
         ]);
     }
 }
