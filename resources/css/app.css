@@ -497,38 +497,6 @@
     to { stroke-dashoffset: -160; }
   }
 
-  /* --- Dubai skyline silhouette (hero sections) --- */
-  .skyline-sunglow {
-    background: radial-gradient(ellipse 60% 100% at 50% 100%, rgba(232, 184, 75, 0.22), rgba(201, 122, 52, 0.08) 45%, transparent 75%);
-  }
-
-  .skyline-horizon {
-    stroke: rgba(232, 184, 75, 0.45);
-    stroke-width: 1;
-    filter: drop-shadow(0 0 6px rgba(232, 184, 75, 0.55));
-  }
-
-  .skyline-light circle {
-    fill: rgba(245, 215, 140, 0.95);
-    animation: skyline-twinkle 3.6s ease-in-out infinite;
-  }
-
-  @keyframes skyline-twinkle {
-    0%, 100% { opacity: 0.15; }
-    50% { opacity: 1; }
-  }
-
-  .skyline-beacon {
-    fill: #e8b84b;
-    filter: drop-shadow(0 0 5px rgba(232, 184, 75, 0.9));
-    animation: skyline-beacon 2s ease-in-out infinite;
-  }
-
-  @keyframes skyline-beacon {
-    0%, 100% { opacity: 0.35; }
-    50% { opacity: 1; }
-  }
-
   /* --- Logo glow (navbar / preloader) --- */
   .logo-glow {
     filter: drop-shadow(0 0 0 rgba(232, 184, 75, 0));
