@@ -8,10 +8,9 @@ $currentPath = $currentPath ?? '';
 
 $navItems = [
     ['label' => 'Home', 'href' => '/'],
-    ['label' => 'Tally Solutions', 'href' => '/solutions/tally-solutions'],
+    ['label' => 'Tally', 'href' => '/solutions/tally-solutions'],
     ['label' => 'About', 'href' => '/about'],
-    ['label' => 'Services', 'href' => '/services', 'dropdown' => 'services-menu'],
-    ['label' => 'Solutions', 'href' => '/solutions'],
+    ['label' => 'IT Services', 'href' => '/services', 'dropdown' => 'services-menu'],
     ['label' => 'Products', 'href' => '/products'],
     ['label' => 'Portfolio', 'href' => '/portfolio'],
     ['label' => 'Blog', 'href' => '/blog'],
@@ -83,7 +82,7 @@ $whatsapp = SiteConfig::get('whatsapp_number');
                                     data-dropdown-toggle
                                     aria-expanded="false"
                                     aria-controls="<?= View::e($item['dropdown']) ?>"
-                                    class="nav-link flex items-center gap-1 px-4 py-2 rounded-md text-sm font-medium transition-colors
+                                    class="nav-link flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors
                                            <?= $isActive($item['href']) ? 'text-navy-950 is-active' : 'text-ink-700 hover:text-navy-950' ?>">
                                 <?= View::e($item['label']) ?>
                                 <svg class="w-3.5 h-3.5 transition-transform duration-300 ease-premium" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
@@ -103,7 +102,7 @@ $whatsapp = SiteConfig::get('whatsapp_number');
                         </div>
                     <?php else: ?>
                         <a href="<?= View::e($item['href']) ?>"
-                           class="nav-link px-4 py-2 rounded-md text-sm font-medium transition-colors
+                           class="nav-link px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors
                                   <?= $isActive($item['href']) ? 'text-navy-950 is-active' : 'text-ink-700 hover:text-navy-950' ?>">
                             <?= View::e($item['label']) ?>
                         </a>
