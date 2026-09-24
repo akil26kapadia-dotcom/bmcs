@@ -28,7 +28,7 @@ $categories = $categories ?? [];
     <div class="relative container-custom py-16 md:py-20 text-center">
         <span class="eyebrow-on-dark">IT Distribution</span>
         <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">IT Products &amp; Distribution</h1>
-        <p class="mt-4 text-white/70 max-w-2xl mx-auto">
+        <p class="mt-4 text-white/80 max-w-2xl mx-auto">
             BMCS supplies and configures the hardware businesses need — from servers and workstations
             to networking equipment and accessories.
         </p>

@@ -24,9 +24,9 @@
 @tailwind utilities;
 
 :root {
-  --color-navy-950: #0a1830;
-  --color-navy-900: #0f2340;
-  --color-gold-500: #e8b84b;
+  --color-navy-950: #2A67B2;
+  --color-navy-900: #2A67B2;
+  --color-gold-500: #FFC632;
 }
 
 /* ============================== BASE ============================== */
@@ -44,7 +44,7 @@
   }
 
   ::selection {
-    @apply bg-gold-400 text-navy-950;
+    @apply bg-gold-400 text-ink-900;
   }
 
   a {
@@ -97,8 +97,8 @@
   }
 
   .btn-primary {
-    @apply btn text-navy-950 shadow-card hover:shadow-glow hover:-translate-y-0.5;
-    background: linear-gradient(135deg, #f0c866 0%, #e8b84b 50%, #c99a34 100%);
+    @apply btn text-ink-900 shadow-card hover:shadow-glow hover:-translate-y-0.5;
+    background: linear-gradient(135deg, #FFD766 0%, #FFC632 50%, #E5A800 100%);
     background-size: 160% 160%;
     background-position: 0% 50%;
     transition: background-position 0.4s ease-premium, box-shadow 0.3s ease-premium, transform 0.3s ease-premium;
@@ -136,7 +136,7 @@
   .card-hover::before {
     content: '';
     @apply absolute inset-x-0 top-0 h-[3px] scale-x-0 origin-left transition-transform duration-300 ease-premium;
-    background: linear-gradient(90deg, #e8b84b, #c99a34);
+    background: linear-gradient(90deg, #FFC632, #E5A800);
   }
 
   .card-hover:hover::before {
@@ -146,7 +146,7 @@
   /* --- Icon badges (service/category cards) --- */
   .icon-badge {
     @apply relative inline-flex items-center justify-center w-14 h-14 rounded-2xl shrink-0 shadow-card transition-all duration-300 ease-premium;
-    background: linear-gradient(135deg, #1c3f72 0%, #0a1830 100%);
+    background: linear-gradient(135deg, #3573BE 0%, #2A67B2 100%);
   }
 
   .icon-badge svg {
@@ -155,7 +155,7 @@
 
   .group:hover .icon-badge {
     @apply shadow-glow -translate-y-0.5;
-    background: linear-gradient(135deg, #e8b84b 0%, #c99a34 100%);
+    background: linear-gradient(135deg, #FFC632 0%, #E5A800 100%);
   }
 
   .group:hover .icon-badge svg {
@@ -174,7 +174,7 @@
 
   .section-blob {
     @apply absolute rounded-full blur-3xl pointer-events-none;
-    background: radial-gradient(closest-side, rgba(232, 184, 75, 0.16), transparent);
+    background: radial-gradient(closest-side, rgba(255, 198, 50, 0.16), transparent);
   }
 
   /* --- Scroll-reveal animation hooks (driven by IntersectionObserver in app.js) --- */
@@ -345,7 +345,7 @@
   }
 
   .admin-nav-link.is-active {
-    @apply bg-gold-500 text-navy-950 hover:bg-gold-500 hover:text-navy-950;
+    @apply bg-gold-500 text-ink-900 hover:bg-gold-500 hover:text-ink-900;
   }
 
   /* --- Admin: table --- */
@@ -467,7 +467,7 @@
   }
 
   .hero-glow {
-    background: radial-gradient(closest-side, rgba(232, 184, 75, 0.18), transparent);
+    background: radial-gradient(closest-side, rgba(255, 198, 50, 0.18), transparent);
     animation: hero-glow-pulse 8s ease-in-out infinite;
   }
 
@@ -502,7 +502,7 @@
   }
 
   .hero-dot {
-    fill: rgba(232, 184, 75, 0.7);
+    fill: rgba(255, 198, 50, 0.7);
     transform-box: fill-box;
     transform-origin: center;
     animation: hero-dot-twinkle 4s ease-in-out infinite;
@@ -515,13 +515,13 @@
 
   /* --- Logo glow (navbar / preloader) --- */
   .logo-glow {
-    filter: drop-shadow(0 0 0 rgba(232, 184, 75, 0));
+    filter: drop-shadow(0 0 0 rgba(255, 198, 50, 0));
     transition: filter 0.3s ease-premium;
   }
 
   .group:hover .logo-glow,
   a:hover .logo-glow {
-    filter: drop-shadow(0 0 10px rgba(232, 184, 75, 0.55));
+    filter: drop-shadow(0 0 10px rgba(255, 198, 50, 0.55));
   }
 
   /* --- Glowing pulse ring (hero primary CTA) --- */
@@ -532,14 +532,14 @@
   .glow-pulse::before {
     content: '';
     @apply absolute inset-0 rounded-md pointer-events-none;
-    box-shadow: 0 0 0 0 rgba(232, 184, 75, 0.55);
+    box-shadow: 0 0 0 0 rgba(255, 198, 50, 0.55);
     animation: glow-pulse-ring 2.6s ease-out infinite;
   }
 
   @keyframes glow-pulse-ring {
-    0% { box-shadow: 0 0 0 0 rgba(232, 184, 75, 0.55); }
-    70% { box-shadow: 0 0 0 14px rgba(232, 184, 75, 0); }
-    100% { box-shadow: 0 0 0 0 rgba(232, 184, 75, 0); }
+    0% { box-shadow: 0 0 0 0 rgba(255, 198, 50, 0.55); }
+    70% { box-shadow: 0 0 0 14px rgba(255, 198, 50, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(255, 198, 50, 0); }
   }
 
   /* --- Preloader --- */
@@ -553,7 +553,7 @@
 
   #site-preloader .preloader-logo {
     animation: preloader-pulse 1.6s ease-in-out infinite;
-    filter: drop-shadow(0 0 16px rgba(232, 184, 75, 0.5));
+    filter: drop-shadow(0 0 16px rgba(255, 198, 50, 0.5));
   }
 
   @keyframes preloader-pulse {

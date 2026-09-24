@@ -15,7 +15,7 @@ $onDark = $onDark ?? false;
 $wrapClass = $align === 'center' ? 'text-center mx-auto' : 'text-left';
 $maxWidth = $align === 'center' ? 'max-w-2xl' : 'max-w-xl';
 $titleColor = $onDark ? 'text-white' : 'text-navy-950';
-$subtitleColor = $onDark ? 'text-white/70' : 'text-ink-500';
+$subtitleColor = $onDark ? 'text-white/80' : 'text-ink-500';
 $eyebrowClass = $onDark ? 'eyebrow-on-dark' : 'eyebrow';
 ?>
 <div class="<?= $wrapClass ?> <?= $align === 'left' ? $maxWidth : '' ?>">

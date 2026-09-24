@@ -35,11 +35,11 @@ $navItems = [
     </nav>
 
     <div class="mt-auto p-4 border-t border-white/10">
-        <p class="px-4 text-xs text-white/40">Signed in as</p>
+        <p class="px-4 text-xs text-white/80">Signed in as</p>
         <p class="px-4 text-sm font-medium text-white"><?= View::e(Session::get('admin_name', 'Admin')) ?></p>
         <form action="/admin/logout" method="POST" class="mt-3 px-4">
             <?= Csrf::field() ?>
-            <button type="submit" class="text-sm text-white/60 hover:text-gold-400">Log out</button>
+            <button type="submit" class="text-sm text-white/80 hover:text-gold-400">Log out</button>
         </form>
     </div>
 </aside>

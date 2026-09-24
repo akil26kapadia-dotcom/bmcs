@@ -31,7 +31,7 @@ $categories = $categories ?? [];
         <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white max-w-3xl mx-auto">
             Empowering Effective Solutions
         </h1>
-        <p class="mt-4 text-white/70 max-w-2xl mx-auto text-lg">
+        <p class="mt-4 text-white/80 max-w-2xl mx-auto text-lg">
             A Dubai-based IT and technology solutions provider bringing enterprise infrastructure,
             security, cloud and digital capabilities together for businesses across the UAE.
         </p>
@@ -116,7 +116,7 @@ $categories = $categories ?? [];
     <div class="container-custom text-center max-w-3xl mx-auto">
         <span class="eyebrow-on-dark">Technology &amp; Innovation</span>
         <h2 class="mt-4 text-2xl md:text-3xl font-semibold text-white">Built on the Desire to Do Excellent Work</h2>
-        <p class="mt-5 text-white/70 leading-relaxed">
+        <p class="mt-5 text-white/80 leading-relaxed">
             We approach every engagement with the same goal: deliver technology that genuinely works
             for the business behind it. From network cabling to cloud migration and digital design,
             our focus stays on solutions that are reliable, well-installed and built to last —

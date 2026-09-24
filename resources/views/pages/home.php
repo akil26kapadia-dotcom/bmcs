@@ -5,7 +5,6 @@ use App\Helpers\Html;
 use App\Helpers\Icon;
 
 $serviceCategories = $serviceCategories ?? [];
-$portfolioProjects = $portfolioProjects ?? [];
 $latestPosts = $latestPosts ?? [];
 $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class);
 $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
@@ -22,25 +21,24 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
              class="w-full h-full object-cover hero-bg-zoom"
              fetchpriority="high" decoding="async">
         <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-gradient-to-b from-navy-950/90 via-navy-950/70 to-navy-950"></div>
+        <div class="absolute inset-0 bg-gradient-to-b from-navy-950/70 via-navy-950/45 to-navy-950/85"></div>
     </div>
 
     <?= View::capture('components/hero-network-bg') ?>
 
     <div class="relative container-custom pt-20 pb-28 md:pt-28 md:pb-40 lg:pt-36 lg:pb-48 text-center">
-        <span class="eyebrow-on-dark" data-animate="fade-up">TallyPrime Partner &amp; Complete IT Solutions</span>
+        <span class="eyebrow-on-dark" data-animate="fade-up">Bright Mind Computer Solutions LLC</span>
         <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white max-w-4xl mx-auto leading-[1.1]" data-animate="fade-up" data-delay="80">
-            TallyPrime &amp; Complete IT Solutions for Businesses in Dubai
+            TallyPrime Solutions &amp; Complete IT Services in Dubai, UAE
         </h1>
-        <p class="mt-6 text-lg text-white/70 max-w-2xl mx-auto leading-relaxed" data-animate="fade-up" data-delay="160">
-            TallyPrime sales, renewal, customization and cloud solutions, combined with reliable IT support,
-            networking, cybersecurity, servers, CCTV and business technology services across the UAE.
+        <p class="mt-6 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed" data-animate="fade-up" data-delay="160">
+            TallyPrime sales, TSS renewal, Tally on Cloud, TallyPrime Server, customization and support &mdash;
+            together with IT hardware, servers, networking, cybersecurity, CCTV and AMC for businesses across the UAE.
         </p>
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="240">
             <?= Html::button(['href' => '/contact', 'label' => 'Request a Quotation', 'variant' => 'primary', 'icon' => true, 'class' => 'glow-pulse']) ?>
-            <?php if ($whatsapp): ?>
-                <a href="https://wa.me/<?= View::e(preg_replace('/[^0-9]/', '', $whatsapp)) ?>" target="_blank" rel="noopener" class="btn-outline-light">WhatsApp Us</a>
-            <?php endif; ?>
+            <?= Html::whatsappButton('WhatsApp Us', 'Hello BMCS, I would like to know more about TallyPrime.') ?>
+            <?= Html::callButton('Call BMCS') ?>
         </div>
     </div>
 </section>
@@ -50,20 +48,21 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     <div class="section-blob w-96 h-96 -top-32 -right-20" aria-hidden="true"></div>
     <div class="relative container-custom">
         <?= View::capture('components/section-heading', [
-            'eyebrow' => 'Authorized TallyPrime Partner',
-            'title' => 'Complete TallyPrime Solutions for Your Business',
-            'subtitle' => 'From licensing and renewal to customization, cloud hosting and support — everything you need to run TallyPrime with confidence.',
+            'eyebrow' => 'TallyPrime Solutions',
+            'title' => 'TallyPrime Dubai: Sales, Renewal, Cloud, Server and Support',
+            'subtitle' => 'From licensing and TSS renewal to Tally on Cloud, TallyPrime Server, customization and AMC — everything you need to run TallyPrime with confidence in the UAE.',
             'align' => 'center',
         ]) ?>
 
-        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php foreach ($tallyServices as $i => $service): ?>
                 <?= View::capture('components/service-card', ['service' => $service, 'icon' => 'coin', 'delay' => ($i % 6) * 60]) ?>
             <?php endforeach; ?>
         </div>
 
-        <div class="mt-12 text-center">
+        <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
             <?= Html::button(['href' => '/solutions/tally-solutions', 'label' => 'View All Tally Solutions', 'variant' => 'secondary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us', 'Hello BMCS, I need help with TallyPrime.', 'outline-dark') ?>
         </div>
     </div>
 </section>
@@ -102,7 +101,7 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
                  class="rounded-2xl shadow-premium w-full h-[420px] md:h-[520px] object-cover">
             <div class="absolute -bottom-6 -right-6 hidden md:block bg-navy-950 text-white rounded-xl px-6 py-5 shadow-premium max-w-[220px]">
                 <p class="text-sm font-semibold">Empowering Effective Solutions</p>
-                <p class="mt-1 text-xs text-white/60">Since our founding, our focus has stayed the same.</p>
+                <p class="mt-1 text-xs text-white/80">Since our founding, our focus has stayed the same.</p>
             </div>
         </div>
         <div data-animate="fade-left">
@@ -133,8 +132,8 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     <div class="section-blob w-[26rem] h-[26rem] -bottom-40 -left-40" aria-hidden="true"></div>
     <div class="relative container-custom">
         <?= View::capture('components/section-heading', [
-            'eyebrow' => 'What We Do',
-            'title' => 'A Complete Range of IT & Technology Services',
+            'eyebrow' => 'Complete IT Services',
+            'title' => 'Beyond Tally: A Complete Range of IT Services',
             'subtitle' => 'From infrastructure to digital experiences, BMCS covers the full technology stack your business relies on.',
             'align' => 'center',
         ]) ?>
@@ -144,6 +143,24 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
                 <?= View::capture('components/category-card', ['category' => $category, 'delay' => ($i % 4) * 80]) ?>
             <?php endforeach; ?>
         </div>
+
+        <div class="mt-12 text-center" data-animate="fade-up">
+            <p class="text-sm font-semibold uppercase tracking-wide text-ink-500">Popular IT services</p>
+            <div class="mt-4 flex flex-wrap justify-center gap-3">
+                <?php foreach ([
+                    ['Computer Hardware', '/services/computer-hardware-supplies'],
+                    ['Servers', '/services/servers-storage'],
+                    ['Networking', '/solutions/network-infrastructure'],
+                    ['Cloud Solutions', '/services/cloud-solutions'],
+                    ['Cybersecurity', '/services/firewall-solutions'],
+                    ['CCTV / Security', '/services/cctv-surveillance'],
+                    ['IT Support', '/services/it-helpdesk'],
+                    ['IT AMC', '/services/it-amc-support'],
+                ] as [$chipLabel, $chipHref]): ?>
+                    <a href="<?= View::e($chipHref) ?>" class="filter-pill"><?= View::e($chipLabel) ?></a>
+                <?php endforeach; ?>
+            </div>
+        </div>
     </div>
 </section>
 
@@ -151,9 +168,9 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
 <section class="section-py bg-navy-950">
     <div class="container-custom">
         <?= View::capture('components/section-heading', [
-            'eyebrow' => 'Technology Solutions',
+            'eyebrow' => 'Solutions We Deliver',
             'title' => 'Infrastructure Built for Reliability and Growth',
-            'subtitle' => 'A closer look at the technology areas where BMCS delivers the most impact.',
+            'subtitle' => 'The technology areas where BMCS designs, installs and supports solutions for businesses across Dubai and the UAE.',
             'align' => 'center',
             'onDark' => true,
         ]) ?>
@@ -213,26 +230,6 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     </div>
 </section>
 
-<!-- ============================== PORTFOLIO ============================== -->
-<section class="section-py bg-white">
-    <div class="container-custom">
-        <div class="flex flex-wrap items-end justify-between gap-6">
-            <?= View::capture('components/section-heading', [
-                'eyebrow' => 'Our Work',
-                'title' => 'A Look at Our Project Capabilities',
-                'subtitle' => 'Representative examples of the type of work BMCS delivers across infrastructure, security and cloud.',
-            ]) ?>
-            <?= Html::button(['href' => '/portfolio', 'label' => 'View Portfolio', 'variant' => 'outline-dark', 'icon' => true]) ?>
-        </div>
-
-        <div class="mt-12 grid md:grid-cols-3 gap-6">
-            <?php foreach ($portfolioProjects as $i => $project): ?>
-                <?= View::capture('components/portfolio-card', ['project' => $project, 'delay' => $i * 100]) ?>
-            <?php endforeach; ?>
-        </div>
-    </div>
-</section>
-
 <!-- ============================== BLOG PREVIEW ============================== -->
 <section class="section-py bg-ink-100/50">
     <div class="container-custom">
@@ -277,11 +274,13 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
         <h2 class="text-3xl md:text-4xl font-semibold text-white max-w-2xl mx-auto" data-animate="fade-up">
             Let's Build a Smarter Technology Infrastructure
         </h2>
-        <p class="mt-4 text-white/70 max-w-xl mx-auto" data-animate="fade-up" data-delay="80">
+        <p class="mt-4 text-white/80 max-w-xl mx-auto" data-animate="fade-up" data-delay="80">
             Tell us about your business and we'll help you find the right technology solution.
         </p>
-        <div class="mt-8" data-animate="fade-up" data-delay="160">
-            <?= Html::button(['href' => '/contact', 'label' => 'Talk to BMCS', 'variant' => 'primary', 'icon' => true]) ?>
+        <div class="mt-8 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="160">
+            <?= Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us') ?>
+            <?= Html::callButton('Call BMCS') ?>
         </div>
     </div>
 </section>

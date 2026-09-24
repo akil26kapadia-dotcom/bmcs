@@ -28,7 +28,7 @@ $grouped = $grouped ?? [];
     <div class="relative container-custom py-16 md:py-20 text-center">
         <span class="eyebrow-on-dark">What We Do</span>
         <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">Our Services</h1>
-        <p class="mt-4 text-white/70 max-w-2xl mx-auto">
+        <p class="mt-4 text-white/80 max-w-2xl mx-auto">
             A complete range of IT infrastructure, security, cloud, telecommunication and digital
             services for businesses across Dubai and the UAE.
         </p>

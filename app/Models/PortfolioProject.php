@@ -7,7 +7,7 @@ class PortfolioProject extends Model
     protected static string $table = 'portfolio_projects';
 
     /**
-     * Published projects with their category slug/name joined in,
+     * Published, non-demo projects (sample/demo rows are never shown as real work) with their category slug/name joined in,
      * so the index page can render filter pills without N+1 queries.
      */
     public static function published(): array
@@ -16,7 +16,7 @@ class PortfolioProject extends Model
             'SELECT p.*, c.slug AS category_slug, c.name AS category_name
              FROM portfolio_projects p
              LEFT JOIN service_categories c ON c.id = p.category_id
-             WHERE p.status = "published"
+             WHERE p.status = "published" AND p.is_demo = 0
              ORDER BY p.sort_order ASC, p.id DESC'
         )->fetchAll();
     }
@@ -27,7 +27,7 @@ class PortfolioProject extends Model
             'SELECT p.*, c.slug AS category_slug, c.name AS category_name
              FROM portfolio_projects p
              LEFT JOIN service_categories c ON c.id = p.category_id
-             WHERE p.slug = :slug AND p.status = "published" LIMIT 1'
+             WHERE p.slug = :slug AND p.status = "published" AND p.is_demo = 0 LIMIT 1'
         );
         $stmt->execute(['slug' => $slug]);
         $row = $stmt->fetch();
@@ -44,7 +44,7 @@ class PortfolioProject extends Model
         if ($categoryId !== null) {
             $stmt = static::db()->prepare(
                 'SELECT * FROM portfolio_projects WHERE category_id = :category_id AND id != :exclude_id
-                 AND status = "published" ORDER BY sort_order ASC LIMIT :limit'
+                 AND status = "published" AND is_demo = 0 ORDER BY sort_order ASC LIMIT :limit'
             );
             $stmt->bindValue(':category_id', $categoryId, \PDO::PARAM_INT);
             $stmt->bindValue(':exclude_id', $excludeId, \PDO::PARAM_INT);
@@ -65,7 +65,7 @@ class PortfolioProject extends Model
         $placeholders = implode(',', array_fill(0, count($excludeIds), '?'));
 
         $stmt = static::db()->prepare(
-            "SELECT * FROM portfolio_projects WHERE id NOT IN ($placeholders) AND status = \"published\"
+            "SELECT * FROM portfolio_projects WHERE id NOT IN ($placeholders) AND status = \"published\" AND is_demo = 0
              ORDER BY sort_order ASC LIMIT {$needed}"
         );
         $stmt->execute($excludeIds);
@@ -76,7 +76,7 @@ class PortfolioProject extends Model
     public static function search(string $term): array
     {
         $stmt = static::db()->prepare(
-            'SELECT * FROM portfolio_projects WHERE status = "published"
+            'SELECT * FROM portfolio_projects WHERE status = "published" AND is_demo = 0
              AND (title LIKE :term1 OR summary LIKE :term2)
              ORDER BY id DESC'
         );

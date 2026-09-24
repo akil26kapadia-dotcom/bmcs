@@ -38,4 +38,50 @@ class Html
             $arrow
         );
     }
+
+    /**
+     * wa.me link for the configured WhatsApp number, optionally with a
+     * pre-filled message. Returns '' when no number is configured.
+     */
+    public static function whatsappUrl(?string $message = null): string
+    {
+        $number = preg_replace('/[^0-9]/', '', (string) SiteConfig::get('whatsapp_number'));
+        if ($number === '') {
+            return '';
+        }
+
+        return 'https://wa.me/' . $number . ($message ? '?text=' . rawurlencode($message) : '');
+    }
+
+    /** Outlined WhatsApp button (opens in a new tab); empty when not configured. */
+    public static function whatsappButton(string $label = 'WhatsApp Us', ?string $message = null, string $variant = 'outline-light', string $class = ''): string
+    {
+        $url = self::whatsappUrl($message);
+        if ($url === '') {
+            return '';
+        }
+
+        return sprintf(
+            '<a href="%s" target="_blank" rel="noopener" class="%s">%s</a>',
+            View::e($url),
+            View::e(trim((self::VARIANT_CLASSES[$variant] ?? 'btn-outline-light') . ' ' . $class)),
+            View::e($label)
+        );
+    }
+
+    /** Call button using the main site phone number. */
+    public static function callButton(string $label = 'Call BMCS', string $variant = 'outline-light', string $class = ''): string
+    {
+        $phone = (string) SiteConfig::get('site_phone');
+        if ($phone === '') {
+            return '';
+        }
+
+        return sprintf(
+            '<a href="tel:%s" class="%s">%s</a>',
+            View::e(preg_replace('/[^0-9+]/', '', $phone)),
+            View::e(trim((self::VARIANT_CLASSES[$variant] ?? 'btn-outline-light') . ' ' . $class)),
+            View::e($label)
+        );
+    }
 }

@@ -12,6 +12,8 @@ $success = Session::flash('contact_success');
 $errors = Session::flash('contact_errors');
 
 $serviceOptions = [
+    'TallyPrime Sales & Licensing', 'TSS Renewal', 'Tally on Cloud', 'TallyPrime Customization', 'TallyPrime Server',
+    'Tally Support & AMC', 'Tally Integration & Data Migration',
     'Network & Infrastructure', 'Cloud & Data', 'Security & Surveillance', 'Telecommunication',
     'Microsoft & Business Solutions', 'IT Support & Distribution', 'Web & Digital', 'Audio Visual',
 ];
@@ -21,7 +23,7 @@ $serviceOptions = [
         <div class="lg:col-span-2" data-animate="fade-right">
             <?= View::capture('components/section-heading', [
                 'eyebrow' => 'Contact Us',
-                'title' => 'Request a Consultation',
+                'title' => 'Request a Quotation or Consultation',
                 'subtitle' => 'Tell us a little about your business and one of our specialists will get back to you.',
             ]) ?>
 

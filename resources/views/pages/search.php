@@ -31,14 +31,14 @@ $portfolio = $results['portfolio'] ?? [];
             <?= $term !== '' ? 'Results for &ldquo;' . View::e($term) . '&rdquo;' : 'Search BMCS' ?>
         </h1>
         <?php if ($term !== ''): ?>
-            <p class="mt-4 text-white/70"><?= $count ?> result<?= $count === 1 ? '' : 's' ?> found</p>
+            <p class="mt-4 text-white/80"><?= $count ?> result<?= $count === 1 ? '' : 's' ?> found</p>
         <?php endif; ?>
 
         <form action="/search" method="GET" class="mt-8 max-w-md mx-auto relative">
             <label for="site-search" class="sr-only">Search the site</label>
             <input type="search" id="site-search" name="q" value="<?= View::e($term) ?>" placeholder="Search services, portfolio, articles&hellip;"
                    class="w-full rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 pl-11 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500">
-            <svg class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-white/50" viewBox="0 0 20 20" fill="none">
+            <svg class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-white/80" viewBox="0 0 20 20" fill="none">
                 <circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.5"/>
                 <path d="M18 18l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>

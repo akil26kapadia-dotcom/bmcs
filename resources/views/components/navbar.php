@@ -8,13 +8,22 @@ $currentPath = $currentPath ?? '';
 
 $navItems = [
     ['label' => 'Home', 'href' => '/'],
-    ['label' => 'Tally', 'href' => '/solutions/tally-solutions'],
+    ['label' => 'Tally', 'href' => '/solutions/tally-solutions', 'dropdown' => 'tally-menu'],
     ['label' => 'About', 'href' => '/about'],
     ['label' => 'IT Services', 'href' => '/services', 'dropdown' => 'services-menu'],
     ['label' => 'Products', 'href' => '/products'],
-    ['label' => 'Portfolio', 'href' => '/portfolio'],
     ['label' => 'Blog', 'href' => '/blog'],
     ['label' => 'Contact', 'href' => '/contact'],
+];
+
+$tallyLinks = [
+    ['name' => 'TallyPrime Sales & Licensing', 'slug' => 'tallyprime-sales'],
+    ['name' => 'TSS Renewal', 'slug' => 'tally-renewal'],
+    ['name' => 'Tally on Cloud', 'slug' => 'tally-on-cloud'],
+    ['name' => 'Customization & Implementation', 'slug' => 'tally-customization'],
+    ['name' => 'TallyPrime Server', 'slug' => 'tallyprime-server'],
+    ['name' => 'Support & AMC', 'slug' => 'tally-support'],
+    ['name' => 'Integration & Data Migration', 'slug' => 'tally-integration'],
 ];
 
 $serviceCategories = [
@@ -87,16 +96,17 @@ $whatsapp = SiteConfig::get('whatsapp_number');
                                 <?= View::e($item['label']) ?>
                                 <svg class="w-3.5 h-3.5 transition-transform duration-300 ease-premium" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                             </button>
+                            <?php $isTallyMenu = $item['dropdown'] === 'tally-menu'; ?>
                             <div id="<?= View::e($item['dropdown']) ?>" data-dropdown-menu
-                                 class="absolute left-1/2 -translate-x-1/2 mt-2 w-[36rem] bg-white rounded-xl shadow-card-hover border border-ink-900/[0.06] p-6 grid grid-cols-2 gap-x-8 gap-y-1">
-                                <?php foreach ($serviceCategories as $cat): ?>
-                                    <a href="/solutions/<?= View::e($cat['slug']) ?>"
+                                 class="absolute left-1/2 -translate-x-1/2 mt-2 bg-white rounded-xl shadow-card-hover border border-ink-900/[0.06] p-6 grid gap-x-8 gap-y-1 <?= $isTallyMenu ? 'w-[24rem] grid-cols-1' : 'w-[36rem] grid-cols-2' ?>">
+                                <?php foreach ($isTallyMenu ? $tallyLinks : $serviceCategories as $cat): ?>
+                                    <a href="<?= $isTallyMenu ? '/services/' : '/solutions/' ?><?= View::e($cat['slug']) ?>"
                                        class="block px-3 py-2.5 rounded-lg text-sm text-ink-700 hover:bg-navy-950/[0.04] hover:text-navy-950">
                                         <?= View::e($cat['name']) ?>
                                     </a>
                                 <?php endforeach; ?>
-                                <a href="/services" class="col-span-2 mt-2 pt-3 border-t border-ink-900/[0.06] px-3 text-sm font-semibold text-gold-600 hover:text-gold-500">
-                                    View All Services &rarr;
+                                <a href="<?= $isTallyMenu ? '/solutions/tally-solutions' : '/services' ?>" class="<?= $isTallyMenu ? '' : 'col-span-2' ?> mt-2 pt-3 border-t border-ink-900/[0.06] px-3 text-sm font-semibold text-gold-600 hover:text-gold-500">
+                                    <?= $isTallyMenu ? 'View All Tally Solutions' : 'View All Services' ?> &rarr;
                                 </a>
                             </div>
                         </div>
@@ -118,13 +128,13 @@ $whatsapp = SiteConfig::get('whatsapp_number');
                     <div id="nav-search-panel" data-search-panel class="absolute right-0 mt-2 w-80 bg-white rounded-xl shadow-card-hover border border-ink-900/[0.06] p-3">
                         <form action="/search" method="GET" class="relative">
                             <label for="nav-search-input" class="sr-only">Search the site</label>
-                            <input type="search" id="nav-search-input" name="q" data-search-input placeholder="Search services, portfolio, articles&hellip;"
+                            <input type="search" id="nav-search-input" name="q" data-search-input placeholder="Search services, solutions, articles&hellip;"
                                    class="w-full rounded-lg border border-ink-300 pl-9 pr-3 py-2.5 text-sm text-navy-950 focus:outline-none focus:ring-2 focus:ring-gold-500 focus:border-transparent">
                             <svg class="w-4 h-4 absolute left-3 top-1/2 -translate-y-1/2 text-ink-500" viewBox="0 0 20 20" fill="none"><circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.5"/><path d="M18 18l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
                         </form>
                     </div>
                 </div>
-                <?= Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'primary', 'icon' => true]) ?>
+                <?= Html::button(['href' => '/contact', 'label' => 'Get a Quote', 'variant' => 'primary', 'icon' => true]) ?>
             </div>
 
             <button type="button" data-menu-toggle aria-expanded="false" aria-controls="mobile-nav-panel"
@@ -166,11 +176,13 @@ $whatsapp = SiteConfig::get('whatsapp_number');
             </a>
         </nav>
 
-        <div class="mt-8">
-            <?= Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'primary', 'icon' => true, 'class' => 'w-full']) ?>
+        <div class="mt-8 space-y-3">
+            <?= Html::button(['href' => '/contact', 'label' => 'Request a Quotation', 'variant' => 'primary', 'icon' => true, 'class' => 'w-full']) ?>
+            <?= Html::whatsappButton('WhatsApp Us', null, 'outline-light', 'w-full') ?>
+            <?= Html::callButton('Call BMCS', 'outline-light', 'w-full') ?>
         </div>
 
-        <div class="mt-8 pt-6 border-t border-white/10 space-y-3 text-white/70 text-sm">
+        <div class="mt-8 pt-6 border-t border-white/10 space-y-3 text-white/80 text-sm">
             <a href="tel:<?= View::e(preg_replace('/\s+/', '', $phone)) ?>" class="block hover:text-gold-400"><?= View::e($phone) ?></a>
             <a href="mailto:<?= View::e($email) ?>" class="block hover:text-gold-400"><?= View::e($email) ?></a>
         </div>

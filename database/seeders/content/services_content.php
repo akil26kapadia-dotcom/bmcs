@@ -122,14 +122,6 @@ return [
         'meta_title' => 'Microsoft Licensing Services in Dubai',
         'meta_description' => 'Microsoft licensing assessment and procurement in Dubai — BMCS helps businesses stay correctly and cost-effectively licensed.',
     ],
-    'tally-on-cloud' => [
-        'short_description' => 'Tally on Cloud setup for accessing your accounting software securely from anywhere.',
-        'description' => 'Running Tally from the cloud lets your finance team access accounting data securely from any location or device, without maintaining on-site infrastructure. We set up and configure Tally on Cloud for businesses moving away from local installations.',
-        'technologies' => 'Cloud-hosted Tally, remote desktop access, data security configuration',
-        'meta_title' => 'Tally on Cloud Setup in Dubai',
-        'meta_description' => 'Tally on Cloud setup and configuration in Dubai and the UAE, giving your finance team secure, remote access to accounting software.',
-    ],
-
     // --- IT Support & Distribution ---
     'it-consultancy' => [
         'short_description' => 'IT consultancy to help you plan technology decisions with confidence.',

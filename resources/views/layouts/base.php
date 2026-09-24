@@ -11,7 +11,7 @@ $pageTitle = $title ?? $siteName;
 $metaDescription = $description ?? SiteConfig::get('default_seo_description', 'BMCS delivers enterprise IT infrastructure, networking, security, cloud and digital solutions across Dubai and the UAE.');
 $currentPath = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/', '/');
 $canonicalUrl = $canonicalOverride ?? Url::full($currentPath);
-$fullTitle = $pageTitle === $siteName ? $siteName : $pageTitle . ' | ' . $siteName;
+$fullTitle = $titleOverride ?? ($pageTitle === $siteName ? $siteName : $pageTitle . ' | ' . $siteName);
 
 $ogImagePath = $ogImage ?? '/assets/images/hero/hero-datacenter-1920.webp';
 $schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $schema : [$schema]) : [];
@@ -57,6 +57,9 @@ $schemaList[] = [
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
 
     <link rel="preload" href="/assets/fonts/inter/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <?php if (!empty($preloadHero)): ?>
+    <link rel="preload" as="image" href="/assets/images/hero/dubai-skyline-1920.jpg" imagesrcset="/assets/images/hero/dubai-skyline-960.jpg 960w, /assets/images/hero/dubai-skyline-1920.jpg 1920w" imagesizes="100vw" fetchpriority="high">
+    <?php endif; ?>
     <link rel="stylesheet" href="<?= View::e(Asset::versioned('/assets/css/app.css')) ?>">
     <noscript><style>#site-preloader{display:none}</style></noscript>
 

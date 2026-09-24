@@ -20,7 +20,6 @@ class SitemapController extends Controller
             ['loc' => Url::full('services'), 'priority' => '0.9'],
             ['loc' => Url::full('solutions'), 'priority' => '0.9'],
             ['loc' => Url::full('products'), 'priority' => '0.6'],
-            ['loc' => Url::full('portfolio'), 'priority' => '0.7'],
             ['loc' => Url::full('blog'), 'priority' => '0.7'],
             ['loc' => Url::full('contact'), 'priority' => '0.6'],
         ];

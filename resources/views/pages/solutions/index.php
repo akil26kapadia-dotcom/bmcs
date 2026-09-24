@@ -7,7 +7,7 @@ $categories = $categories ?? [];
 <?= View::capture('components/breadcrumbs', [
     'items' => [
         ['label' => 'Home', 'href' => '/'],
-        ['label' => 'Solutions', 'href' => null],
+        ['label' => 'Solutions We Deliver', 'href' => null],
     ],
 ]) ?>
 
@@ -24,11 +24,11 @@ $categories = $categories ?? [];
     </div>
     <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 md:py-20 text-center">
-        <span class="eyebrow-on-dark">IT Solutions</span>
-        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">Technology Solutions Built Around Your Business</h1>
-        <p class="mt-4 text-white/70 max-w-2xl mx-auto">
-            Eight core technology areas, each covering a range of individual services — explore the
-            one most relevant to what you need today.
+        <span class="eyebrow-on-dark">Bright Mind Computer Solutions</span>
+        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">Solutions We Deliver in Dubai &amp; the UAE</h1>
+        <p class="mt-4 text-white/80 max-w-2xl mx-auto">
+            TallyPrime solutions and the IT services around them &mdash; networking, cloud, security,
+            telecommunication, Microsoft, IT support and digital. Explore the area most relevant to you.
         </p>
     </div>
 </section>
@@ -45,9 +45,10 @@ $categories = $categories ?? [];
     <div class="absolute inset-0 hero-grid opacity-40 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 text-center">
         <h2 class="text-2xl md:text-3xl font-semibold text-white">Not Sure Which Solution Fits?</h2>
-        <p class="mt-3 text-white/70 max-w-xl mx-auto">Tell us about your business and we'll point you to the right service.</p>
-        <div class="mt-6">
-            <?= \App\Helpers\Html::button(['href' => '/contact', 'label' => 'Talk to BMCS', 'variant' => 'primary', 'icon' => true]) ?>
+        <p class="mt-3 text-white/80 max-w-xl mx-auto">Tell us about your business and we'll point you to the right service.</p>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+            <?= \App\Helpers\Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= \App\Helpers\Html::whatsappButton('WhatsApp Us') ?>
         </div>
     </div>
 </section>

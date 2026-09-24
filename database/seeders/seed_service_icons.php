@@ -19,6 +19,7 @@ $icons = [
     'tally-renewal' => 'refresh',
     'tally-customization' => 'gear',
     'tally-on-cloud' => 'cloud',
+    'tallyprime-server' => 'server',
     'tally-support' => 'life-buoy',
     'tally-integration' => 'link',
 

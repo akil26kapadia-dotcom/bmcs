@@ -54,7 +54,8 @@ class ServiceController extends Controller
         $applications = !empty($service['applications']) ? $service['applications'] : ($category['applications'] ?? []);
         $faq = !empty($service['faq']) ? $service['faq'] : ($category['faq'] ?? []);
 
-        $related = Service::relatedTo((int) $service['category_id'], (int) $service['id']);
+        $isTally = ($category['slug'] ?? '') === 'tally-solutions';
+        $related = Service::relatedTo((int) $service['category_id'], (int) $service['id'], $isTally ? 6 : 3);
 
         $this->view('pages/services/show', [
             'title' => $service['meta_title'] ?: $service['name'],

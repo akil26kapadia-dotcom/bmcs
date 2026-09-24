@@ -11,6 +11,8 @@ $capabilities = $category['capabilities'] ?? [];
 $benefits = $category['benefits'] ?? [];
 $applications = $category['applications'] ?? [];
 $faq = $category['faq'] ?? [];
+$isTally = ($category['slug'] ?? '') === 'tally-solutions';
+$h1 = $isTally ? 'TallyPrime Solutions in Dubai & the UAE' : ($category['name'] ?? '');
 ?>
 <?= View::capture('components/breadcrumbs', [
     'items' => [
@@ -37,10 +39,11 @@ $faq = $category['faq'] ?? [];
         <span class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-white/10 text-gold-400">
             <?= Icon::svg($category['icon'] ?? 'network', 'w-7 h-7') ?>
         </span>
-        <h1 class="mt-6 text-3xl md:text-5xl font-semibold text-white max-w-3xl"><?= View::e($category['name']) ?></h1>
-        <p class="mt-4 text-white/70 max-w-2xl text-lg"><?= View::e($category['description']) ?></p>
-        <div class="mt-8">
-            <?= Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'primary', 'icon' => true]) ?>
+        <h1 class="mt-6 text-3xl md:text-5xl font-semibold text-white max-w-3xl"><?= View::e($h1) ?></h1>
+        <p class="mt-4 text-white/80 max-w-2xl text-lg"><?= View::e($category['description']) ?></p>
+        <div class="mt-8 flex flex-wrap gap-4">
+            <?= Html::button(['href' => '/contact', 'label' => 'Request a Quotation', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us', 'Hello BMCS, I would like to discuss ' . ($isTally ? 'TallyPrime' : $category['name']) . '.') ?>
         </div>
     </div>
 </section>
@@ -50,7 +53,7 @@ $faq = $category['faq'] ?? [];
     <div class="container-custom">
         <?= View::capture('components/section-heading', [
             'eyebrow' => 'Services',
-            'title' => 'What\'s Included in ' . $category['name'],
+            'title' => $isTally ? 'Our TallyPrime Services' : 'What\'s Included in ' . $category['name'],
             'align' => 'center',
         ]) ?>
         <div class="mt-12 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -139,8 +142,10 @@ $faq = $category['faq'] ?? [];
     <div class="absolute inset-0 hero-grid opacity-40 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 text-center">
         <h2 class="text-2xl md:text-3xl font-semibold text-white">Ready to Discuss <?= View::e($category['name']) ?>?</h2>
-        <div class="mt-6">
-            <?= Html::button(['href' => '/contact', 'label' => 'Talk to BMCS', 'variant' => 'primary', 'icon' => true]) ?>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+            <?= Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us') ?>
+            <?= Html::callButton('Call BMCS') ?>
         </div>
     </div>
 </section>

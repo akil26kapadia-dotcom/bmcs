@@ -14,6 +14,15 @@ $applications = $applications ?? [];
 $faq = $faq ?? [];
 $related = $related ?? [];
 $categoryIcon = $category['icon'] ?? 'network';
+$isTally = ($category['slug'] ?? '') === 'tally-solutions';
+$waMessage = 'Hello BMCS, I would like a quotation for ' . $service['name'] . '.';
+
+/**
+ * Overview text: blank-line separated paragraphs; a block starting with
+ * "## " becomes an H2 sub-heading so longer pages (e.g. TallyPrime Server)
+ * can be structured without extra database columns.
+ */
+$overviewBlocks = preg_split('/\R{2,}/', trim((string) ($service['description'] ?? ''))) ?: [];
 
 $schema = [
     '@context' => 'https://schema.org',
@@ -40,7 +49,7 @@ $schema = [
         <img src="/assets/images/hero/dubai-skyline-1920.jpg"
              srcset="/assets/images/hero/dubai-skyline-960.jpg 960w, /assets/images/hero/dubai-skyline-1920.jpg 1920w"
              sizes="100vw"
-             alt="Dubai skyline at sunset with the Burj Khalifa"
+             alt="<?= View::e($isTally ? 'Dubai business district, home of Bright Mind Computer Solutions TallyPrime services' : 'Dubai skyline at sunset with the Burj Khalifa') ?>"
              width="1920" height="776" decoding="async" fetchpriority="high"
              class="w-full h-full object-cover">
         <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
@@ -57,9 +66,10 @@ $schema = [
             <?php endif; ?>
         </div>
         <h1 class="mt-6 text-3xl md:text-5xl font-semibold text-white max-w-3xl"><?= View::e($service['name']) ?></h1>
-        <p class="mt-4 text-white/70 max-w-2xl text-lg"><?= View::e($service['short_description']) ?></p>
-        <div class="mt-8">
-            <?= Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'primary', 'icon' => true]) ?>
+        <p class="mt-4 text-white/80 max-w-2xl text-lg"><?= View::e($service['short_description']) ?></p>
+        <div class="mt-8 flex flex-wrap gap-4">
+            <?= Html::button(['href' => '/contact', 'label' => 'Request a Quotation', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us', $waMessage) ?>
         </div>
     </div>
 </section>
@@ -69,7 +79,13 @@ $schema = [
     <div class="container-custom grid lg:grid-cols-3 gap-12">
         <div class="lg:col-span-2">
             <h2 class="text-2xl font-semibold text-navy-950">Overview</h2>
-            <p class="mt-4 text-ink-500 leading-relaxed"><?= View::e($service['description']) ?></p>
+            <?php foreach ($overviewBlocks as $block): ?>
+                <?php if (str_starts_with($block, '## ')): ?>
+                    <h2 class="mt-10 text-2xl font-semibold text-navy-950"><?= View::e(substr($block, 3)) ?></h2>
+                <?php else: ?>
+                    <p class="mt-4 text-ink-500 leading-relaxed"><?= View::e($block) ?></p>
+                <?php endif; ?>
+            <?php endforeach; ?>
 
             <?php if (!empty($capabilities)): ?>
                 <h2 class="mt-12 text-2xl font-semibold text-navy-950">Key Capabilities</h2>
@@ -127,9 +143,11 @@ $schema = [
 
             <div class="card p-6 bg-navy-950 border-none">
                 <h3 class="font-semibold text-white">Need this for your business?</h3>
-                <p class="mt-2 text-sm text-white/60">Tell us about your requirements and we'll recommend the right solution.</p>
-                <div class="mt-4">
-                    <?= Html::button(['href' => '/contact', 'label' => 'Request a Consultation', 'variant' => 'primary', 'icon' => true, 'class' => 'w-full']) ?>
+                <p class="mt-2 text-sm text-white/80">Tell us about your requirements and we'll recommend the right solution.</p>
+                <div class="mt-4 space-y-3">
+                    <?= Html::button(['href' => '/contact', 'label' => 'Request a Quotation', 'variant' => 'primary', 'icon' => true, 'class' => 'w-full']) ?>
+                    <?= Html::whatsappButton('WhatsApp Us', $waMessage, 'outline-light', 'w-full') ?>
+                    <?= Html::callButton('Call BMCS', 'outline-light', 'w-full') ?>
                 </div>
             </div>
         </aside>
@@ -141,8 +159,8 @@ $schema = [
 <section class="section-py bg-ink-100/50">
     <div class="container-custom">
         <?= View::capture('components/section-heading', [
-            'eyebrow' => 'Related Services',
-            'title' => 'You May Also Need',
+            'eyebrow' => $isTally ? 'More Tally Solutions' : 'Related Services',
+            'title' => $isTally ? 'Other Tally Services from BMCS' : 'You May Also Need',
         ]) ?>
         <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ($related as $i => $relatedService): ?>
@@ -162,8 +180,9 @@ $schema = [
     <div class="absolute inset-0 hero-grid opacity-40 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 text-center">
         <h2 class="text-2xl md:text-3xl font-semibold text-white">Ready to Talk About <?= View::e($service['name']) ?>?</h2>
-        <div class="mt-6">
-            <?= Html::button(['href' => '/contact', 'label' => 'Talk to BMCS', 'variant' => 'primary', 'icon' => true]) ?>
+        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+            <?= Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us', $waMessage) ?>
         </div>
     </div>
 </section>

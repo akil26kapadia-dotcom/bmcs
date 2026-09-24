@@ -36,7 +36,7 @@ $technologies = array_filter(array_map('trim', explode(',', $project['technologi
             <p class="mt-5 eyebrow-on-dark"><?= View::e($project['industry']) ?></p>
         <?php endif; ?>
         <h1 class="mt-3 text-3xl md:text-5xl font-semibold text-white max-w-3xl"><?= View::e($project['title']) ?></h1>
-        <p class="mt-4 text-white/70 max-w-2xl text-lg"><?= View::e($project['summary']) ?></p>
+        <p class="mt-4 text-white/80 max-w-2xl text-lg"><?= View::e($project['summary']) ?></p>
     </div>
 </section>
 
@@ -116,7 +116,7 @@ $technologies = array_filter(array_map('trim', explode(',', $project['technologi
 
             <div class="card p-6 bg-navy-950 border-none">
                 <h3 class="font-semibold text-white">Planning something similar?</h3>
-                <p class="mt-2 text-sm text-white/60">Tell us about your project and we'll help you scope it out.</p>
+                <p class="mt-2 text-sm text-white/80">Tell us about your project and we'll help you scope it out.</p>
                 <div class="mt-4">
                     <?= Html::button(['href' => '/contact', 'label' => 'Talk to BMCS', 'variant' => 'primary', 'icon' => true, 'class' => 'w-full']) ?>
                 </div>

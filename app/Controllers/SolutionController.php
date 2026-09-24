@@ -12,8 +12,8 @@ class SolutionController extends Controller
     public function index(Request $request): void
     {
         $this->view('pages/solutions/index', [
-            'title' => 'IT Solutions',
-            'description' => 'Explore BMCS technology solutions across network infrastructure, cloud, security, telecommunication, Microsoft services, IT support and digital.',
+            'title' => 'Solutions We Deliver in Dubai & UAE',
+            'description' => 'TallyPrime solutions plus network infrastructure, cloud, security, telecommunication, Microsoft, IT support and digital services delivered by Bright Mind Computer Solutions in Dubai and the UAE.',
             'categories' => ServiceCategory::allOrdered(),
         ]);
     }
@@ -38,9 +38,13 @@ class SolutionController extends Controller
                 fn ($c) => $c['id'] !== $category['id']
             ));
 
+        $isTally = $params['slug'] === 'tally-solutions';
+
         $this->view('pages/solutions/show', [
-            'title' => $category['name'],
-            'description' => $category['description'],
+            'title' => $isTally ? 'TallyPrime Solutions in Dubai & UAE' : $category['name'],
+            'description' => $isTally
+                ? 'TallyPrime Dubai and UAE: sales and licensing, TSS renewal, Tally on Cloud, TallyPrime Server, customization, support and AMC, and data migration from Bright Mind Computer Solutions.'
+                : $category['description'],
             'category' => $category,
             'services' => Service::byCategorySlug($params['slug']),
             'otherCategories' => $otherCategories,

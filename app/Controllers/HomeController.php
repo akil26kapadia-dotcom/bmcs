@@ -4,7 +4,6 @@ namespace App\Controllers;
 
 use App\Core\Controller;
 use App\Core\Request;
-use App\Models\PortfolioProject;
 use App\Models\Post;
 use App\Models\Service;
 use App\Models\ServiceCategory;
@@ -14,11 +13,12 @@ class HomeController extends Controller
     public function index(Request $request): void
     {
         $this->view('pages/home', [
-            'title' => 'TallyPrime & Complete IT Solutions in Dubai',
-            'description' => 'BMCS is a Dubai-based TallyPrime partner and IT solutions provider — TallyPrime sales, renewal, customization and cloud hosting, plus networking, security, cloud and digital solutions across the UAE.',
+            'title' => 'TallyPrime Solutions & Complete IT Services in Dubai, UAE',
+            'preloadHero' => true,
+            'titleOverride' => 'TallyPrime Dubai & UAE, plus Complete IT Services | BMCS',
+            'description' => 'Bright Mind Computer Solutions LLC: TallyPrime sales, TSS renewal, Tally on Cloud, TallyPrime Server, customization and support in Dubai and the UAE, plus IT hardware, servers, networking, cybersecurity, CCTV and AMC.',
             'serviceCategories' => ServiceCategory::allOrdered(),
             'tallyServices' => Service::byCategorySlug('tally-solutions'),
-            'portfolioProjects' => PortfolioProject::published(),
             'latestPosts' => Post::published(3),
         ]);
     }

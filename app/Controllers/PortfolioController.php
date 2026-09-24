@@ -11,10 +11,18 @@ class PortfolioController extends Controller
 {
     public function index(Request $request): void
     {
+        // Until genuine case studies exist there is nothing to list; the
+        // "Solutions We Deliver" page is the honest replacement.
+        $projects = PortfolioProject::published();
+        if ($projects === []) {
+            $this->redirect('/solutions');
+            return;
+        }
+
         $this->view('pages/portfolio/index', [
             'title' => 'Portfolio',
             'description' => 'Representative examples of the network, security, cloud and digital projects BMCS delivers for businesses across Dubai and the UAE.',
-            'projects' => PortfolioProject::published(),
+            'projects' => $projects,
             'categories' => ServiceCategory::allOrdered(),
         ]);
     }

@@ -31,7 +31,7 @@ if ($activeFilter) {
     <div class="relative container-custom py-16 md:py-20 text-center">
         <span class="eyebrow-on-dark">Insights</span>
         <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white"><?= View::e($heading) ?></h1>
-        <p class="mt-4 text-white/70 max-w-2xl mx-auto">
+        <p class="mt-4 text-white/80 max-w-2xl mx-auto">
             Technology insights and updates from BMCS on IT infrastructure, networking, security, cloud and digital solutions.
         </p>
 
@@ -39,7 +39,7 @@ if ($activeFilter) {
             <label for="blog-search" class="sr-only">Search articles</label>
             <input type="search" id="blog-search" name="q" value="<?= View::e($search) ?>" placeholder="Search articles&hellip;"
                    class="w-full rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 pl-11 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500">
-            <svg class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-white/50" viewBox="0 0 20 20" fill="none">
+            <svg class="w-4 h-4 absolute left-4 top-1/2 -translate-y-1/2 text-white/80" viewBox="0 0 20 20" fill="none">
                 <circle cx="9" cy="9" r="6.5" stroke="currentColor" stroke-width="1.5"/>
                 <path d="M18 18l-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
             </svg>
