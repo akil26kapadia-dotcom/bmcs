@@ -91,7 +91,7 @@ $schemaList[] = array_filter([
     <link rel="icon" type="image/png" sizes="192x192" href="/assets/images/favicon-192.png">
     <link rel="apple-touch-icon" sizes="180x180" href="/assets/images/apple-touch-icon.png">
 
-    <link rel="preload" href="/assets/fonts/inter/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
+    <link rel="preload" href="/assets/fonts/bricolage-grotesque/BricolageGrotesque-latin.woff2" as="font" type="font/woff2" crossorigin>
     <?php if (!empty($preloadHero)): ?>
     <link rel="preload" as="image" href="<?= View::e(SiteConfig::get('site_hero_image', '/assets/images/hero/dubai-skyline-1920.jpg')) ?>" fetchpriority="high">
     <?php endif; ?>

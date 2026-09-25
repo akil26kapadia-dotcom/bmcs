@@ -33,7 +33,7 @@ module.exports = {
         },
       },
       fontFamily: {
-        sans: ["Inter", "ui-sans-serif", "system-ui", "-apple-system", "sans-serif"],
+        sans: ["Bricolage Grotesque", "Arial", "Helvetica", "sans-serif"],
       },
       maxWidth: {
         container: "80rem",
