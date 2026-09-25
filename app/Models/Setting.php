@@ -23,6 +23,13 @@ class Setting extends Model
         $stmt->execute(['key' => $key, 'value' => $value]);
     }
 
+    /** Removes a key entirely, so a caller's own default takes over again. */
+    public static function forget(string $key): void
+    {
+        $stmt = static::db()->prepare('DELETE FROM settings WHERE setting_key = :key');
+        $stmt->execute(['key' => $key]);
+    }
+
     public static function allAsMap(): array
     {
         $rows = static::db()->query('SELECT setting_key, setting_value FROM settings')->fetchAll();

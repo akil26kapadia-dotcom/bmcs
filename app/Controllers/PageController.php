@@ -7,6 +7,7 @@ use App\Core\Request;
 use App\Helpers\SiteConfig;
 use App\Models\Category;
 use App\Models\Post;
+use App\Models\ProductCategory;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 
@@ -53,22 +54,11 @@ class PageController extends Controller
 
     public function products(Request $request): void
     {
-        // No dedicated products table yet (not in the required Phase 2 schema —
-        // see Phase 2 notes). Static content for now; swapping this for a
-        // database-backed Product model later won't require any route/view changes.
+        // Categories are managed in Admin > Product Categories.
         $this->view('pages/products', [
             'title' => 'IT Products & Distribution',
             'description' => 'BMCS supplies and configures servers, desktops, laptops, networking equipment and IT accessories for businesses across Dubai and the UAE.',
-            'categories' => [
-                ['name' => 'Servers', 'icon' => 'briefcase', 'description' => 'Rack and tower servers configured for business workloads.'],
-                ['name' => 'Desktops', 'icon' => 'monitor', 'description' => 'Business desktop computers for offices of any size.'],
-                ['name' => 'Laptops', 'icon' => 'monitor', 'description' => 'Laptops for office, hybrid and mobile workforces.'],
-                ['name' => 'Networking Equipment', 'icon' => 'network', 'description' => 'Switches, routers and access points for reliable connectivity.'],
-                ['name' => 'Accessories', 'icon' => 'layers', 'description' => 'Peripherals and accessories to complete your setup.'],
-                ['name' => 'Security Equipment', 'icon' => 'shield', 'description' => 'CCTV cameras, access control hardware and related equipment.'],
-                ['name' => 'Storage', 'icon' => 'cloud', 'description' => 'Storage devices and solutions for business data.'],
-                ['name' => 'IT Infrastructure', 'icon' => 'life-buoy', 'description' => 'Core infrastructure hardware for your IT environment.'],
-            ],
+            'categories' => ProductCategory::allOrdered(),
         ]);
     }
 }

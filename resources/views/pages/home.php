@@ -3,11 +3,13 @@
 use App\Core\View;
 use App\Helpers\Html;
 use App\Helpers\Icon;
+use App\Helpers\SiteConfig;
 
 $serviceCategories = $serviceCategories ?? [];
 $latestPosts = $latestPosts ?? [];
 $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class);
-$whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
+$whatsapp = SiteConfig::get('whatsapp_number');
+$get = fn (string $key, string $default) => SiteConfig::get($key, $default);
 ?>
 
 <!-- ============================== HERO ============================== -->
@@ -27,13 +29,12 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     <?= View::capture('components/hero-network-bg') ?>
 
     <div class="relative container-custom pt-20 pb-28 md:pt-28 md:pb-40 lg:pt-36 lg:pb-48 text-center">
-        <span class="eyebrow-on-dark" data-animate="fade-up">Bright Mind Computer Solutions LLC</span>
+        <span class="eyebrow-on-dark" data-animate="fade-up"><?= View::e($get('home_hero_eyebrow', 'Bright Mind Computer Solutions LLC')) ?></span>
         <h1 class="mt-5 text-4xl sm:text-5xl lg:text-6xl font-semibold tracking-tight text-white max-w-4xl mx-auto leading-[1.1]" data-animate="fade-up" data-delay="80">
-            TallyPrime Solutions &amp; Complete IT Services in Dubai, UAE
+            <?= View::e($get('home_hero_heading', 'TallyPrime Solutions & Complete IT Services in Dubai, UAE')) ?>
         </h1>
         <p class="mt-6 text-lg text-white/80 max-w-2xl mx-auto leading-relaxed" data-animate="fade-up" data-delay="160">
-            TallyPrime sales, TSS renewal, Tally on Cloud, TallyPrime Server, customization and support &mdash;
-            together with IT hardware, servers, networking, cybersecurity, CCTV and AMC for businesses across the UAE.
+            <?= View::e($get('home_hero_subtext', 'TallyPrime sales, TSS renewal, Tally on Cloud, TallyPrime Server, customization and support — together with IT hardware, servers, networking, cybersecurity, CCTV and AMC for businesses across the UAE.')) ?>
         </p>
         <div class="mt-10 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="240">
             <?= Html::button(['href' => '/contact', 'label' => 'Request a Quotation', 'variant' => 'primary', 'icon' => true, 'class' => 'glow-pulse']) ?>
@@ -48,9 +49,9 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     <div class="section-blob w-96 h-96 -top-32 -right-20" aria-hidden="true"></div>
     <div class="relative container-custom">
         <?= View::capture('components/section-heading', [
-            'eyebrow' => 'TallyPrime Solutions',
-            'title' => 'TallyPrime Dubai: Sales, Renewal, Cloud, Server and Support',
-            'subtitle' => 'From licensing and TSS renewal to Tally on Cloud, TallyPrime Server, customization and AMC — everything you need to run TallyPrime with confidence in the UAE.',
+            'eyebrow' => $get('home_tally_eyebrow', 'TallyPrime Solutions'),
+            'title' => $get('home_tally_heading', 'TallyPrime Dubai: Sales, Renewal, Cloud, Server and Support'),
+            'subtitle' => $get('home_tally_subtitle', 'From licensing and TSS renewal to Tally on Cloud, TallyPrime Server, customization and AMC — everything you need to run TallyPrime with confidence in the UAE.'),
             'align' => 'center',
         ]) ?>
 
@@ -72,12 +73,12 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     <div class="container-custom py-10">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             <?php foreach ([
-                ['icon' => 'server', 'label' => 'IT Infrastructure'],
-                ['icon' => 'network', 'label' => 'Networking'],
-                ['icon' => 'shield', 'label' => 'Security'],
-                ['icon' => 'cloud', 'label' => 'Cloud'],
-                ['icon' => 'phone', 'label' => 'Telecommunication'],
-                ['icon' => 'monitor', 'label' => 'Digital Solutions'],
+                ['icon' => 'server', 'label' => $get('home_trust_1', 'IT Infrastructure')],
+                ['icon' => 'network', 'label' => $get('home_trust_2', 'Networking')],
+                ['icon' => 'shield', 'label' => $get('home_trust_3', 'Security')],
+                ['icon' => 'cloud', 'label' => $get('home_trust_4', 'Cloud')],
+                ['icon' => 'phone', 'label' => $get('home_trust_5', 'Telecommunication')],
+                ['icon' => 'monitor', 'label' => $get('home_trust_6', 'Digital Solutions')],
             ] as $i => $item): ?>
                 <div class="group flex flex-col items-center text-center gap-3" data-animate="fade-up" data-delay="<?= $i * 60 ?>">
                     <span class="icon-badge icon-badge-round">
@@ -100,25 +101,21 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
                  width="1200" height="1400" loading="lazy" decoding="async"
                  class="rounded-2xl shadow-premium w-full h-[420px] md:h-[520px] object-cover">
             <div class="absolute -bottom-6 -right-6 hidden md:block bg-navy-950 text-white rounded-xl px-6 py-5 shadow-premium max-w-[220px]">
-                <p class="text-sm font-semibold">Empowering Effective Solutions</p>
-                <p class="mt-1 text-xs text-white/80">Since our founding, our focus has stayed the same.</p>
+                <p class="text-sm font-semibold"><?= View::e($get('home_about_badge_title', 'Empowering Effective Solutions')) ?></p>
+                <p class="mt-1 text-xs text-white/80"><?= View::e($get('home_about_badge_text', 'Since our founding, our focus has stayed the same.')) ?></p>
             </div>
         </div>
         <div data-animate="fade-left">
             <?= View::capture('components/section-heading', [
-                'eyebrow' => 'About BMCS',
-                'title' => 'A Technology Partner Built Around Your Business',
+                'eyebrow' => $get('home_about_eyebrow', 'About BMCS'),
+                'title' => $get('home_about_heading', 'A Technology Partner Built Around Your Business'),
                 'subtitle' => null,
             ]) ?>
             <p class="mt-6 text-ink-500 leading-relaxed">
-                Bright Mind Computer Solutions (BMCS) is a Dubai-based IT and technology solutions provider,
-                delivering enterprise computing, data networking, security, voice and telephony, Microsoft
-                solutions, business continuity and digital services to businesses across the UAE.
+                <?= View::e($get('home_about_paragraph_1', 'Bright Mind Computer Solutions (BMCS) is a Dubai-based IT and technology solutions provider, delivering enterprise computing, data networking, security, voice and telephony, Microsoft solutions, business continuity and digital services to businesses across the UAE.')) ?>
             </p>
             <p class="mt-4 text-ink-500 leading-relaxed">
-                From structured cabling and cloud infrastructure to CCTV surveillance and web development,
-                we bring together the technical disciplines a modern business needs under one roof —
-                so you can work with a single, accountable technology partner instead of a patchwork of vendors.
+                <?= View::e($get('home_about_paragraph_2', 'From structured cabling and cloud infrastructure to CCTV surveillance and web development, we bring together the technical disciplines a modern business needs under one roof — so you can work with a single, accountable technology partner instead of a patchwork of vendors.')) ?>
             </p>
             <div class="mt-8">
                 <?= Html::button(['href' => '/about', 'label' => 'Discover BMCS', 'variant' => 'secondary', 'icon' => true]) ?>
@@ -132,9 +129,9 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     <div class="section-blob w-[26rem] h-[26rem] -bottom-40 -left-40" aria-hidden="true"></div>
     <div class="relative container-custom">
         <?= View::capture('components/section-heading', [
-            'eyebrow' => 'Complete IT Services',
-            'title' => 'Beyond Tally: A Complete Range of IT Services',
-            'subtitle' => 'From infrastructure to digital experiences, BMCS covers the full technology stack your business relies on.',
+            'eyebrow' => $get('home_services_eyebrow', 'Complete IT Services'),
+            'title' => $get('home_services_heading', 'Beyond Tally: A Complete Range of IT Services'),
+            'subtitle' => $get('home_services_subtitle', 'From infrastructure to digital experiences, BMCS covers the full technology stack your business relies on.'),
             'align' => 'center',
         ]) ?>
 
@@ -148,14 +145,14 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
             <p class="text-sm font-semibold uppercase tracking-wide text-ink-500">Popular IT services</p>
             <div class="mt-4 flex flex-wrap justify-center gap-3">
                 <?php foreach ([
-                    ['Computer Hardware', '/services/computer-hardware-supplies'],
-                    ['Servers', '/services/servers-storage'],
-                    ['Networking', '/solutions/network-infrastructure'],
-                    ['Cloud Solutions', '/services/cloud-solutions'],
-                    ['Cybersecurity', '/services/firewall-solutions'],
-                    ['CCTV / Security', '/services/cctv-surveillance'],
-                    ['IT Support', '/services/it-helpdesk'],
-                    ['IT AMC', '/services/it-amc-support'],
+                    [$get('home_chip_1', 'Computer Hardware'), '/services/computer-hardware-supplies'],
+                    [$get('home_chip_2', 'Servers'), '/services/servers-storage'],
+                    [$get('home_chip_3', 'Networking'), '/solutions/network-infrastructure'],
+                    [$get('home_chip_4', 'Cloud Solutions'), '/services/cloud-solutions'],
+                    [$get('home_chip_5', 'Cybersecurity'), '/services/firewall-solutions'],
+                    [$get('home_chip_6', 'CCTV / Security'), '/services/cctv-surveillance'],
+                    [$get('home_chip_7', 'IT Support'), '/services/it-helpdesk'],
+                    [$get('home_chip_8', 'IT AMC'), '/services/it-amc-support'],
                 ] as [$chipLabel, $chipHref]): ?>
                     <a href="<?= View::e($chipHref) ?>" class="filter-pill"><?= View::e($chipLabel) ?></a>
                 <?php endforeach; ?>
@@ -168,21 +165,21 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
 <section class="section-py bg-navy-950">
     <div class="container-custom">
         <?= View::capture('components/section-heading', [
-            'eyebrow' => 'Solutions We Deliver',
-            'title' => 'Infrastructure Built for Reliability and Growth',
-            'subtitle' => 'The technology areas where BMCS designs, installs and supports solutions for businesses across Dubai and the UAE.',
+            'eyebrow' => $get('home_bento_eyebrow', 'Solutions We Deliver'),
+            'title' => $get('home_bento_heading', 'Infrastructure Built for Reliability and Growth'),
+            'subtitle' => $get('home_bento_subtitle', 'The technology areas where BMCS designs, installs and supports solutions for businesses across Dubai and the UAE.'),
             'align' => 'center',
             'onDark' => true,
         ]) ?>
 
         <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ([
-                ['title' => 'Network & Infrastructure', 'slug' => 'network-infrastructure', 'image' => 'solution-network.webp', 'span' => 'lg:col-span-2 lg:row-span-2', 'h' => 'h-[280px] lg:h-full'],
-                ['title' => 'Security & Surveillance', 'slug' => 'security-surveillance', 'image' => 'solution-security.webp', 'span' => '', 'h' => 'h-[280px]'],
-                ['title' => 'Cloud & Data', 'slug' => 'cloud-data', 'image' => 'solution-cloud.webp', 'span' => '', 'h' => 'h-[280px]'],
-                ['title' => 'Telecommunication', 'slug' => 'telecommunication', 'image' => 'solution-telecom.webp', 'span' => '', 'h' => 'h-[280px]'],
-                ['title' => 'IT Support & Distribution', 'slug' => 'it-support-distribution', 'image' => 'solution-itsupport.webp', 'span' => '', 'h' => 'h-[280px]'],
-                ['title' => 'Web & Digital', 'slug' => 'web-digital', 'image' => 'solution-webdigital.webp', 'span' => 'lg:col-span-1', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_1', 'Network & Infrastructure'), 'slug' => 'network-infrastructure', 'image' => 'solution-network.webp', 'span' => 'lg:col-span-2 lg:row-span-2', 'h' => 'h-[280px] lg:h-full'],
+                ['title' => $get('home_bento_2', 'Security & Surveillance'), 'slug' => 'security-surveillance', 'image' => 'solution-security.webp', 'span' => '', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_3', 'Cloud & Data'), 'slug' => 'cloud-data', 'image' => 'solution-cloud.webp', 'span' => '', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_4', 'Telecommunication'), 'slug' => 'telecommunication', 'image' => 'solution-telecom.webp', 'span' => '', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_5', 'IT Support & Distribution'), 'slug' => 'it-support-distribution', 'image' => 'solution-itsupport.webp', 'span' => '', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_6', 'Web & Digital'), 'slug' => 'web-digital', 'image' => 'solution-webdigital.webp', 'span' => 'lg:col-span-1', 'h' => 'h-[280px]'],
             ] as $i => $tile): ?>
                 <a href="/solutions/<?= View::e($tile['slug']) ?>"
                    class="group relative <?= $tile['span'] ?> <?= $tile['h'] ?> rounded-2xl overflow-hidden block"
@@ -206,17 +203,17 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
 <section class="section-py bg-white">
     <div class="container-custom">
         <?= View::capture('components/section-heading', [
-            'eyebrow' => 'Why BMCS',
-            'title' => 'A Partner Businesses Choose to Rely On',
+            'eyebrow' => $get('home_why_eyebrow', 'Why BMCS'),
+            'title' => $get('home_why_heading', 'A Partner Businesses Choose to Rely On'),
             'align' => 'center',
         ]) ?>
 
         <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php foreach ([
-                ['icon' => 'coin', 'title' => 'Value for Money', 'text' => 'Solutions sized and priced to match real business needs, not oversold.'],
-                ['icon' => 'badge', 'title' => 'High Quality Work', 'text' => 'Careful design and installation across every service we deliver.'],
-                ['icon' => 'heart', 'title' => 'Excellent Service', 'text' => 'Responsive support before, during and after every project.'],
-                ['icon' => 'layers', 'title' => 'Complete Solutions', 'text' => 'One partner across infrastructure, security, cloud and digital.'],
+                ['icon' => 'coin', 'title' => $get('home_why_1_title', 'Value for Money'), 'text' => $get('home_why_1_text', 'Solutions sized and quoted to match real business needs, not oversold.')],
+                ['icon' => 'badge', 'title' => $get('home_why_2_title', 'High Quality Work'), 'text' => $get('home_why_2_text', 'Careful design and installation across every service we deliver.')],
+                ['icon' => 'heart', 'title' => $get('home_why_3_title', 'Excellent Service'), 'text' => $get('home_why_3_text', 'Responsive support before, during and after every project.')],
+                ['icon' => 'layers', 'title' => $get('home_why_4_title', 'Complete Solutions'), 'text' => $get('home_why_4_text', 'One partner across infrastructure, security, cloud and digital.')],
             ] as $i => $item): ?>
                 <div class="text-center p-6" data-animate="fade-up" data-delay="<?= $i * 80 ?>">
                     <span class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gold-500/10 text-gold-600">
@@ -235,8 +232,8 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     <div class="container-custom">
         <div class="flex flex-wrap items-end justify-between gap-6">
             <?= View::capture('components/section-heading', [
-                'eyebrow' => 'Insights',
-                'title' => 'From the BMCS Blog',
+                'eyebrow' => $get('home_blog_eyebrow', 'Insights'),
+                'title' => $get('home_blog_heading', 'From the BMCS Blog'),
             ]) ?>
             <?= Html::button(['href' => '/blog', 'label' => 'Visit the Blog', 'variant' => 'outline-dark', 'icon' => true]) ?>
         </div>
@@ -272,10 +269,10 @@ $whatsapp = \App\Helpers\SiteConfig::get('whatsapp_number');
     <div class="absolute inset-0 hero-grid opacity-40 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-20 text-center">
         <h2 class="text-3xl md:text-4xl font-semibold text-white max-w-2xl mx-auto" data-animate="fade-up">
-            Let's Build a Smarter Technology Infrastructure
+            <?= View::e($get('home_cta_heading', "Let's Build a Smarter Technology Infrastructure")) ?>
         </h2>
         <p class="mt-4 text-white/80 max-w-xl mx-auto" data-animate="fade-up" data-delay="80">
-            Tell us about your business and we'll help you find the right technology solution.
+            <?= View::e($get('home_cta_subtext', "Tell us about your business and we'll help you find the right technology solution.")) ?>
         </p>
         <div class="mt-8 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="160">
             <?= Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>

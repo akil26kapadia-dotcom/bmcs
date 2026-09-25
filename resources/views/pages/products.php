@@ -3,6 +3,7 @@
 use App\Core\View;
 use App\Helpers\Html;
 use App\Helpers\Icon;
+use App\Helpers\SiteConfig;
 
 $categories = $categories ?? [];
 ?>
@@ -26,11 +27,10 @@ $categories = $categories ?? [];
     </div>
     <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 md:py-20 text-center">
-        <span class="eyebrow-on-dark">IT Distribution</span>
-        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">IT Products &amp; Distribution</h1>
+        <span class="eyebrow-on-dark"><?= View::e(SiteConfig::get('products_hero_eyebrow', 'IT Distribution')) ?></span>
+        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white"><?= View::e(SiteConfig::get('products_hero_heading', 'IT Products & Distribution')) ?></h1>
         <p class="mt-4 text-white/80 max-w-2xl mx-auto">
-            BMCS supplies and configures the hardware businesses need — from servers and workstations
-            to networking equipment and accessories.
+            <?= View::e(SiteConfig::get('products_hero_subtext', 'BMCS supplies and configures the hardware businesses need — from servers and workstations to networking equipment and accessories.')) ?>
         </p>
     </div>
 </section>
@@ -49,10 +49,9 @@ $categories = $categories ?? [];
     </div>
 
     <div class="mt-14 card p-8 md:p-10 text-center bg-ink-100/50 border-none">
-        <h2 class="text-xl md:text-2xl font-semibold text-navy-950">Looking for Specific Hardware?</h2>
+        <h2 class="text-xl md:text-2xl font-semibold text-navy-950"><?= View::e(SiteConfig::get('products_cta_heading', 'Looking for Specific Hardware?')) ?></h2>
         <p class="mt-3 text-ink-500 max-w-xl mx-auto">
-            Tell us what your business needs and we'll help you source and configure the right
-            equipment, at the right budget.
+            <?= View::e(SiteConfig::get('products_cta_subtext', "Tell us what your business needs and we'll help you source and configure the right equipment, at the right budget.")) ?>
         </p>
         <div class="mt-6">
             <?= Html::button(['href' => '/contact', 'label' => 'Enquire About Products', 'variant' => 'primary', 'icon' => true]) ?>

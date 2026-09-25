@@ -3,6 +3,9 @@
 use App\Controllers\Admin\AuthController;
 use App\Controllers\Admin\CategoryController;
 use App\Controllers\Admin\ContactSubmissionController;
+use App\Controllers\Admin\ContentController;
+use App\Controllers\Admin\MenuController;
+use App\Controllers\Admin\ProductCategoryController;
 use App\Controllers\Admin\DashboardController;
 use App\Controllers\Admin\MediaController;
 use App\Controllers\Admin\PostController;
@@ -81,6 +84,17 @@ return function (Router $router): void {
 
         $router->get('/contacts', [ContactSubmissionController::class, 'index']);
         $router->post('/contacts/read/{id}', [ContactSubmissionController::class, 'markRead'], [CsrfMiddleware::class]);
+
+        $router->get('/menus', [MenuController::class, 'index']);
+        $router->post('/menus', [MenuController::class, 'store'], [CsrfMiddleware::class]);
+        $router->post('/menus/delete/{id}', [MenuController::class, 'delete'], [CsrfMiddleware::class]);
+
+        $router->get('/products', [ProductCategoryController::class, 'index']);
+        $router->post('/products', [ProductCategoryController::class, 'store'], [CsrfMiddleware::class]);
+        $router->post('/products/delete/{id}', [ProductCategoryController::class, 'delete'], [CsrfMiddleware::class]);
+
+        $router->get('/content', [ContentController::class, 'index']);
+        $router->post('/content/{group}', [ContentController::class, 'update'], [CsrfMiddleware::class]);
 
         $router->get('/settings', [SettingsController::class, 'index']);
         $router->post('/settings', [SettingsController::class, 'update'], [CsrfMiddleware::class]);

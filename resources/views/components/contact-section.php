@@ -4,27 +4,34 @@ use App\Core\Csrf;
 use App\Core\Session;
 use App\Core\View;
 use App\Helpers\SiteConfig;
+use App\Models\Service;
+use App\Models\ServiceCategory;
 
 $phone = SiteConfig::get('site_phone');
 $email = SiteConfig::get('site_email');
 $whatsapp = SiteConfig::get('whatsapp_number');
+$address = SiteConfig::get('site_address');
+$city = SiteConfig::get('site_city', 'Dubai');
 $success = Session::flash('contact_success');
 $errors = Session::flash('contact_errors');
 
-$serviceOptions = [
-    'TallyPrime Sales & Licensing', 'TSS Renewal', 'Tally on Cloud', 'TallyPrime Customization', 'TallyPrime Server',
-    'Tally Support & AMC', 'Tally Integration & Data Migration',
-    'Network & Infrastructure', 'Cloud & Data', 'Security & Surveillance', 'Telecommunication',
-    'Microsoft & Business Solutions', 'IT Support & Distribution', 'Web & Digital', 'Audio Visual',
-];
+// Pulled live from Admin > Categories/Services, same as the header/footer menus.
+try {
+    $serviceOptions = array_merge(
+        array_column(Service::byCategorySlug('tally-solutions'), 'name'),
+        array_column(array_filter(ServiceCategory::allOrdered(), fn ($c) => $c['slug'] !== 'tally-solutions'), 'name')
+    );
+} catch (\Throwable $e) {
+    $serviceOptions = [];
+}
 ?>
 <section id="contact" class="section-py bg-white">
     <div class="container-custom grid lg:grid-cols-5 gap-12">
         <div class="lg:col-span-2" data-animate="fade-right">
             <?= View::capture('components/section-heading', [
-                'eyebrow' => 'Contact Us',
-                'title' => 'Request a Quotation or Consultation',
-                'subtitle' => 'Tell us a little about your business and one of our specialists will get back to you.',
+                'eyebrow' => SiteConfig::get('contact_form_eyebrow', 'Contact Us'),
+                'title' => SiteConfig::get('contact_form_heading', 'Request a Quotation or Consultation'),
+                'subtitle' => SiteConfig::get('contact_form_subtitle', 'Tell us a little about your business and one of our specialists will get back to you.'),
             ]) ?>
 
             <div class="mt-8 space-y-4">
@@ -52,7 +59,7 @@ $serviceOptions = [
                     <span class="inline-flex items-center justify-center w-10 h-10 rounded-lg bg-navy-950 text-gold-400 shrink-0">
                         <svg class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor"><path fill-rule="evenodd" d="M9.69 18.933l.003.001C9.89 19.02 10 19 10 19s.11.02.308-.066l.002-.001.006-.003.018-.008a5.741 5.741 0 00.281-.14c.186-.096.446-.24.757-.433.62-.384 1.445-.966 2.274-1.765C15.302 14.988 17 12.493 17 9A7 7 0 103 9c0 3.492 1.698 5.988 3.355 7.584a13.731 13.731 0 002.273 1.765 11.842 11.842 0 00.976.544l.062.029.018.008.006.003zM10 11.25a2.25 2.25 0 100-4.5 2.25 2.25 0 000 4.5z" clip-rule="evenodd"/></svg>
                     </span>
-                    Dubai, United Arab Emirates
+                    <?= View::e($address ?: $city . ', United Arab Emirates') ?>
                 </p>
             </div>
         </div>

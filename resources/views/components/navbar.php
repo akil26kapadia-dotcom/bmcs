@@ -3,20 +3,24 @@
 use App\Helpers\Html;
 use App\Helpers\SiteConfig;
 use App\Core\View;
+use App\Models\MenuItem;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 
 $currentPath = $currentPath ?? '';
 
-$navItems = [
-    ['label' => 'Home', 'href' => '/'],
-    ['label' => 'Tally', 'href' => '/solutions/tally-solutions', 'dropdown' => 'tally-menu'],
-    ['label' => 'About', 'href' => '/about'],
-    ['label' => 'IT Services', 'href' => '/services', 'dropdown' => 'services-menu'],
-    ['label' => 'Products', 'href' => '/products'],
-    ['label' => 'Blog', 'href' => '/blog'],
-    ['label' => 'Contact', 'href' => '/contact'],
-];
+// The plain links (Home, About, Products, ...) are managed in Admin > Menus.
+// The two dropdown anchors below are structural — their submenus are wired
+// to live Category/Service data — so they're fixed here at reserved
+// sort-order slots (20 and 40) an admin item can be placed before/between/after.
+try {
+    $navItems = MenuItem::forLocation('header');
+} catch (\Throwable $e) {
+    $navItems = [];
+}
+$navItems[] = ['label' => 'Tally', 'href' => '/solutions/tally-solutions', 'dropdown' => 'tally-menu', 'sort_order' => 20];
+$navItems[] = ['label' => 'IT Services', 'href' => '/services', 'dropdown' => 'services-menu', 'sort_order' => 40];
+usort($navItems, fn ($a, $b) => ($a['sort_order'] ?? 0) <=> ($b['sort_order'] ?? 0));
 
 // Pulled live from the database (Admin > Categories/Services own this data)
 // so the menu never drifts from what the site actually has published.
@@ -113,6 +117,7 @@ $whatsapp = SiteConfig::get('whatsapp_number');
                         </div>
                     <?php else: ?>
                         <a href="<?= View::e($item['href']) ?>"
+                           <?= !empty($item['open_new_tab']) ? 'target="_blank" rel="noopener"' : '' ?>
                            class="nav-link px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors
                                   <?= $isActive($item['href']) ? 'text-navy-950 is-active' : 'text-ink-700 hover:text-navy-950' ?>">
                             <?= View::e($item['label']) ?>
@@ -168,7 +173,8 @@ $whatsapp = SiteConfig::get('whatsapp_number');
 
         <nav class="mt-10 flex flex-col divide-y divide-white/10" aria-label="Mobile">
             <?php foreach ($navItems as $item): ?>
-                <a href="<?= View::e($item['href']) ?>" class="py-4 text-lg font-medium <?= $isActive($item['href']) ? 'text-gold-400' : 'text-white' ?>">
+                <a href="<?= View::e($item['href']) ?>" <?= !empty($item['open_new_tab']) ? 'target="_blank" rel="noopener"' : '' ?>
+                   class="py-4 text-lg font-medium <?= $isActive($item['href']) ? 'text-gold-400' : 'text-white' ?>">
                     <?= View::e($item['label']) ?>
                 </a>
             <?php endforeach; ?>

@@ -13,6 +13,9 @@ $navItems = [
     ['label' => 'Tags', 'href' => '/admin/tags', 'icon' => 'badge'],
     ['label' => 'Media', 'href' => '/admin/media', 'icon' => 'cloud'],
     ['label' => 'Contacts', 'href' => '/admin/contacts', 'icon' => 'phone'],
+    ['label' => 'Menus', 'href' => '/admin/menus', 'icon' => 'link'],
+    ['label' => 'Product Categories', 'href' => '/admin/products', 'icon' => 'cart'],
+    ['label' => 'Page Content', 'href' => '/admin/content', 'icon' => 'code'],
     ['label' => 'SEO', 'href' => '/admin/seo', 'icon' => 'chart'],
     ['label' => 'Settings', 'href' => '/admin/settings', 'icon' => 'life-buoy'],
 ];

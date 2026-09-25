@@ -2,6 +2,7 @@
 
 use App\Helpers\SiteConfig;
 use App\Core\View;
+use App\Models\MenuItem;
 use App\Models\Service;
 use App\Models\ServiceCategory;
 
@@ -33,14 +34,12 @@ try {
     $tallyLinks = [];
 }
 
-$quickLinks = [
-    ['label' => 'About Us', 'href' => '/about'],
-    ['label' => 'Services', 'href' => '/services'],
-    ['label' => 'Solutions We Deliver', 'href' => '/solutions'],
-    ['label' => 'Blog', 'href' => '/blog'],
-    ['label' => 'Products', 'href' => '/products'],
-    ['label' => 'Contact', 'href' => '/contact'],
-];
+// Managed in Admin > Menus.
+try {
+    $quickLinks = MenuItem::forLocation('footer');
+} catch (\Throwable $e) {
+    $quickLinks = [];
+}
 ?>
 <footer class="relative bg-navy-950 text-white/80 overflow-hidden">
     <div class="absolute top-0 inset-x-0 h-px bg-gradient-to-r from-transparent via-gold-500/70 to-transparent" aria-hidden="true"></div>
