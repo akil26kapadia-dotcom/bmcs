@@ -3,6 +3,8 @@
 use App\Helpers\Html;
 use App\Helpers\SiteConfig;
 use App\Core\View;
+use App\Models\Service;
+use App\Models\ServiceCategory;
 
 $currentPath = $currentPath ?? '';
 
@@ -16,26 +18,25 @@ $navItems = [
     ['label' => 'Contact', 'href' => '/contact'],
 ];
 
-$tallyLinks = [
-    ['name' => 'TallyPrime Sales & Licensing', 'slug' => 'tallyprime-sales'],
-    ['name' => 'TSS Renewal', 'slug' => 'tally-renewal'],
-    ['name' => 'Tally on Cloud', 'slug' => 'tally-on-cloud'],
-    ['name' => 'Customization & Implementation', 'slug' => 'tally-customization'],
-    ['name' => 'TallyPrime Server', 'slug' => 'tallyprime-server'],
-    ['name' => 'Support & AMC', 'slug' => 'tally-support'],
-    ['name' => 'Integration & Data Migration', 'slug' => 'tally-integration'],
-];
-
-$serviceCategories = [
-    ['name' => 'Network & Infrastructure', 'slug' => 'network-infrastructure'],
-    ['name' => 'Cloud & Data', 'slug' => 'cloud-data'],
-    ['name' => 'Security & Surveillance', 'slug' => 'security-surveillance'],
-    ['name' => 'Telecommunication', 'slug' => 'telecommunication'],
-    ['name' => 'Microsoft & Business Solutions', 'slug' => 'microsoft-business-solutions'],
-    ['name' => 'IT Support & Distribution', 'slug' => 'it-support-distribution'],
-    ['name' => 'Web & Digital', 'slug' => 'web-digital'],
-    ['name' => 'Audio Visual', 'slug' => 'audio-visual'],
-];
+// Pulled live from the database (Admin > Categories/Services own this data)
+// so the menu never drifts from what the site actually has published.
+// Wrapped defensively because the navbar renders on every page, including
+// error pages — a DB hiccup should never take down the header with it.
+try {
+    $tallyLinks = Service::byCategorySlug('tally-solutions');
+} catch (\Throwable $e) {
+    $tallyLinks = [];
+}
+try {
+    // Tally already has its own top-level menu, so it's excluded here to
+    // avoid listing it twice.
+    $serviceCategories = array_values(array_filter(
+        ServiceCategory::allOrdered(),
+        fn ($c) => $c['slug'] !== 'tally-solutions'
+    ));
+} catch (\Throwable $e) {
+    $serviceCategories = [];
+}
 
 $isActive = function (string $href) use ($currentPath): bool {
     $target = trim($href, '/');

@@ -39,6 +39,48 @@ $get = fn (string $key) => View::e($settings[$key] ?? '');
     </div>
 
     <div class="card p-6 space-y-4">
+        <h3 class="font-semibold text-navy-950">Address</h3>
+        <p class="text-sm text-ink-500">Shown in the footer and used in the site's Organization/LocalBusiness structured data for search engines.</p>
+        <div>
+            <label for="site_address" class="form-label">Street Address</label>
+            <input type="text" id="site_address" name="site_address" value="<?= $get('site_address') ?>" class="form-input" placeholder="e.g. Office 000, Building Name, Street, Area">
+            <p class="form-hint">Leave blank to show just the city and country.</p>
+        </div>
+        <div class="grid sm:grid-cols-2 gap-4">
+            <div>
+                <label for="site_city" class="form-label">City</label>
+                <input type="text" id="site_city" name="site_city" value="<?= $get('site_city') ?: 'Dubai' ?>" class="form-input">
+            </div>
+            <div>
+                <label for="site_country_code" class="form-label">Country Code</label>
+                <input type="text" id="site_country_code" name="site_country_code" value="<?= $get('site_country_code') ?: 'AE' ?>" class="form-input" maxlength="2" placeholder="AE">
+                <p class="form-hint">Two-letter ISO code, e.g. AE for United Arab Emirates.</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="card p-6 space-y-4">
+        <h3 class="font-semibold text-navy-950">Social Links</h3>
+        <p class="text-sm text-ink-500">Optional. Shown as icons in the footer and included in structured data. Leave any blank to hide it.</p>
+        <div>
+            <label for="facebook_url" class="form-label">Facebook URL</label>
+            <input type="url" id="facebook_url" name="facebook_url" value="<?= $get('facebook_url') ?>" class="form-input" placeholder="https://facebook.com/...">
+        </div>
+        <div>
+            <label for="instagram_url" class="form-label">Instagram URL</label>
+            <input type="url" id="instagram_url" name="instagram_url" value="<?= $get('instagram_url') ?>" class="form-input" placeholder="https://instagram.com/...">
+        </div>
+        <div>
+            <label for="linkedin_url" class="form-label">LinkedIn URL</label>
+            <input type="url" id="linkedin_url" name="linkedin_url" value="<?= $get('linkedin_url') ?>" class="form-input" placeholder="https://linkedin.com/company/...">
+        </div>
+        <div>
+            <label for="twitter_url" class="form-label">X / Twitter URL</label>
+            <input type="url" id="twitter_url" name="twitter_url" value="<?= $get('twitter_url') ?>" class="form-input" placeholder="https://x.com/...">
+        </div>
+    </div>
+
+    <div class="card p-6 space-y-4">
         <h3 class="font-semibold text-navy-950">SEO Defaults</h3>
         <div>
             <label for="default_seo_title" class="form-label">Default SEO Title</label>

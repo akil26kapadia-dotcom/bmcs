@@ -6,6 +6,7 @@ use App\Controllers\Admin\ContactSubmissionController;
 use App\Controllers\Admin\DashboardController;
 use App\Controllers\Admin\MediaController;
 use App\Controllers\Admin\PostController;
+use App\Controllers\Admin\SeoController;
 use App\Controllers\Admin\SettingsController;
 use App\Controllers\Admin\TagController;
 use App\Controllers\BlogController;
@@ -84,5 +85,9 @@ return function (Router $router): void {
         $router->get('/settings', [SettingsController::class, 'index']);
         $router->post('/settings', [SettingsController::class, 'update'], [CsrfMiddleware::class]);
         $router->post('/settings/password', [SettingsController::class, 'updatePassword'], [CsrfMiddleware::class]);
+
+        $router->get('/seo', [SeoController::class, 'index']);
+        $router->post('/seo', [SeoController::class, 'store'], [CsrfMiddleware::class]);
+        $router->post('/seo/delete/{id}', [SeoController::class, 'delete'], [CsrfMiddleware::class]);
     });
 };

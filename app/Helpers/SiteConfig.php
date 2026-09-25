@@ -20,6 +20,8 @@ class SiteConfig
         'site_email' => 'info@bmcs.ae',
         'whatsapp_number' => '',
         'footer_text' => 'Empowering Effective Solutions.',
+        'site_city' => 'Dubai',
+        'site_country_code' => 'AE',
     ];
 
     public static function get(string $key, ?string $default = null): string

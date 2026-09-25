@@ -169,6 +169,28 @@ class Icon
             'stroke' => true,
             'body' => '<path d="M16.6152 18.25H16.6252" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><path d="M4.75013 13.9468V5.5C4.75013 4.67157 5.4217 4 6.25013 4H17.7501C18.5785 4 19.2501 4.67157 19.2501 5.5V9M4.75013 13.9468C5.02602 13.6671 5.40763 13.5 5.81822 13.5H9M4.75013 13.9468C4.59644 14.1025 4.47556 14.2932 4.40074 14.5093L3.1892 18.0093C2.85192 18.9837 3.57558 20 4.60668 20H9M14.8447 21.25H18.4048C19.2332 21.25 19.9048 20.5784 19.9048 19.75V13.5C19.9048 12.6716 19.2332 12 18.4048 12H14.8447C14.0163 12 13.3447 12.6716 13.3447 13.5V19.75C13.3447 20.5784 14.0163 21.25 14.8447 21.25Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>',
         ],
+
+        // --- Social profile glyphs (footer) ---
+        'facebook' => [
+            'viewBox' => '0 0 24 24',
+            'stroke' => false,
+            'body' => '<path d="M22 12.06C22 6.5 17.52 2 12 2S2 6.5 2 12.06C2 17.08 5.66 21.23 10.44 22v-7.03H7.9v-2.91h2.54V9.85c0-2.51 1.49-3.9 3.77-3.9 1.09 0 2.24.2 2.24.2v2.47h-1.26c-1.24 0-1.63.78-1.63 1.58v1.86h2.78l-.44 2.91h-2.34V22C18.34 21.23 22 17.08 22 12.06z"/>',
+        ],
+        'instagram' => [
+            'viewBox' => '0 0 24 24',
+            'stroke' => true,
+            'body' => '<rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.6"/><circle cx="17.2" cy="6.8" r="1.1" fill="currentColor" stroke="none"/>',
+        ],
+        'linkedin' => [
+            'viewBox' => '0 0 24 24',
+            'stroke' => false,
+            'body' => '<path d="M6.94 5a2 2 0 11-4 0 2 2 0 014 0zM3.2 8.75h3.5V21H3.2V8.75zM9.5 8.75h3.36v1.68h.05c.47-.88 1.6-1.8 3.3-1.8 3.53 0 4.18 2.32 4.18 5.34V21h-3.5v-5.4c0-1.29-.02-2.94-1.79-2.94-1.8 0-2.08 1.4-2.08 2.85V21H9.5V8.75z"/>',
+        ],
+        'twitter' => [
+            'viewBox' => '0 0 24 24',
+            'stroke' => false,
+            'body' => '<path d="M17.53 3h3.16l-6.9 7.89L22 21h-6.36l-4.98-6.51L4.94 21H1.77l7.38-8.44L2 3h6.52l4.5 5.95L17.53 3zm-1.11 16.17h1.75L7.66 4.73H5.78l10.64 14.44z"/>',
+        ],
     ];
 
     public static function raw(string $name): string

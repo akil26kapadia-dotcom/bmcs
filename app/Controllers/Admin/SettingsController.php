@@ -13,6 +13,8 @@ class SettingsController extends Controller
     /** Only these keys may be written — prevents arbitrary key injection via the form. */
     private const ALLOWED_KEYS = [
         'site_name', 'site_phone', 'site_email', 'whatsapp_number',
+        'site_address', 'site_city', 'site_country_code',
+        'facebook_url', 'instagram_url', 'linkedin_url', 'twitter_url',
         'default_seo_title', 'default_seo_description', 'footer_text',
         'ga_id', 'gsc_verification',
     ];

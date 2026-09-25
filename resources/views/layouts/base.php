@@ -5,20 +5,53 @@ use App\Helpers\Asset;
 use App\Helpers\SEO;
 use App\Helpers\SiteConfig;
 use App\Helpers\Url;
+use App\Models\SeoMetadata;
 
 $siteName = SiteConfig::get('site_name');
 $pageTitle = $title ?? $siteName;
 $metaDescription = $description ?? SiteConfig::get('default_seo_description', 'BMCS delivers enterprise IT infrastructure, networking, security, cloud and digital solutions across Dubai and the UAE.');
 $currentPath = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/', '/');
 $canonicalUrl = $canonicalOverride ?? Url::full($currentPath);
-$fullTitle = $titleOverride ?? ($pageTitle === $siteName ? $siteName : $pageTitle . ' | ' . $siteName);
-
 $ogImagePath = $ogImage ?? '/assets/images/hero/hero-datacenter-1920.webp';
+$ogTitleValue = $ogTitle ?? null;
+$ogDescriptionValue = $ogDescription ?? null;
+
+// Admin-editable overrides (Admin > SEO) for the current route, keyed by its
+// path ('home' for '/'). Only applied to static/listing pages — a dynamic
+// page (a specific service/post/portfolio slug) has its own currentPath per
+// item, so a generic row here never collides with per-item meta from its
+// own database record. Safe to fail: a DB hiccup just means no override.
+try {
+    $seoOverride = SeoMetadata::findByRouteKey($currentPath === '' ? 'home' : $currentPath);
+} catch (\Throwable $e) {
+    $seoOverride = null;
+}
+if ($seoOverride) {
+    $pageTitle = $seoOverride['meta_title'] ?: $pageTitle;
+    $metaDescription = $seoOverride['meta_description'] ?: $metaDescription;
+    $canonicalUrl = $seoOverride['canonical_url'] ?: $canonicalUrl;
+    $ogTitleValue = $seoOverride['og_title'] ?: $ogTitleValue;
+    $ogDescriptionValue = $seoOverride['og_description'] ?: $ogDescriptionValue;
+    $ogImagePath = $seoOverride['og_image'] ?: $ogImagePath;
+}
+
+$fullTitle = $titleOverride ?? ($pageTitle === $siteName ? $siteName : $pageTitle . ' | ' . $siteName);
 $schemaList = isset($schema) ? (array_is_list($schema) && isset($schema[0]) ? $schema : [$schema]) : [];
 
 $whatsapp = SiteConfig::get('whatsapp_number');
 
-$schemaList[] = [
+// Address and social links are set in Admin > Settings; both are optional so
+// the schema degrades gracefully to just a locality until the real street
+// address is confirmed (see standing reminder to the client).
+$streetAddress = SiteConfig::get('site_address');
+$socialLinks = array_values(array_filter([
+    SiteConfig::get('facebook_url'),
+    SiteConfig::get('instagram_url'),
+    SiteConfig::get('linkedin_url'),
+    SiteConfig::get('twitter_url'),
+]));
+
+$schemaList[] = array_filter([
     '@context' => 'https://schema.org',
     '@type' => 'Organization',
     'name' => $siteName,
@@ -27,12 +60,14 @@ $schemaList[] = [
     'image' => Url::full('/assets/images/logo-mark.png'),
     'telephone' => SiteConfig::get('site_phone'),
     'email' => SiteConfig::get('site_email'),
-    'address' => [
+    'address' => array_filter([
         '@type' => 'PostalAddress',
-        'addressLocality' => 'Dubai',
-        'addressCountry' => 'AE',
-    ],
-];
+        'streetAddress' => $streetAddress ?: null,
+        'addressLocality' => SiteConfig::get('site_city', 'Dubai'),
+        'addressCountry' => SiteConfig::get('site_country_code', 'AE'),
+    ]),
+    'sameAs' => $socialLinks ?: null,
+]);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -44,8 +79,8 @@ $schemaList[] = [
     <link rel="canonical" href="<?= View::e($canonicalUrl) ?>">
 
     <?= SEO::openGraph([
-        'title' => $ogTitle ?? $fullTitle,
-        'description' => $ogDescription ?? $metaDescription,
+        'title' => $ogTitleValue ?? $fullTitle,
+        'description' => $ogDescriptionValue ?? $metaDescription,
         'url' => $canonicalUrl,
         'image' => $ogImagePath ? Url::full($ogImagePath) : null,
         'type' => $ogType ?? 'website',

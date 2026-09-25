@@ -2,30 +2,36 @@
 
 use App\Helpers\SiteConfig;
 use App\Core\View;
+use App\Models\Service;
+use App\Models\ServiceCategory;
 
 $phone = SiteConfig::get('site_phone');
 $email = SiteConfig::get('site_email');
 $whatsapp = SiteConfig::get('whatsapp_number');
 $footerText = SiteConfig::get('footer_text');
+$address = SiteConfig::get('site_address');
+$city = SiteConfig::get('site_city', 'Dubai');
+$socialLinks = array_filter([
+    'facebook' => SiteConfig::get('facebook_url'),
+    'instagram' => SiteConfig::get('instagram_url'),
+    'linkedin' => SiteConfig::get('linkedin_url'),
+    'twitter' => SiteConfig::get('twitter_url'),
+]);
 
-$serviceLinks = [
-    ['name' => 'Network & Infrastructure', 'slug' => 'network-infrastructure'],
-    ['name' => 'Cloud & Data', 'slug' => 'cloud-data'],
-    ['name' => 'Security & Surveillance', 'slug' => 'security-surveillance'],
-    ['name' => 'Telecommunication', 'slug' => 'telecommunication'],
-    ['name' => 'Microsoft & Business Solutions', 'slug' => 'microsoft-business-solutions'],
-    ['name' => 'Web & Digital', 'slug' => 'web-digital'],
-];
-
-$tallyLinks = [
-    ['name' => 'TallyPrime Sales & Licensing', 'slug' => 'tallyprime-sales'],
-    ['name' => 'TSS Renewal', 'slug' => 'tally-renewal'],
-    ['name' => 'Tally on Cloud', 'slug' => 'tally-on-cloud'],
-    ['name' => 'Tally Customization', 'slug' => 'tally-customization'],
-    ['name' => 'TallyPrime Server', 'slug' => 'tallyprime-server'],
-    ['name' => 'Tally Support & AMC', 'slug' => 'tally-support'],
-    ['name' => 'Integration & Migration', 'slug' => 'tally-integration'],
-];
+// Pulled live from the database (Admin > Categories/Services) — see navbar.php.
+try {
+    $serviceLinks = array_values(array_filter(
+        ServiceCategory::allOrdered(),
+        fn ($c) => $c['slug'] !== 'tally-solutions'
+    ));
+} catch (\Throwable $e) {
+    $serviceLinks = [];
+}
+try {
+    $tallyLinks = Service::byCategorySlug('tally-solutions');
+} catch (\Throwable $e) {
+    $tallyLinks = [];
+}
 
 $quickLinks = [
     ['label' => 'About Us', 'href' => '/about'],
@@ -55,7 +61,17 @@ $quickLinks = [
                 <?= View::e($footerText) ?> Bright Mind Computer Solutions LLC provides TallyPrime solutions
                 and complete IT services &mdash; networking, servers, security, cloud and support &mdash; for businesses across Dubai and the UAE.
             </p>
-            <p class="mt-4 text-sm text-white/80">Dubai, United Arab Emirates</p>
+            <p class="mt-4 text-sm text-white/80"><?= View::e($address ?: $city . ', United Arab Emirates') ?></p>
+            <?php if (!empty($socialLinks)): ?>
+                <div class="mt-5 flex items-center gap-3">
+                    <?php foreach ($socialLinks as $network => $url): ?>
+                        <a href="<?= View::e($url) ?>" target="_blank" rel="noopener" aria-label="BMCS on <?= View::e(ucfirst($network)) ?>"
+                           class="inline-flex items-center justify-center w-9 h-9 rounded-full bg-white/10 text-white/80 hover:bg-gold-500 hover:text-navy-950 transition-colors">
+                            <?= \App\Helpers\Icon::svg($network, 'w-4 h-4') ?>
+                        </a>
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
         </div>
 
         <div class="lg:col-span-3">
