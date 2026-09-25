@@ -81,7 +81,7 @@ $whatsapp = SiteConfig::get('whatsapp_number');
     <div class="container-custom">
         <div class="nav-inner flex items-center justify-between">
             <a href="/" class="flex items-center gap-3 shrink-0">
-                <img src="/assets/images/logo-mark.png" alt="Bright Mind Computer Solutions logo" width="38" height="48" class="h-12 w-auto logo-glow">
+                <img src="<?= View::e(\App\Helpers\SiteConfig::get('site_logo', '/assets/images/logo-mark.png')) ?>" alt="Bright Mind Computer Solutions logo" width="38" height="48" class="h-12 w-auto logo-glow">
                 <span class="leading-tight">
                     <span class="block text-base font-bold text-navy-950 tracking-tight">BRIGHT MIND</span>
                     <span class="block text-[11px] font-medium text-ink-500 tracking-wide uppercase">Computer Solutions</span>
@@ -160,7 +160,7 @@ $whatsapp = SiteConfig::get('whatsapp_number');
     <div class="container-custom py-6">
         <div class="flex items-center justify-between">
             <a href="/" class="flex items-center gap-3">
-                <img src="/assets/images/logo-mark.png" alt="Bright Mind Computer Solutions logo" width="35" height="44" class="h-11 w-auto logo-glow">
+                <img src="<?= View::e(\App\Helpers\SiteConfig::get('site_logo', '/assets/images/logo-mark.png')) ?>" alt="Bright Mind Computer Solutions logo" width="35" height="44" class="h-11 w-auto logo-glow">
                 <span class="text-base font-bold tracking-tight">BRIGHT MIND</span>
             </a>
             <button type="button" data-menu-close class="inline-flex items-center justify-center w-10 h-10 rounded-md hover:bg-white/10">

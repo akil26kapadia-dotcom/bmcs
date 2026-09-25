@@ -15,13 +15,10 @@ $get = fn (string $key, string $default) => SiteConfig::get($key, $default);
 <!-- ============================== HERO ============================== -->
 <section class="relative bg-navy-950 overflow-hidden">
     <div class="absolute inset-0">
-        <img src="/assets/images/hero/dubai-skyline-1920.jpg"
-             srcset="/assets/images/hero/dubai-skyline-960.jpg 960w, /assets/images/hero/dubai-skyline-1920.jpg 1920w"
-             sizes="100vw"
-             alt="Dubai skyline at sunset with the Burj Khalifa, representing BMCS's home market"
-             width="1920" height="776"
-             class="w-full h-full object-cover hero-bg-zoom"
-             fetchpriority="high" decoding="async">
+        <?= View::capture('components/hero-image', [
+            'alt' => "Dubai skyline at sunset with the Burj Khalifa, representing BMCS's home market",
+            'class' => 'w-full h-full object-cover hero-bg-zoom',
+        ]) ?>
         <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
         <div class="absolute inset-0 bg-gradient-to-b from-navy-950/70 via-navy-950/45 to-navy-950/85"></div>
     </div>
@@ -96,7 +93,7 @@ $get = fn (string $key, string $default) => SiteConfig::get($key, $default);
     <div class="section-blob w-[28rem] h-[28rem] -top-32 -right-32" aria-hidden="true"></div>
     <div class="relative container-custom grid lg:grid-cols-2 gap-14 items-center">
         <div class="relative" data-animate="fade-right">
-            <img src="/assets/images/about/about-technician.webp"
+            <img src="<?= View::e(SiteConfig::get('about_photo_image', '/assets/images/about/about-technician.webp')) ?>"
                  alt="BMCS technician working on server and network equipment"
                  width="1200" height="1400" loading="lazy" decoding="async"
                  class="rounded-2xl shadow-premium w-full h-[420px] md:h-[520px] object-cover">
@@ -174,17 +171,17 @@ $get = fn (string $key, string $default) => SiteConfig::get($key, $default);
 
         <div class="mt-14 grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ([
-                ['title' => $get('home_bento_1', 'Network & Infrastructure'), 'slug' => 'network-infrastructure', 'image' => 'solution-network.webp', 'span' => 'lg:col-span-2 lg:row-span-2', 'h' => 'h-[280px] lg:h-full'],
-                ['title' => $get('home_bento_2', 'Security & Surveillance'), 'slug' => 'security-surveillance', 'image' => 'solution-security.webp', 'span' => '', 'h' => 'h-[280px]'],
-                ['title' => $get('home_bento_3', 'Cloud & Data'), 'slug' => 'cloud-data', 'image' => 'solution-cloud.webp', 'span' => '', 'h' => 'h-[280px]'],
-                ['title' => $get('home_bento_4', 'Telecommunication'), 'slug' => 'telecommunication', 'image' => 'solution-telecom.webp', 'span' => '', 'h' => 'h-[280px]'],
-                ['title' => $get('home_bento_5', 'IT Support & Distribution'), 'slug' => 'it-support-distribution', 'image' => 'solution-itsupport.webp', 'span' => '', 'h' => 'h-[280px]'],
-                ['title' => $get('home_bento_6', 'Web & Digital'), 'slug' => 'web-digital', 'image' => 'solution-webdigital.webp', 'span' => 'lg:col-span-1', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_1', 'Network & Infrastructure'), 'slug' => 'network-infrastructure', 'image' => $get('home_bento_1_image', '/assets/images/services/solution-network.webp'), 'span' => 'lg:col-span-2 lg:row-span-2', 'h' => 'h-[280px] lg:h-full'],
+                ['title' => $get('home_bento_2', 'Security & Surveillance'), 'slug' => 'security-surveillance', 'image' => $get('home_bento_2_image', '/assets/images/services/solution-security.webp'), 'span' => '', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_3', 'Cloud & Data'), 'slug' => 'cloud-data', 'image' => $get('home_bento_3_image', '/assets/images/services/solution-cloud.webp'), 'span' => '', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_4', 'Telecommunication'), 'slug' => 'telecommunication', 'image' => $get('home_bento_4_image', '/assets/images/services/solution-telecom.webp'), 'span' => '', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_5', 'IT Support & Distribution'), 'slug' => 'it-support-distribution', 'image' => $get('home_bento_5_image', '/assets/images/services/solution-itsupport.webp'), 'span' => '', 'h' => 'h-[280px]'],
+                ['title' => $get('home_bento_6', 'Web & Digital'), 'slug' => 'web-digital', 'image' => $get('home_bento_6_image', '/assets/images/services/solution-webdigital.webp'), 'span' => 'lg:col-span-1', 'h' => 'h-[280px]'],
             ] as $i => $tile): ?>
                 <a href="/solutions/<?= View::e($tile['slug']) ?>"
                    class="group relative <?= $tile['span'] ?> <?= $tile['h'] ?> rounded-2xl overflow-hidden block"
                    data-animate="fade-up" data-delay="<?= $i * 70 ?>">
-                    <img src="/assets/images/services/<?= View::e($tile['image']) ?>"
+                    <img src="<?= View::e($tile['image']) ?>"
                          alt="<?= View::e($tile['title']) ?> technology solution"
                          width="900" height="700" loading="lazy" decoding="async"
                          class="absolute inset-0 w-full h-full object-cover transition-transform duration-500 ease-premium group-hover:scale-105">

@@ -5,6 +5,8 @@ namespace App\Controllers\Admin;
 use App\Core\Controller;
 use App\Core\Request;
 use App\Core\Session;
+use App\Helpers\FileUpload;
+use App\Models\Media;
 use App\Models\Setting;
 
 class ContentController extends Controller
@@ -151,7 +153,23 @@ class ContentController extends Controller
                 'terms_content' => ['label' => 'Terms & Conditions body (HTML, excluding the final "Contact Us" line)', 'type' => 'html', 'default' => "<p>These terms and conditions govern your use of the Bright Mind Computer Solutions (\"BMCS\", \"we\", \"us\") website. By using this website, you agree to these terms.</p>\n\n<h2>Use of This Website</h2>\n<p>This website is provided for general information about BMCS and its services. You agree to use it only for lawful purposes and not to attempt to disrupt or compromise its security or functionality.</p>\n\n<h2>Information Accuracy</h2>\n<p>We aim to keep the information on this website accurate and up to date, but we make no warranty that all content is complete, current or error-free. Service descriptions are general in nature; specific project scope, pricing and timelines are confirmed separately with each client.</p>\n\n<h2>Intellectual Property</h2>\n<p>The content, design and branding of this website are the property of BMCS unless otherwise stated, and may not be reproduced without permission.</p>\n\n<h2>Third-Party Links</h2>\n<p>This website may contain links to third-party websites. We are not responsible for the content or practices of any linked third-party site.</p>\n\n<h2>Limitation of Liability</h2>\n<p>BMCS shall not be liable for any indirect, incidental or consequential damages arising from your use of this website, to the fullest extent permitted by law.</p>\n\n<h2>Governing Law</h2>\n<p>These terms are governed by the laws of the United Arab Emirates.</p>\n\n<h2>Changes to These Terms</h2>\n<p>We may update these terms from time to time. Continued use of the website after changes are posted constitutes acceptance of the revised terms.</p>"],
             ],
         ],
+        'media' => [
+            'label' => 'Site Images',
+            'fields' => [
+                'site_hero_image' => ['label' => 'Page Header Background', 'type' => 'image', 'default' => '/assets/images/hero/dubai-skyline-1920.jpg', 'hint' => 'Used behind the heading on Home and every other page header across the whole site — one upload changes it everywhere.'],
+                'site_logo' => ['label' => 'Site Logo', 'type' => 'image', 'default' => '/assets/images/logo-mark.png', 'hint' => 'Shown in the header, footer and the loading screen. Use a transparent PNG for best results.'],
+                'about_photo_image' => ['label' => 'About / Team Photo', 'type' => 'image', 'default' => '/assets/images/about/about-technician.webp', 'hint' => 'Shown on the Home page "About" section and the About page.'],
+                'home_bento_1_image' => ['label' => 'Technology tile image — Network & Infrastructure', 'type' => 'image', 'default' => '/assets/images/services/solution-network.webp'],
+                'home_bento_2_image' => ['label' => 'Technology tile image — Security & Surveillance', 'type' => 'image', 'default' => '/assets/images/services/solution-security.webp'],
+                'home_bento_3_image' => ['label' => 'Technology tile image — Cloud & Data', 'type' => 'image', 'default' => '/assets/images/services/solution-cloud.webp'],
+                'home_bento_4_image' => ['label' => 'Technology tile image — Telecommunication', 'type' => 'image', 'default' => '/assets/images/services/solution-telecom.webp'],
+                'home_bento_5_image' => ['label' => 'Technology tile image — IT Support & Distribution', 'type' => 'image', 'default' => '/assets/images/services/solution-itsupport.webp'],
+                'home_bento_6_image' => ['label' => 'Technology tile image — Web & Digital', 'type' => 'image', 'default' => '/assets/images/services/solution-webdigital.webp'],
+            ],
+        ],
     ];
+
+    private const UPLOAD_DIR = __DIR__ . '/../../../public/uploads';
 
     public static function fieldGroups(): array
     {
@@ -187,6 +205,11 @@ class ContentController extends Controller
         }
 
         foreach (self::FIELDS[$groupKey]['fields'] as $key => $field) {
+            if (($field['type'] ?? 'text') === 'image') {
+                $this->handleImageField($key, $request);
+                continue;
+            }
+
             $value = $request->input($key);
             if ($value === null) {
                 continue;
@@ -203,5 +226,44 @@ class ContentController extends Controller
 
         Session::flash('admin_success', self::FIELDS[$groupKey]['label'] . ' updated.');
         $this->redirect('/admin/content');
+    }
+
+    /**
+     * A chosen file replaces the image; the "reset" checkbox (shown next to
+     * a field once it has been customized) reverts it to the built-in
+     * default. Leaving both alone changes nothing — most saves on a group's
+     * form don't touch every image field, so this must be a true no-op.
+     */
+    private function handleImageField(string $key, Request $request): void
+    {
+        if ($request->input($key . '_reset')) {
+            Setting::forget($key);
+            return;
+        }
+
+        $file = $_FILES[$key] ?? null;
+        if ($file === null || ($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+            return;
+        }
+
+        $errors = FileUpload::validate($file);
+        if (!empty($errors)) {
+            Session::flash('admin_error', implode(' ', $errors));
+            return;
+        }
+
+        $filename = FileUpload::store($file, self::UPLOAD_DIR);
+        $path = '/uploads/' . $filename;
+
+        Media::create([
+            'file_name' => $filename,
+            'file_path' => $path,
+            'mime_type' => mime_content_type(self::UPLOAD_DIR . '/' . $filename),
+            'size_bytes' => filesize(self::UPLOAD_DIR . '/' . $filename),
+            'alt_text' => null,
+            'uploaded_by' => Session::get('admin_id'),
+        ]);
+
+        Setting::set($key, $path);
     }
 }

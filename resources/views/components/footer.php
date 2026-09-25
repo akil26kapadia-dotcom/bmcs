@@ -50,7 +50,7 @@ try {
     <div class="relative z-10 container-custom section-py !py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
         <div class="lg:col-span-3">
             <a href="/" class="flex items-center gap-3">
-                <img src="/assets/images/logo-mark.png" alt="Bright Mind Computer Solutions logo" width="38" height="48" class="h-12 w-auto logo-glow">
+                <img src="<?= View::e(\App\Helpers\SiteConfig::get('site_logo', '/assets/images/logo-mark.png')) ?>" alt="Bright Mind Computer Solutions logo" width="38" height="48" class="h-12 w-auto logo-glow">
                 <span class="leading-tight">
                     <span class="block text-base font-bold text-white tracking-tight">BRIGHT MIND</span>
                     <span class="block text-[11px] font-medium text-white/80 tracking-wide uppercase">Computer Solutions</span>

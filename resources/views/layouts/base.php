@@ -12,7 +12,7 @@ $pageTitle = $title ?? $siteName;
 $metaDescription = $description ?? SiteConfig::get('default_seo_description', 'BMCS delivers enterprise IT infrastructure, networking, security, cloud and digital solutions across Dubai and the UAE.');
 $currentPath = trim(parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?? '/', '/');
 $canonicalUrl = $canonicalOverride ?? Url::full($currentPath);
-$ogImagePath = $ogImage ?? '/assets/images/hero/hero-datacenter-1920.webp';
+$ogImagePath = $ogImage ?? SiteConfig::get('site_hero_image', '/assets/images/hero/dubai-skyline-1920.jpg');
 $ogTitleValue = $ogTitle ?? null;
 $ogDescriptionValue = $ogDescription ?? null;
 
@@ -56,8 +56,8 @@ $schemaList[] = array_filter([
     '@type' => 'Organization',
     'name' => $siteName,
     'url' => Url::full(''),
-    'logo' => Url::full('/assets/images/logo-mark.png'),
-    'image' => Url::full('/assets/images/logo-mark.png'),
+    'logo' => Url::full(SiteConfig::get('site_logo', '/assets/images/logo-mark.png')),
+    'image' => Url::full(SiteConfig::get('site_logo', '/assets/images/logo-mark.png')),
     'telephone' => SiteConfig::get('site_phone'),
     'email' => SiteConfig::get('site_email'),
     'address' => array_filter([
@@ -93,7 +93,7 @@ $schemaList[] = array_filter([
 
     <link rel="preload" href="/assets/fonts/inter/Inter-latin.woff2" as="font" type="font/woff2" crossorigin>
     <?php if (!empty($preloadHero)): ?>
-    <link rel="preload" as="image" href="/assets/images/hero/dubai-skyline-1920.jpg" imagesrcset="/assets/images/hero/dubai-skyline-960.jpg 960w, /assets/images/hero/dubai-skyline-1920.jpg 1920w" imagesizes="100vw" fetchpriority="high">
+    <link rel="preload" as="image" href="<?= View::e(SiteConfig::get('site_hero_image', '/assets/images/hero/dubai-skyline-1920.jpg')) ?>" fetchpriority="high">
     <?php endif; ?>
     <link rel="stylesheet" href="<?= View::e(Asset::versioned('/assets/css/app.css')) ?>">
     <noscript><style>#site-preloader{display:none}</style></noscript>
@@ -104,7 +104,7 @@ $schemaList[] = array_filter([
 </head>
 <body class="bg-white">
     <div id="site-preloader" role="status" aria-label="Loading">
-        <img src="/assets/images/logo-mark.png" alt="" width="72" height="90" class="preloader-logo h-20 w-auto">
+        <img src="<?= View::e(SiteConfig::get('site_logo', '/assets/images/logo-mark.png')) ?>" alt="" width="72" height="90" class="preloader-logo h-20 w-auto">
     </div>
 
     <a href="#main-content" class="skip-link">Skip to content</a>

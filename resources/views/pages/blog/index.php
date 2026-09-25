@@ -18,12 +18,7 @@ if ($activeFilter) {
 
 <section class="relative bg-navy-950 overflow-hidden">
     <div class="absolute inset-0">
-        <img src="/assets/images/hero/dubai-skyline-1920.jpg"
-             srcset="/assets/images/hero/dubai-skyline-960.jpg 960w, /assets/images/hero/dubai-skyline-1920.jpg 1920w"
-             sizes="100vw"
-             alt="Dubai skyline at sunset with the Burj Khalifa"
-             width="1920" height="776" decoding="async" fetchpriority="high"
-             class="w-full h-full object-cover">
+        <?= View::capture('components/hero-image', ['alt' => "Dubai skyline at sunset with the Burj Khalifa"]) ?>
         <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
         <div class="absolute inset-0 bg-navy-950/25"></div>
     </div>

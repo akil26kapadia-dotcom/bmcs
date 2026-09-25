@@ -18,12 +18,7 @@ $get = fn (string $key, string $default) => SiteConfig::get($key, $default);
 <!-- HERO -->
 <section class="relative bg-navy-950 overflow-hidden">
     <div class="absolute inset-0">
-        <img src="/assets/images/hero/dubai-skyline-1920.jpg"
-             srcset="/assets/images/hero/dubai-skyline-960.jpg 960w, /assets/images/hero/dubai-skyline-1920.jpg 1920w"
-             sizes="100vw"
-             alt="Dubai skyline at sunset with the Burj Khalifa"
-             width="1920" height="776" decoding="async" fetchpriority="high"
-             class="w-full h-full object-cover">
+        <?= View::capture('components/hero-image', ['alt' => "Dubai skyline at sunset with the Burj Khalifa"]) ?>
         <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
         <div class="absolute inset-0 bg-navy-950/25"></div>
     </div>
@@ -43,7 +38,7 @@ $get = fn (string $key, string $default) => SiteConfig::get($key, $default);
 <section class="section-py bg-white overflow-hidden">
     <div class="container-custom grid lg:grid-cols-2 gap-14 items-center">
         <div data-animate="fade-right">
-            <img src="/assets/images/about/about-technician.webp"
+            <img src="<?= View::e(SiteConfig::get('about_photo_image', '/assets/images/about/about-technician.webp')) ?>"
                  alt="BMCS technician working on server and network equipment"
                  width="1200" height="1400" loading="lazy" decoding="async"
                  class="rounded-2xl shadow-premium w-full h-[420px] md:h-[520px] object-cover">

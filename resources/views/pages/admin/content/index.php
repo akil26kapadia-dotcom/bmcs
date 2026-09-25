@@ -15,7 +15,7 @@ $groups = $groups ?? [];
     <?php foreach ($groups as $groupKey => $group): ?>
         <details class="card overflow-hidden">
             <summary class="cursor-pointer select-none px-6 py-4 font-semibold text-navy-950"><?= View::e($group['label']) ?></summary>
-            <form action="/admin/content/<?= View::e($groupKey) ?>" method="POST" class="px-6 pb-6 space-y-4 border-t border-ink-900/[0.06] pt-5">
+            <form action="/admin/content/<?= View::e($groupKey) ?>" method="POST" enctype="multipart/form-data" class="px-6 pb-6 space-y-4 border-t border-ink-900/[0.06] pt-5">
                 <?= Csrf::field() ?>
                 <?php foreach ($group['fields'] as $key => $field): ?>
                     <div>
@@ -25,6 +25,20 @@ $groups = $groups ?? [];
                         <?php elseif (($field['type'] ?? 'text') === 'html'): ?>
                             <textarea id="<?= View::e($key) ?>" name="<?= View::e($key) ?>" rows="16" class="form-textarea font-mono text-xs leading-relaxed"><?= View::e($field['value']) ?></textarea>
                             <p class="form-hint">HTML content, rendered as-is on the page.</p>
+                        <?php elseif (($field['type'] ?? 'text') === 'image'): ?>
+                            <div class="flex items-start gap-4">
+                                <img src="<?= View::e($field['value']) ?>" alt="" class="w-28 h-20 object-cover rounded-lg border border-ink-900/[0.08] shrink-0 bg-ink-100">
+                                <div class="flex-1 space-y-2">
+                                    <input type="file" id="<?= View::e($key) ?>" name="<?= View::e($key) ?>" accept="image/jpeg,image/png,image/webp,image/gif" class="form-input text-xs">
+                                    <label class="flex items-center gap-2 text-sm text-ink-700">
+                                        <input type="checkbox" name="<?= View::e($key) ?>_reset" value="1" class="form-checkbox">
+                                        Reset to default image
+                                    </label>
+                                </div>
+                            </div>
+                            <?php if (!empty($field['hint'])): ?>
+                                <p class="form-hint"><?= View::e($field['hint']) ?></p>
+                            <?php endif; ?>
                         <?php else: ?>
                             <input type="text" id="<?= View::e($key) ?>" name="<?= View::e($key) ?>" value="<?= View::e($field['value']) ?>" class="form-input">
                         <?php endif; ?>
