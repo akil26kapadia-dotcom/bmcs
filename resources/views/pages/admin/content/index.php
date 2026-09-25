@@ -25,6 +25,21 @@ $groups = $groups ?? [];
                         <?php elseif (($field['type'] ?? 'text') === 'html'): ?>
                             <textarea id="<?= View::e($key) ?>" name="<?= View::e($key) ?>" rows="16" class="form-textarea font-mono text-xs leading-relaxed"><?= View::e($field['value']) ?></textarea>
                             <p class="form-hint">HTML content, rendered as-is on the page.</p>
+                        <?php elseif (($field['type'] ?? 'text') === 'icon'): ?>
+                            <div class="flex items-start gap-4">
+                                <span class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-ink-100 text-navy-950 shrink-0">
+                                    <?= \App\Helpers\Icon::svg($field['value'], 'w-7 h-7') ?>
+                                </span>
+                                <div class="flex-1 space-y-2">
+                                    <input type="text" id="<?= View::e($key) ?>" name="<?= View::e($key) ?>" value="<?= View::e($field['value']) ?>" class="form-input" placeholder="Built-in icon name, e.g. server">
+                                    <input type="file" name="<?= View::e($key) ?>_file" accept="image/jpeg,image/png,image/webp,image/gif" class="form-input text-xs">
+                                    <label class="flex items-center gap-2 text-sm text-ink-700">
+                                        <input type="checkbox" name="<?= View::e($key) ?>_reset" value="1" class="form-checkbox">
+                                        Reset to default icon
+                                    </label>
+                                </div>
+                            </div>
+                            <p class="form-hint">Type a built-in icon name (see the list on the Product Categories page), or upload a custom image — an uploaded image always wins over a typed name.</p>
                         <?php elseif (($field['type'] ?? 'text') === 'image'): ?>
                             <div class="flex items-start gap-4">
                                 <img src="<?= View::e($field['value']) ?>" alt="" class="w-28 h-20 object-cover rounded-lg border border-ink-900/[0.08] shrink-0 bg-ink-100">

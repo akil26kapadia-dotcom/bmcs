@@ -91,6 +91,7 @@ return function (Router $router): void {
 
         $router->get('/products', [ProductCategoryController::class, 'index']);
         $router->post('/products', [ProductCategoryController::class, 'store'], [CsrfMiddleware::class]);
+        $router->post('/products/update/{id}', [ProductCategoryController::class, 'update'], [CsrfMiddleware::class]);
         $router->post('/products/delete/{id}', [ProductCategoryController::class, 'delete'], [CsrfMiddleware::class]);
 
         $router->get('/content', [ContentController::class, 'index']);

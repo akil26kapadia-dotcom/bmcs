@@ -70,12 +70,12 @@ $get = fn (string $key, string $default) => SiteConfig::get($key, $default);
     <div class="container-custom py-10">
         <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-6 gap-8">
             <?php foreach ([
-                ['icon' => 'server', 'label' => $get('home_trust_1', 'IT Infrastructure')],
-                ['icon' => 'network', 'label' => $get('home_trust_2', 'Networking')],
-                ['icon' => 'shield', 'label' => $get('home_trust_3', 'Security')],
-                ['icon' => 'cloud', 'label' => $get('home_trust_4', 'Cloud')],
-                ['icon' => 'phone', 'label' => $get('home_trust_5', 'Telecommunication')],
-                ['icon' => 'monitor', 'label' => $get('home_trust_6', 'Digital Solutions')],
+                ['icon' => $get('home_trust_1_icon', 'server'), 'label' => $get('home_trust_1', 'IT Infrastructure')],
+                ['icon' => $get('home_trust_2_icon', 'network'), 'label' => $get('home_trust_2', 'Networking')],
+                ['icon' => $get('home_trust_3_icon', 'shield'), 'label' => $get('home_trust_3', 'Security')],
+                ['icon' => $get('home_trust_4_icon', 'cloud'), 'label' => $get('home_trust_4', 'Cloud')],
+                ['icon' => $get('home_trust_5_icon', 'phone'), 'label' => $get('home_trust_5', 'Telecommunication')],
+                ['icon' => $get('home_trust_6_icon', 'monitor'), 'label' => $get('home_trust_6', 'Digital Solutions')],
             ] as $i => $item): ?>
                 <div class="group flex flex-col items-center text-center gap-3" data-animate="fade-up" data-delay="<?= $i * 60 ?>">
                     <span class="icon-badge icon-badge-round">
@@ -207,10 +207,10 @@ $get = fn (string $key, string $default) => SiteConfig::get($key, $default);
 
         <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php foreach ([
-                ['icon' => 'coin', 'title' => $get('home_why_1_title', 'Value for Money'), 'text' => $get('home_why_1_text', 'Solutions sized and quoted to match real business needs, not oversold.')],
-                ['icon' => 'badge', 'title' => $get('home_why_2_title', 'High Quality Work'), 'text' => $get('home_why_2_text', 'Careful design and installation across every service we deliver.')],
-                ['icon' => 'heart', 'title' => $get('home_why_3_title', 'Excellent Service'), 'text' => $get('home_why_3_text', 'Responsive support before, during and after every project.')],
-                ['icon' => 'layers', 'title' => $get('home_why_4_title', 'Complete Solutions'), 'text' => $get('home_why_4_text', 'One partner across infrastructure, security, cloud and digital.')],
+                ['icon' => $get('home_why_1_icon', 'coin'), 'title' => $get('home_why_1_title', 'Value for Money'), 'text' => $get('home_why_1_text', 'Solutions sized and quoted to match real business needs, not oversold.')],
+                ['icon' => $get('home_why_2_icon', 'badge'), 'title' => $get('home_why_2_title', 'High Quality Work'), 'text' => $get('home_why_2_text', 'Careful design and installation across every service we deliver.')],
+                ['icon' => $get('home_why_3_icon', 'heart'), 'title' => $get('home_why_3_title', 'Excellent Service'), 'text' => $get('home_why_3_text', 'Responsive support before, during and after every project.')],
+                ['icon' => $get('home_why_4_icon', 'layers'), 'title' => $get('home_why_4_title', 'Complete Solutions'), 'text' => $get('home_why_4_text', 'One partner across infrastructure, security, cloud and digital.')],
             ] as $i => $item): ?>
                 <div class="text-center p-6" data-animate="fade-up" data-delay="<?= $i * 80 ?>">
                     <span class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gold-500/10 text-gold-600">

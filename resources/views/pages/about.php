@@ -83,10 +83,10 @@ $get = fn (string $key, string $default) => SiteConfig::get($key, $default);
         ]) ?>
         <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
             <?php foreach ([
-                ['icon' => 'coin', 'title' => $get('about_why_1_title', 'Value for Money'), 'text' => $get('about_why_1_text', 'Solutions sized and priced to match real business needs, not oversold.')],
-                ['icon' => 'badge', 'title' => $get('about_why_2_title', 'High Quality Work'), 'text' => $get('about_why_2_text', 'Careful design and installation across every service we deliver.')],
-                ['icon' => 'heart', 'title' => $get('about_why_3_title', 'Excellent Service'), 'text' => $get('about_why_3_text', 'Responsive support before, during and after every project.')],
-                ['icon' => 'layers', 'title' => $get('about_why_4_title', 'Complete Solutions'), 'text' => $get('about_why_4_text', 'One partner across infrastructure, security, cloud and digital.')],
+                ['icon' => $get('about_why_1_icon', 'coin'), 'title' => $get('about_why_1_title', 'Value for Money'), 'text' => $get('about_why_1_text', 'Solutions sized and priced to match real business needs, not oversold.')],
+                ['icon' => $get('about_why_2_icon', 'badge'), 'title' => $get('about_why_2_title', 'High Quality Work'), 'text' => $get('about_why_2_text', 'Careful design and installation across every service we deliver.')],
+                ['icon' => $get('about_why_3_icon', 'heart'), 'title' => $get('about_why_3_title', 'Excellent Service'), 'text' => $get('about_why_3_text', 'Responsive support before, during and after every project.')],
+                ['icon' => $get('about_why_4_icon', 'layers'), 'title' => $get('about_why_4_title', 'Complete Solutions'), 'text' => $get('about_why_4_text', 'One partner across infrastructure, security, cloud and digital.')],
             ] as $i => $item): ?>
                 <div class="text-center p-6" data-animate="fade-up" data-delay="<?= $i * 80 ?>">
                     <span class="inline-flex items-center justify-center w-14 h-14 rounded-full bg-gold-500/10 text-gold-600">

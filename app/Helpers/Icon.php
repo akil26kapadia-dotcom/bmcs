@@ -198,8 +198,23 @@ class Icon
         return self::ICONS[$name]['body'] ?? '';
     }
 
+    /**
+     * Any place that stores an "icon" as a plain string (services,
+     * categories, product categories, and the icon-or-image fields in
+     * Admin > Page Content) can hold either a built-in icon name from
+     * ICONS above, or the path to an admin-uploaded image — this renders
+     * whichever it finds, so callers never need to know which one it is.
+     */
     public static function svg(string $name, string $class = 'w-6 h-6'): string
     {
+        if (self::looksLikeImagePath($name)) {
+            return sprintf(
+                '<img src="%s" alt="" class="%s object-contain" aria-hidden="true">',
+                htmlspecialchars($name, ENT_QUOTES),
+                htmlspecialchars($class, ENT_QUOTES)
+            );
+        }
+
         $icon = self::ICONS[$name] ?? null;
 
         if ($icon === null) {
@@ -215,5 +230,11 @@ class Icon
             $fill,
             $icon['body']
         );
+    }
+
+    private static function looksLikeImagePath(string $value): bool
+    {
+        return (bool) preg_match('/\.(png|jpe?g|webp|gif|svg)$/i', $value)
+            && (str_starts_with($value, '/uploads/') || str_starts_with($value, '/assets/'));
     }
 }

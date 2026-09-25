@@ -33,11 +33,17 @@ class ContentController extends Controller
                 'home_tally_subtitle' => ['label' => 'Tally section subtitle', 'type' => 'textarea', 'default' => 'From licensing and TSS renewal to Tally on Cloud, TallyPrime Server, customization and AMC — everything you need to run TallyPrime with confidence in the UAE.'],
 
                 'home_trust_1' => ['label' => 'Trust strip item 1', 'default' => 'IT Infrastructure'],
+                'home_trust_1_icon' => ['label' => 'Trust strip item 1 icon', 'type' => 'icon', 'default' => 'server'],
                 'home_trust_2' => ['label' => 'Trust strip item 2', 'default' => 'Networking'],
+                'home_trust_2_icon' => ['label' => 'Trust strip item 2 icon', 'type' => 'icon', 'default' => 'network'],
                 'home_trust_3' => ['label' => 'Trust strip item 3', 'default' => 'Security'],
+                'home_trust_3_icon' => ['label' => 'Trust strip item 3 icon', 'type' => 'icon', 'default' => 'shield'],
                 'home_trust_4' => ['label' => 'Trust strip item 4', 'default' => 'Cloud'],
+                'home_trust_4_icon' => ['label' => 'Trust strip item 4 icon', 'type' => 'icon', 'default' => 'cloud'],
                 'home_trust_5' => ['label' => 'Trust strip item 5', 'default' => 'Telecommunication'],
+                'home_trust_5_icon' => ['label' => 'Trust strip item 5 icon', 'type' => 'icon', 'default' => 'phone'],
                 'home_trust_6' => ['label' => 'Trust strip item 6', 'default' => 'Digital Solutions'],
+                'home_trust_6_icon' => ['label' => 'Trust strip item 6 icon', 'type' => 'icon', 'default' => 'monitor'],
 
                 'home_about_eyebrow' => ['label' => 'About section eyebrow', 'default' => 'About BMCS'],
                 'home_about_heading' => ['label' => 'About section heading', 'default' => 'A Technology Partner Built Around Your Business'],
@@ -71,12 +77,16 @@ class ContentController extends Controller
 
                 'home_why_eyebrow' => ['label' => '"Why BMCS" eyebrow', 'default' => 'Why BMCS'],
                 'home_why_heading' => ['label' => '"Why BMCS" heading', 'default' => 'A Partner Businesses Choose to Rely On'],
+                'home_why_1_icon' => ['label' => 'Why-card 1 icon', 'type' => 'icon', 'default' => 'coin'],
                 'home_why_1_title' => ['label' => 'Why-card 1 title', 'default' => 'Value for Money'],
                 'home_why_1_text' => ['label' => 'Why-card 1 text', 'default' => 'Solutions sized and quoted to match real business needs, not oversold.'],
+                'home_why_2_icon' => ['label' => 'Why-card 2 icon', 'type' => 'icon', 'default' => 'badge'],
                 'home_why_2_title' => ['label' => 'Why-card 2 title', 'default' => 'High Quality Work'],
                 'home_why_2_text' => ['label' => 'Why-card 2 text', 'default' => 'Careful design and installation across every service we deliver.'],
+                'home_why_3_icon' => ['label' => 'Why-card 3 icon', 'type' => 'icon', 'default' => 'heart'],
                 'home_why_3_title' => ['label' => 'Why-card 3 title', 'default' => 'Excellent Service'],
                 'home_why_3_text' => ['label' => 'Why-card 3 text', 'default' => 'Responsive support before, during and after every project.'],
+                'home_why_4_icon' => ['label' => 'Why-card 4 icon', 'type' => 'icon', 'default' => 'layers'],
                 'home_why_4_title' => ['label' => 'Why-card 4 title', 'default' => 'Complete Solutions'],
                 'home_why_4_text' => ['label' => 'Why-card 4 text', 'default' => 'One partner across infrastructure, security, cloud and digital.'],
 
@@ -105,12 +115,16 @@ class ContentController extends Controller
 
                 'about_why_eyebrow' => ['label' => '"Why BMCS" eyebrow', 'default' => 'Why BMCS'],
                 'about_why_heading' => ['label' => '"Why BMCS" heading', 'default' => 'Why Businesses Choose to Work With Us'],
+                'about_why_1_icon' => ['label' => 'Why-card 1 icon', 'type' => 'icon', 'default' => 'coin'],
                 'about_why_1_title' => ['label' => 'Why-card 1 title', 'default' => 'Value for Money'],
                 'about_why_1_text' => ['label' => 'Why-card 1 text', 'default' => 'Solutions sized and priced to match real business needs, not oversold.'],
+                'about_why_2_icon' => ['label' => 'Why-card 2 icon', 'type' => 'icon', 'default' => 'badge'],
                 'about_why_2_title' => ['label' => 'Why-card 2 title', 'default' => 'High Quality Work'],
                 'about_why_2_text' => ['label' => 'Why-card 2 text', 'default' => 'Careful design and installation across every service we deliver.'],
+                'about_why_3_icon' => ['label' => 'Why-card 3 icon', 'type' => 'icon', 'default' => 'heart'],
                 'about_why_3_title' => ['label' => 'Why-card 3 title', 'default' => 'Excellent Service'],
                 'about_why_3_text' => ['label' => 'Why-card 3 text', 'default' => 'Responsive support before, during and after every project.'],
+                'about_why_4_icon' => ['label' => 'Why-card 4 icon', 'type' => 'icon', 'default' => 'layers'],
                 'about_why_4_title' => ['label' => 'Why-card 4 title', 'default' => 'Complete Solutions'],
                 'about_why_4_text' => ['label' => 'Why-card 4 text', 'default' => 'One partner across infrastructure, security, cloud and digital.'],
 
@@ -210,6 +224,11 @@ class ContentController extends Controller
                 continue;
             }
 
+            if (($field['type'] ?? 'text') === 'icon') {
+                $this->handleIconField($key, $request);
+                continue;
+            }
+
             $value = $request->input($key);
             if ($value === null) {
                 continue;
@@ -265,5 +284,53 @@ class ContentController extends Controller
         ]);
 
         Setting::set($key, $path);
+    }
+
+    /**
+     * An "icon" field holds either a built-in icon name (typed into the
+     * text box) or an uploaded custom image — Icon::svg() already renders
+     * whichever it finds. A file, when chosen, wins over the typed name.
+     */
+    private function handleIconField(string $key, Request $request): void
+    {
+        if ($request->input($key . '_reset')) {
+            Setting::forget($key);
+            return;
+        }
+
+        $file = $_FILES[$key . '_file'] ?? null;
+        if ($file !== null && ($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_NO_FILE) {
+            $errors = FileUpload::validate($file);
+            if (!empty($errors)) {
+                Session::flash('admin_error', implode(' ', $errors));
+                return;
+            }
+
+            $filename = FileUpload::store($file, self::UPLOAD_DIR);
+            $path = '/uploads/' . $filename;
+
+            Media::create([
+                'file_name' => $filename,
+                'file_path' => $path,
+                'mime_type' => mime_content_type(self::UPLOAD_DIR . '/' . $filename),
+                'size_bytes' => filesize(self::UPLOAD_DIR . '/' . $filename),
+                'alt_text' => null,
+                'uploaded_by' => Session::get('admin_id'),
+            ]);
+
+            Setting::set($key, $path);
+            return;
+        }
+
+        $value = $request->input($key);
+        if ($value === null) {
+            return;
+        }
+        $value = trim((string) $value);
+        if ($value === '') {
+            Setting::forget($key);
+        } else {
+            Setting::set($key, $value);
+        }
     }
 }
