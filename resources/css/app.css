@@ -771,3 +771,24 @@
   .mock-bar, .mock-line, .mock-donut, .mock-skel, .mock-chip, .tile-photo { animation: none !important; }
   .mock-line { stroke-dashoffset: 0; } .mock-donut { stroke-dasharray: 130 190; }
 }
+
+/* ---- Closing CTA hover effects ---- */
+.cta-spot {
+  position: absolute; inset: 0; pointer-events: none; opacity: 0; transition: opacity .4s;
+  background: radial-gradient(460px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 255, 255, .30), rgba(255, 198, 50, .28) 38%, rgba(255, 198, 50, 0) 68%);
+}
+.cta-section:hover .cta-spot { opacity: 1; }
+.cta-section .aurora-blob { transition: scale 1.6s ease; }
+.cta-section:hover .aurora-blob { scale: 1.2; }
+
+.cta-word { display: inline-block; cursor: default; transition: transform .28s cubic-bezier(.34, 1.56, .64, 1), color .2s, text-shadow .25s; }
+.cta-word:hover { transform: translateY(-7px) rotate(-2.5deg) scale(1.06); color: #FFC632; text-shadow: 0 10px 28px rgba(255, 198, 50, .55); }
+
+.cta-btns a { transition: transform .28s cubic-bezier(.34, 1.56, .64, 1), box-shadow .3s, background-color .25s, color .25s, border-color .25s; }
+.cta-btns a:hover { transform: translateY(-5px) scale(1.06); box-shadow: 0 18px 36px -12px rgba(255, 198, 50, .65); }
+.cta-btns .btn-outline-light:hover { background: #fff; color: #2A67B2; border-color: #fff; }
+.cta-btns a:active { transform: translateY(-1px) scale(1.01); }
+
+@media (prefers-reduced-motion: reduce) {
+  .cta-word:hover, .cta-btns a:hover, .cta-section:hover .aurora-blob { transform: none; scale: none; }
+}

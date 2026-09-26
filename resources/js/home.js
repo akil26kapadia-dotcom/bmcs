@@ -165,7 +165,7 @@
 
   /* ---------------- Cursor spotlight on cards ---------------- */
   document.addEventListener('mousemove', function (e) {
-    var el = e.target.closest ? e.target.closest('.spotlight') : null;
+    var el = e.target.closest ? e.target.closest('.spotlight, [data-spot]') : null;
     if (!el) return;
     var r = el.getBoundingClientRect();
     el.style.setProperty('--mx', (e.clientX - r.left) + 'px');

@@ -460,12 +460,17 @@ $featureImage = $get('home_tally_feature_image', '');
 </section>
 
 <!-- ============================== CTA ============================== -->
-<section class="relative isolate overflow-hidden text-white">
+<section class="cta-section relative isolate overflow-hidden text-white" data-spot>
     <div class="aurora" aria-hidden="true"><span class="aurora-blob aurora-blob--sky"></span><span class="aurora-blob aurora-blob--deep"></span><span class="aurora-blob aurora-blob--yellow"></span></div>
-    <div class="relative container-custom py-20 md:py-24 text-center">
-        <h2 class="text-3xl md:text-5xl font-semibold text-white max-w-3xl mx-auto leading-tight" data-animate="fade-up"><?= View::e($get('home_cta_heading', "Let's Build a Smarter Technology Infrastructure")) ?></h2>
+    <span class="cta-spot" aria-hidden="true"></span>
+    <div class="relative container-custom py-20 md:py-28 text-center">
+        <h2 class="text-3xl md:text-5xl font-semibold text-white max-w-3xl mx-auto leading-tight" data-animate="fade-up"><?php
+            foreach (preg_split('/\s+/', trim($get('home_cta_heading', "Let's Build a Smarter Technology Infrastructure"))) as $w) {
+                echo '<span class="cta-word">' . View::e($w) . '</span> ';
+            }
+        ?></h2>
         <p class="mt-5 text-white/85 max-w-xl mx-auto text-lg" data-animate="fade-up" data-delay="80"><?= View::e($get('home_cta_subtext', "Tell us about your business and we'll help you find the right technology solution.")) ?></p>
-        <div class="mt-9 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="160">
+        <div class="cta-btns mt-9 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="160">
             <?= Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
             <?= Html::whatsappButton('WhatsApp Us') ?>
             <?= Html::callButton('Call BMCS') ?>
