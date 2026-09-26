@@ -122,6 +122,7 @@ class ContentController extends Controller
                 'home_stat_4_suffix' => ['label' => 'Stat 4 suffix', 'default' => ''],
                 'home_stat_4_label' => ['label' => 'Stat 4 label', 'default' => ''],
 
+                'home_tally_feature_image' => ['label' => 'Tally featured tile image (optional)', 'type' => 'image', 'default' => '', 'hint' => 'Shown inside the large TallyPrime Sales tile on the homepage, with a slow zoom that comes alive on hover. Leave empty to show the built-in animated illustration. A wide image (about 900 x 500) works best.'],
                 'home_hero_video' => ['label' => 'Hero background video (optional)', 'type' => 'video', 'default' => '', 'hint' => 'MP4 or WebM, up to 25MB. A short, looping, muted clip works best. Plays only on larger screens and is skipped for visitors who prefer reduced motion. Leave empty to use the animated gradient.'],
 
                 'home_cta_heading' => ['label' => 'Final CTA heading', 'default' => "Let's Build a Smarter Technology Infrastructure"],

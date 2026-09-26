@@ -51,7 +51,7 @@ $groups = $groups ?? [];
                             <p class="form-hint">Type a built-in icon name (see the list on the Product Categories page), or upload a custom image — an uploaded image always wins over a typed name.</p>
                         <?php elseif (($field['type'] ?? 'text') === 'image'): ?>
                             <div class="flex items-start gap-4">
-                                <img src="<?= View::e($field['value']) ?>" alt="" class="w-28 h-20 object-cover rounded-lg border border-ink-900/[0.08] shrink-0 bg-ink-100">
+                                <?php if ($field['value'] !== ''): ?><img src="<?= View::e($field['value']) ?>" alt="" class="w-28 h-20 object-cover rounded-lg border border-ink-900/[0.08] shrink-0 bg-ink-100"><?php else: ?><span class="w-28 h-20 rounded-lg border border-dashed border-ink-300 shrink-0 bg-ink-100 flex items-center justify-center text-[11px] text-ink-500 text-center px-2">Built-in illustration</span><?php endif; ?>
                                 <div class="flex-1 space-y-2">
                                     <input type="file" id="<?= View::e($key) ?>" name="<?= View::e($key) ?>" accept="image/jpeg,image/png,image/webp,image/gif" class="form-input text-xs">
                                     <label class="flex items-center gap-2 text-sm text-ink-700">
