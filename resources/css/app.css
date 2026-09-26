@@ -675,3 +675,48 @@
 @media (prefers-reduced-motion: reduce) {
   .aurora-blob, .float-y, .pulse-dot::after, .marquee-track { animation: none !important; }
 }
+
+/* ---- Homepage polish round 2 ---- */
+.marquee-track { gap: 3.5rem; animation-duration: 140s; }
+
+.text-shimmer {
+  background: linear-gradient(100deg, #FFC632 0%, #FFE38A 30%, #FFC632 55%, #FFB300 100%);
+  background-size: 220% 100%;
+  -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  animation: shimmer 6s ease-in-out infinite alternate;
+}
+@keyframes shimmer { from { background-position: 0% 0; } to { background-position: 100% 0; } }
+
+.scroll-progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 3px; z-index: 70;
+  background: linear-gradient(90deg, #FFC632, #7EBEFF); transform-origin: 0 50%; transform: scaleX(0);
+  box-shadow: 0 0 10px rgba(255, 198, 50, .8); pointer-events: none;
+}
+
+.btn-primary { position: relative; overflow: hidden; }
+.btn-primary::after {
+  content: ''; position: absolute; top: 0; left: -70%; width: 40%; height: 100%; pointer-events: none;
+  background: linear-gradient(100deg, transparent, rgba(255, 255, 255, .6), transparent);
+  transform: skewX(-20deg); transition: left .7s ease;
+}
+.btn-primary:hover::after { left: 140%; }
+
+.chip-glass {
+  display: inline-flex; align-items: center; gap: .5rem; padding: .5rem .9rem; border-radius: 9999px;
+  font-size: .8rem; font-weight: 600; color: #fff;
+  background: rgba(255, 255, 255, .12); border: 1px solid rgba(255, 255, 255, .28);
+}
+
+.glass-card {
+  background: linear-gradient(145deg, rgba(255, 255, 255, .20), rgba(255, 255, 255, .07));
+  border: 1px solid rgba(255, 255, 255, .30);
+  -webkit-backdrop-filter: blur(12px); backdrop-filter: blur(12px);
+  box-shadow: 0 20px 50px -22px rgba(8, 35, 80, .55), inset 0 1px 0 rgba(255, 255, 255, .3);
+  transition: transform .3s, background .3s, border-color .3s;
+}
+.glass-card:hover { transform: translateY(-6px); background: linear-gradient(145deg, rgba(255,255,255,.28), rgba(255,255,255,.1)); border-color: rgba(255, 198, 50, .6); }
+.glass-card:hover .glass-icon { background: #FFC632; color: #1a1a1a; transform: rotate(-6deg) scale(1.06); }
+.glass-icon { transition: all .3s; }
+
+@media (prefers-reduced-motion: reduce) { .text-shimmer { animation: none !important; } .scroll-progress { display: none; } }

@@ -226,6 +226,17 @@
     window.addEventListener('resize', onScrollSteps);
   }
 
+  /* ---------------- Scroll progress bar ---------------- */
+  var bar = document.querySelector('[data-scroll-progress]');
+  if (bar && !reduced) {
+    var onScrollBar = function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0).toFixed(4) + ')';
+    };
+    onScrollBar();
+    window.addEventListener('scroll', onScrollBar, { passive: true });
+  }
+
   /* ---------------- Optional background video ---------------- */
   var video = document.querySelector('[data-hero-video]');
   if (video) {

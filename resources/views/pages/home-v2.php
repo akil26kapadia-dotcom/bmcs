@@ -14,7 +14,7 @@ $icon = fn (string $name, string $class = 'w-6 h-6') => Icon::svg($name, $class)
 
 // Highlight the first "TallyPrime" in the (admin-editable) headline.
 $heading = View::e($get('home_hero_heading', 'TallyPrime Solutions & Complete IT Services in Dubai, UAE'));
-$heading = preg_replace('/TallyPrime/', '<span class="text-gold-400">TallyPrime</span>', $heading, 1);
+$heading = preg_replace('/TallyPrime/', '<span class="text-shimmer">TallyPrime</span>', $heading, 1);
 
 $itCategories = array_values(array_filter($serviceCategories, fn ($c) => $c['slug'] !== 'tally-solutions'));
 
@@ -96,8 +96,10 @@ $advisor = [
 $heroVideo = $get('home_hero_video', '');
 ?>
 
+<div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+
 <!-- ============================== HERO ============================== -->
-<section class="relative isolate overflow-hidden text-white">
+<section class="relative isolate overflow-hidden text-white lg:min-h-[680px] flex items-center">
     <div class="aurora" aria-hidden="true">
         <span class="aurora-blob aurora-blob--sky"></span>
         <span class="aurora-blob aurora-blob--deep"></span>
@@ -109,7 +111,7 @@ $heroVideo = $get('home_hero_video', '');
     <?php endif; ?>
     <canvas data-network data-labels="<?= View::e(json_encode($networkLabels, JSON_UNESCAPED_UNICODE)) ?>" class="absolute inset-0 w-full h-full" aria-hidden="true"></canvas>
 
-    <div class="relative container-custom grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-16 pb-28 md:pt-24 md:pb-36">
+    <div class="relative container-custom w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-16 pb-28 md:pt-24 md:pb-36">
         <div class="lg:col-span-7 min-w-0">
             <span class="inline-flex items-center gap-2.5 rounded-full glass px-4 py-2 text-xs sm:text-sm font-semibold tracking-wide" data-animate="fade-up">
                 <span class="pulse-dot w-2 h-2 rounded-full bg-gold-500 text-gold-500"></span>
@@ -128,6 +130,11 @@ $heroVideo = $get('home_hero_video', '');
                     Find the right TallyPrime
                     <?= $icon('arrow-right', 'w-4 h-4') ?>
                 </a>
+            </div>
+            <div class="mt-8 flex flex-wrap gap-2.5" data-animate="fade-up" data-delay="320">
+                <?php foreach (['Local Dubai team', 'Remote & on-site support', 'Clear written quotations'] as $chip): ?>
+                    <span class="chip-glass"><span class="text-gold-400"><?= $icon('check', 'w-4 h-4') ?></span><?= View::e($chip) ?></span>
+                <?php endforeach; ?>
             </div>
         </div>
 
@@ -164,13 +171,13 @@ $heroVideo = $get('home_hero_video', '');
 
 <!-- ============================== KEYWORD MARQUEE ============================== -->
 <?php if (!empty($allServices)): ?>
-<section class="bg-white py-7 border-b border-ink-900/[0.06]" aria-label="What we do">
+<section class="bg-white py-10 border-b border-ink-900/[0.06]" aria-label="What we do">
     <div class="marquee">
         <div class="marquee-track">
             <?php for ($loop = 0; $loop < 2; $loop++): ?>
                 <?php foreach ($allServices as $s): ?>
-                    <a href="/services/<?= View::e($s['slug']) ?>" class="inline-flex items-center gap-3 text-sm font-semibold text-navy-950/80 hover:text-navy-950 whitespace-nowrap" <?= $loop ? 'tabindex="-1" aria-hidden="true"' : '' ?>>
-                        <span class="w-2 h-2 rotate-45 bg-gold-500 shrink-0"></span>
+                    <a href="/services/<?= View::e($s['slug']) ?>" class="inline-flex items-center gap-4 text-xl md:text-2xl font-semibold tracking-tight text-navy-950/85 hover:text-navy-950 whitespace-nowrap" <?= $loop ? 'tabindex="-1" aria-hidden="true"' : '' ?>>
+                        <span class="w-3 h-3 rotate-45 bg-gold-500 shrink-0"></span>
                         <?= View::e($s['name']) ?>
                     </a>
                 <?php endforeach; ?>
@@ -309,22 +316,23 @@ $heroVideo = $get('home_hero_video', '');
 </section>
 
 <!-- ============================== IT SERVICES ============================== -->
-<section class="relative section-py bg-white overflow-hidden">
+<section class="relative isolate section-py overflow-hidden text-white">
+    <div class="aurora" aria-hidden="true"><span class="aurora-blob aurora-blob--sky"></span><span class="aurora-blob aurora-blob--deep"></span><span class="aurora-blob aurora-blob--yellow"></span></div>
     <div class="relative container-custom">
         <?= View::capture('components/section-heading', [
             'eyebrow' => $get('home_services_eyebrow', 'Complete IT Services'),
             'title' => $get('home_services_heading', 'Beyond Tally: A Complete Range of IT Services'),
             'subtitle' => $get('home_services_subtitle', 'From infrastructure to digital experiences, BMCS covers the full technology stack your business relies on.'),
             'align' => 'center',
+            'onDark' => true,
         ]) ?>
-        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
             <?php foreach ($itCategories as $i => $category): ?>
-                <a href="/solutions/<?= View::e($category['slug']) ?>" class="spotlight group rounded-3xl bg-[#F4F8FD] border border-transparent hover:border-navy-950/20 hover:bg-white hover:shadow-card-hover p-7 transition-all duration-300 hover:-translate-y-1"
-                   data-animate="fade-up" data-delay="<?= ($i % 4) * 70 ?>">
-                    <span class="icon-badge"><?= $icon($category['icon'] ?: 'network', 'w-6 h-6') ?></span>
-                    <h3 class="mt-5 font-semibold text-navy-950"><?= View::e($category['name']) ?></h3>
-                    <p class="mt-2 text-sm text-ink-500 leading-relaxed line-clamp-3"><?= View::e($category['description'] ?? '') ?></p>
-                    <span class="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-600 group-hover:gap-2.5 transition-all">Explore <?= $icon('arrow-right', 'w-4 h-4') ?></span>
+                <a href="/solutions/<?= View::e($category['slug']) ?>" class="glass-card spotlight group rounded-3xl p-7 block" data-animate="fade-up" data-delay="<?= ($i % 4) * 70 ?>">
+                    <span class="glass-icon inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 text-gold-400"><?= $icon($category['icon'] ?: 'network', 'w-7 h-7') ?></span>
+                    <h3 class="mt-5 font-semibold text-lg text-white"><?= View::e($category['name']) ?></h3>
+                    <p class="mt-2 text-sm text-white/85 leading-relaxed line-clamp-3"><?= View::e($category['description'] ?? '') ?></p>
+                    <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-400 group-hover:gap-3 transition-all">Explore <?= $icon('arrow-right', 'w-4 h-4') ?></span>
                 </a>
             <?php endforeach; ?>
         </div>
@@ -416,7 +424,7 @@ $heroVideo = $get('home_hero_video', '');
 <section class="relative isolate overflow-hidden text-white">
     <div class="aurora" aria-hidden="true"><span class="aurora-blob aurora-blob--sky"></span><span class="aurora-blob aurora-blob--deep"></span><span class="aurora-blob aurora-blob--yellow"></span></div>
     <div class="relative container-custom py-20 md:py-24 text-center">
-        <h2 class="text-3xl md:text-5xl font-semibold max-w-3xl mx-auto leading-tight" data-animate="fade-up"><?= View::e($get('home_cta_heading', "Let's Build a Smarter Technology Infrastructure")) ?></h2>
+        <h2 class="text-3xl md:text-5xl font-semibold text-white max-w-3xl mx-auto leading-tight" data-animate="fade-up"><?= View::e($get('home_cta_heading', "Let's Build a Smarter Technology Infrastructure")) ?></h2>
         <p class="mt-5 text-white/85 max-w-xl mx-auto text-lg" data-animate="fade-up" data-delay="80"><?= View::e($get('home_cta_subtext', "Tell us about your business and we'll help you find the right technology solution.")) ?></p>
         <div class="mt-9 flex flex-wrap items-center justify-center gap-4" data-animate="fade-up" data-delay="160">
             <?= Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
