@@ -28,9 +28,7 @@ use App\Middleware\CsrfMiddleware;
 return function (Router $router): void {
     // --- Public site ------------------------------------------------
     $router->get('/', [HomeController::class, 'index']);
-    // New homepage design, kept off the main URL (and out of search engines)
-    // until it is approved.
-    $router->get('/preview/home', [HomeController::class, 'preview']);
+    $router->get('/preview/old-home', [HomeController::class, 'previewOld']);
     $router->get('/about', [PageController::class, 'about']);
     $router->get('/privacy-policy', [PageController::class, 'privacy']);
     $router->get('/terms-and-conditions', [PageController::class, 'terms']);

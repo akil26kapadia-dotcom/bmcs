@@ -10,21 +10,16 @@ use App\Models\ServiceCategory;
 
 class HomeController extends Controller
 {
+    /** The current homepage (new "living network" design). */
     public function index(Request $request): void
     {
-        $this->view('pages/home', $this->homeData() + ['preloadHero' => true]);
+        $this->view('pages/home-v2', $this->homeData() + ['pageScripts' => ['/assets/js/home.js']]);
     }
 
-    /**
-     * New homepage design, served at /preview/home (hidden from search
-     * engines) until it replaces the main homepage.
-     */
-    public function preview(Request $request): void
+    /** The previous homepage design, kept at /preview/old-home for comparison. */
+    public function previewOld(Request $request): void
     {
-        $this->view('pages/home-v2', $this->homeData() + [
-            'noindex' => true,
-            'pageScripts' => ['/assets/js/home.js'],
-        ]);
+        $this->view('pages/home', $this->homeData() + ['preloadHero' => true, 'noindex' => true]);
     }
 
     private function homeData(): array
