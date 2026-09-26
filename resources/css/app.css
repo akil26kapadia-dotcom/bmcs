@@ -792,3 +792,46 @@
 @media (prefers-reduced-motion: reduce) {
   .cta-word:hover, .cta-btns a:hover, .cta-section:hover .aurora-blob { transform: none; scale: none; }
 }
+
+/* ---- About photo: animated frame ---- */
+@property --ring-a { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+.about-media { isolation: isolate; }
+.about-tilt { transition: transform .5s cubic-bezier(.16, 1, .3, 1); transform-style: preserve-3d; will-change: transform; }
+.about-ring {
+  position: relative; padding: 4px; border-radius: 2.2rem;
+  background: conic-gradient(from var(--ring-a), #FFC632, #2A67B2, #7EBEFF, #FFC632);
+  animation: ring-spin 7s linear infinite;
+}
+.about-ring::before {
+  content: ''; position: absolute; inset: 6px; z-index: -1; border-radius: inherit;
+  background: inherit; filter: blur(22px); opacity: .55;
+}
+@keyframes ring-spin { to { --ring-a: 360deg; } }
+
+.about-frame { border-radius: 2rem; overflow: hidden; background: #dbe7f6; position: relative; }
+.about-photo { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; scale: 1.14;
+  animation: kenburns 22s ease-in-out infinite alternate; transition: filter .6s, scale .9s cubic-bezier(.16, 1, .3, 1); }
+.about-media:hover .about-photo { filter: saturate(1.15) contrast(1.04); scale: 1.2; }
+.about-shine { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(115deg, transparent 35%, rgba(255, 255, 255, .28) 50%, transparent 65%);
+  transform: translateX(-120%); animation: about-shine 6s ease-in-out infinite 1.5s; }
+@keyframes about-shine { 0% { transform: translateX(-120%); } 35%, 100% { transform: translateX(120%); } }
+
+.about-orbit { position: absolute; top: -34px; right: -30px; width: 120px; height: 120px; border-radius: 9999px;
+  border: 2px dashed rgba(42, 103, 178, .4); animation: orbit-spin 16s linear infinite; z-index: 2; pointer-events: none; }
+.about-orbit i { position: absolute; top: -7px; left: 50%; margin-left: -7px; width: 14px; height: 14px; border-radius: 9999px; background: #FFC632; box-shadow: 0 0 16px #FFC632; }
+@keyframes orbit-spin { to { transform: rotate(360deg); } }
+.about-dot { position: absolute; bottom: 18%; left: -22px; width: 44px; height: 44px; border-radius: 9999px; z-index: 2; pointer-events: none;
+  background: radial-gradient(circle at 30% 30%, #FFE38A, #FFC632 60%, #E5A800); box-shadow: 0 10px 24px -8px rgba(229, 168, 0, .7); animation: float-y 5s ease-in-out infinite; }
+
+/* Mask reveal: photo unrolls upward the first time it scrolls into view */
+@media (scripting: enabled) {
+  [data-reveal-mask]:not(.is-in) { clip-path: inset(100% 0 0 0 round 2rem); }
+  [data-reveal-mask] { transition: clip-path 1.3s cubic-bezier(.16, 1, .3, 1); }
+  [data-reveal-mask].is-in { clip-path: inset(0 0 0 0 round 2rem); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about-ring, .about-shine, .about-orbit, .about-dot, .about-photo { animation: none !important; }
+  [data-reveal-mask]:not(.is-in) { clip-path: none !important; }
+}

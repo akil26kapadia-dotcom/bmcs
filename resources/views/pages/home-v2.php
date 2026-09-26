@@ -381,12 +381,25 @@ $featureImage = $get('home_tally_feature_image', '');
 <!-- ============================== ABOUT ============================== -->
 <section class="relative section-py bg-[#F4F8FD] overflow-hidden">
     <div class="relative container-custom grid grid-cols-1 lg:grid-cols-2 gap-14 items-center">
-        <div class="relative" data-animate="fade-right">
-            <img src="<?= View::e($get('about_photo_image', '/assets/images/about/about-technician.webp')) ?>"
-                 alt="BMCS technician working on server and network equipment"
-                 width="1200" height="1400" loading="lazy" decoding="async"
-                 class="rounded-[2rem] shadow-premium w-full h-[420px] md:h-[520px] object-cover">
-            <div class="absolute -bottom-6 -right-4 md:-right-6 bg-navy-950 text-white rounded-2xl px-6 py-5 shadow-premium max-w-[230px]">
+        <div class="about-media relative" data-animate="fade-right">
+            <span class="about-orbit" aria-hidden="true"><i></i></span>
+            <span class="about-dot" aria-hidden="true"></span>
+            <div class="about-tilt" data-tilt>
+                <div class="about-ring">
+                    <div class="about-frame h-[420px] md:h-[520px]" data-reveal-mask>
+                        <img data-parallax-y src="<?= View::e($get('about_photo_image', '/assets/images/about/about-technician.webp')) ?>"
+                             alt="BMCS technician working on server and network equipment"
+                             width="1200" height="1400" loading="lazy" decoding="async" class="about-photo">
+                        <span class="about-shine" aria-hidden="true"></span>
+                        <span class="absolute inset-0 pointer-events-none" style="background:linear-gradient(180deg,rgba(42,103,178,0) 55%,rgba(42,103,178,.35))" aria-hidden="true"></span>
+                    </div>
+                </div>
+            </div>
+            <?php $aboutChips = array_values(array_filter([$itCategories[0]['name'] ?? null, $itCategories[2]['name'] ?? null])); ?>
+            <?php foreach ($aboutChips as $ci => $chipName): ?>
+                <span class="mock-chip" style="<?= $ci === 0 ? 'top:12%;left:-18px;' : 'top:40%;right:-20px;animation-delay:-3s;' ?>z-index:3"><i></i><?= View::e(trim(explode(' & ', $chipName)[0])) ?></span>
+            <?php endforeach; ?>
+            <div class="float-y absolute -bottom-6 -right-4 md:-right-6 bg-navy-950 text-white rounded-2xl px-6 py-5 shadow-premium max-w-[230px]" style="z-index:3">
                 <p class="text-sm font-semibold"><?= View::e($get('home_about_badge_title', 'Empowering Effective Solutions')) ?></p>
                 <p class="mt-1 text-xs text-white/85"><?= View::e($get('home_about_badge_text', 'Since our founding, our focus has stayed the same.')) ?></p>
             </div>
