@@ -57,6 +57,46 @@ class FileUpload
         return $errors;
     }
 
+    private const VIDEO_MIME_TO_EXT = ['video/mp4' => 'mp4', 'video/webm' => 'webm'];
+    private const VIDEO_MAX_BYTES = 25 * 1024 * 1024; // 25MB
+
+    /**
+     * Same defensive checks as validate(), for short background videos
+     * (MP4/WebM only, real bytes checked with finfo, 25MB limit).
+     *
+     * @return string[]
+     */
+    public static function validateVideo(array $file): array
+    {
+        if (($file['error'] ?? UPLOAD_ERR_NO_FILE) !== UPLOAD_ERR_OK) {
+            return ['Video upload failed. It may be larger than the server allows.'];
+        }
+        if (($file['size'] ?? 0) > self::VIDEO_MAX_BYTES) {
+            return ['Video exceeds the 25MB size limit.'];
+        }
+        if (!is_uploaded_file($file['tmp_name'] ?? '')) {
+            return ['Invalid upload.'];
+        }
+
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $realMime = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        return isset(self::VIDEO_MIME_TO_EXT[$realMime]) ? [] : ['Unsupported video type — use MP4 or WebM.'];
+    }
+
+    public static function storeVideo(array $file, string $destinationDir): string
+    {
+        $finfo = finfo_open(FILEINFO_MIME_TYPE);
+        $realMime = finfo_file($finfo, $file['tmp_name']);
+        finfo_close($finfo);
+
+        $filename = bin2hex(random_bytes(16)) . '.' . (self::VIDEO_MIME_TO_EXT[$realMime] ?? 'mp4');
+        move_uploaded_file($file['tmp_name'], rtrim($destinationDir, '/') . '/' . $filename);
+
+        return $filename;
+    }
+
     /**
      * Stores a validated file under a random, safe filename.
      * Call validate() first; this does not re-validate.

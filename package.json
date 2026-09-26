@@ -6,12 +6,14 @@
   "scripts": {
     "dev:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css --watch",
     "dev:js": "esbuild resources/js/app.js --bundle --outfile=public/assets/js/app.js --watch",
+    "dev:home-js": "esbuild resources/js/home.js --bundle --outfile=public/assets/js/home.js --watch",
     "dev:admin-js": "esbuild resources/js/admin.js --bundle --outfile=public/assets/js/admin.js --watch",
     "dev": "npm run dev:css & npm run dev:js & npm run dev:admin-js",
     "build:css": "tailwindcss -i ./resources/css/app.css -o ./public/assets/css/app.css --minify",
     "build:js": "esbuild resources/js/app.js --bundle --minify --outfile=public/assets/js/app.js",
+    "build:home-js": "esbuild resources/js/home.js --bundle --minify --outfile=public/assets/js/home.js",
     "build:admin-js": "esbuild resources/js/admin.js --bundle --minify --outfile=public/assets/js/admin.js",
-    "build": "npm run build:css && npm run build:js && npm run build:admin-js"
+    "build": "npm run build:css && npm run build:js && npm run build:home-js && npm run build:admin-js"
   },
   "devDependencies": {
     "tailwindcss": "^3.4.13",

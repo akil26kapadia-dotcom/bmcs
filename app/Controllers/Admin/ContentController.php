@@ -93,6 +93,37 @@ class ContentController extends Controller
                 'home_blog_eyebrow' => ['label' => 'Blog section eyebrow', 'default' => 'Insights'],
                 'home_blog_heading' => ['label' => 'Blog section heading', 'default' => 'From the BMCS Blog'],
 
+                'home_process_eyebrow' => ['label' => 'How-we-work eyebrow', 'default' => 'How We Work'],
+                'home_process_heading' => ['label' => 'How-we-work heading', 'default' => 'A Simple Process, From First Call to Ongoing Support'],
+                'home_process_subtitle' => ['label' => 'How-we-work subtitle', 'type' => 'textarea', 'default' => 'No jargon and no oversized quotes — just a clear path to the right solution for your business.'],
+                'home_step_1_title' => ['label' => 'Step 1 title', 'default' => 'Understand'],
+                'home_step_1_text' => ['label' => 'Step 1 text', 'type' => 'textarea', 'default' => 'We listen to how your business works — how many people use your systems, where the pain points are and what you want to achieve.'],
+                'home_step_2_title' => ['label' => 'Step 2 title', 'default' => 'Recommend'],
+                'home_step_2_text' => ['label' => 'Step 2 text', 'type' => 'textarea', 'default' => 'You get a clear written recommendation and quotation: the right edition, hardware or service for your size, not simply the biggest one.'],
+                'home_step_3_title' => ['label' => 'Step 3 title', 'default' => 'Implement'],
+                'home_step_3_text' => ['label' => 'Step 3 text', 'type' => 'textarea', 'default' => 'Our team installs, configures, migrates your data and trains your staff, planned to keep disruption to your business as low as possible.'],
+                'home_step_4_title' => ['label' => 'Step 4 title', 'default' => 'Support'],
+                'home_step_4_text' => ['label' => 'Step 4 text', 'type' => 'textarea', 'default' => 'Remote and on-site help, updates, renewals and annual maintenance, so your systems keep running long after go-live.'],
+
+                'home_advisor_eyebrow' => ['label' => 'TallyPrime Advisor eyebrow', 'default' => 'TallyPrime Advisor'],
+                'home_advisor_heading' => ['label' => 'TallyPrime Advisor heading', 'default' => 'Not Sure Which TallyPrime You Need?'],
+                'home_advisor_subtitle' => ['label' => 'TallyPrime Advisor subtitle', 'type' => 'textarea', 'default' => 'Answer two or three quick questions and we will point you to the right edition or service. No sign-up needed.'],
+
+                'home_stat_1_value' => ['label' => 'Stat 1 number (leave empty to hide the whole stats band)', 'default' => ''],
+                'home_stat_1_suffix' => ['label' => 'Stat 1 suffix (e.g. +)', 'default' => ''],
+                'home_stat_1_label' => ['label' => 'Stat 1 label (e.g. Years in business)', 'default' => ''],
+                'home_stat_2_value' => ['label' => 'Stat 2 number', 'default' => ''],
+                'home_stat_2_suffix' => ['label' => 'Stat 2 suffix', 'default' => ''],
+                'home_stat_2_label' => ['label' => 'Stat 2 label', 'default' => ''],
+                'home_stat_3_value' => ['label' => 'Stat 3 number', 'default' => ''],
+                'home_stat_3_suffix' => ['label' => 'Stat 3 suffix', 'default' => ''],
+                'home_stat_3_label' => ['label' => 'Stat 3 label', 'default' => ''],
+                'home_stat_4_value' => ['label' => 'Stat 4 number', 'default' => ''],
+                'home_stat_4_suffix' => ['label' => 'Stat 4 suffix', 'default' => ''],
+                'home_stat_4_label' => ['label' => 'Stat 4 label', 'default' => ''],
+
+                'home_hero_video' => ['label' => 'Hero background video (optional)', 'type' => 'video', 'default' => '', 'hint' => 'MP4 or WebM, up to 25MB. A short, looping, muted clip works best. Plays only on larger screens and is skipped for visitors who prefer reduced motion. Leave empty to use the animated gradient.'],
+
                 'home_cta_heading' => ['label' => 'Final CTA heading', 'default' => "Let's Build a Smarter Technology Infrastructure"],
                 'home_cta_subtext' => ['label' => 'Final CTA subtext', 'type' => 'textarea', 'default' => "Tell us about your business and we'll help you find the right technology solution."],
             ],
@@ -224,6 +255,11 @@ class ContentController extends Controller
                 continue;
             }
 
+            if (($field['type'] ?? 'text') === 'video') {
+                $this->handleVideoField($key, $request);
+                continue;
+            }
+
             if (($field['type'] ?? 'text') === 'icon') {
                 $this->handleIconField($key, $request);
                 continue;
@@ -284,6 +320,28 @@ class ContentController extends Controller
         ]);
 
         Setting::set($key, $path);
+    }
+
+    /** Optional background video: a chosen file replaces it, the checkbox removes it. */
+    private function handleVideoField(string $key, Request $request): void
+    {
+        if ($request->input($key . '_reset')) {
+            Setting::forget($key);
+            return;
+        }
+
+        $file = $_FILES[$key] ?? null;
+        if ($file === null || ($file['error'] ?? UPLOAD_ERR_NO_FILE) === UPLOAD_ERR_NO_FILE) {
+            return;
+        }
+
+        $errors = FileUpload::validateVideo($file);
+        if (!empty($errors)) {
+            Session::flash('admin_error', implode(' ', $errors));
+            return;
+        }
+
+        Setting::set($key, '/uploads/' . FileUpload::storeVideo($file, self::UPLOAD_DIR));
     }
 
     /**

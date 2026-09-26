@@ -25,6 +25,15 @@ $groups = $groups ?? [];
                         <?php elseif (($field['type'] ?? 'text') === 'html'): ?>
                             <textarea id="<?= View::e($key) ?>" name="<?= View::e($key) ?>" rows="16" class="form-textarea font-mono text-xs leading-relaxed"><?= View::e($field['value']) ?></textarea>
                             <p class="form-hint">HTML content, rendered as-is on the page.</p>
+                        <?php elseif (($field['type'] ?? 'text') === 'video'): ?>
+                            <?php if (!empty($field['value'])): ?>
+                                <video src="<?= View::e($field['value']) ?>" class="w-56 rounded-lg mb-2" muted controls preload="metadata"></video>
+                            <?php endif; ?>
+                            <input type="file" id="<?= View::e($key) ?>" name="<?= View::e($key) ?>" accept="video/mp4,video/webm" class="form-input text-xs">
+                            <?php if (!empty($field['value'])): ?>
+                                <label class="flex items-center gap-2 text-sm text-ink-700 mt-2"><input type="checkbox" name="<?= View::e($key) ?>_reset" value="1" class="form-checkbox"> Remove video</label>
+                            <?php endif; ?>
+                            <?php if (!empty($field['hint'])): ?><p class="form-hint"><?= View::e($field['hint']) ?></p><?php endif; ?>
                         <?php elseif (($field['type'] ?? 'text') === 'icon'): ?>
                             <div class="flex items-start gap-4">
                                 <span class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-ink-100 text-navy-950 shrink-0">

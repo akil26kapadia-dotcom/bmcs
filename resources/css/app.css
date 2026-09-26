@@ -567,3 +567,111 @@
     }
   }
 }
+
+/* =====================================================================
+   NEW HOMEPAGE DESIGN — "living network"
+   Blue (#2A67B2) + yellow (#FFC632). Everything below is transform/opacity
+   only (GPU friendly) and is switched off for prefers-reduced-motion.
+   ===================================================================== */
+
+/* Animated aurora background: soft drifting blobs of blue and yellow. */
+.aurora {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  background: linear-gradient(135deg, #2A67B2 0%, #2f74c7 48%, #2A67B2 100%);
+}
+.aurora-blob {
+  position: absolute;
+  border-radius: 9999px;
+  will-change: transform;
+  pointer-events: none;
+}
+.aurora-blob--yellow {
+  width: 62vmax; height: 62vmax; right: -18vmax; bottom: -30vmax;
+  background: radial-gradient(closest-side, rgba(255, 198, 50, .92), rgba(255, 214, 110, .42) 52%, rgba(255, 230, 170, 0) 100%);
+  animation: aurora-a 24s ease-in-out infinite alternate;
+}
+.aurora-blob--sky {
+  width: 58vmax; height: 58vmax; left: -20vmax; top: -30vmax;
+  background: radial-gradient(closest-side, rgba(126, 190, 255, .78), rgba(126, 190, 255, .28) 55%, rgba(126, 190, 255, 0) 100%);
+  animation: aurora-b 30s ease-in-out infinite alternate;
+}
+.aurora-blob--deep {
+  width: 50vmax; height: 50vmax; left: 30%; top: 20%;
+  background: radial-gradient(closest-side, rgba(24, 78, 150, .55), rgba(24, 78, 150, 0) 100%);
+  animation: aurora-c 34s ease-in-out infinite alternate;
+}
+.aurora-blob--glow {
+  width: 30vmax; height: 30vmax; right: 8%; top: -10vmax;
+  background: radial-gradient(closest-side, rgba(255, 198, 50, .5), rgba(255, 198, 50, 0) 100%);
+  animation: aurora-b 20s ease-in-out infinite alternate-reverse;
+}
+@keyframes aurora-a { from { transform: translate3d(0, 0, 0) scale(1); } to { transform: translate3d(-14vmax, -10vmax, 0) scale(1.18); } }
+@keyframes aurora-b { from { transform: translate3d(0, 0, 0) scale(1.05); } to { transform: translate3d(16vmax, 12vmax, 0) scale(.9); } }
+@keyframes aurora-c { from { transform: translate3d(-8vmax, 4vmax, 0) scale(1); } to { transform: translate3d(10vmax, -6vmax, 0) scale(1.25); } }
+
+/* Light variant used behind the advisor + soft sections. */
+.aurora-light {
+  position: absolute; inset: 0; overflow: hidden;
+  background: linear-gradient(160deg, #F4F8FD 0%, #EAF2FB 60%, #FFF8E1 100%);
+}
+.aurora-light .aurora-blob--yellow { opacity: .55; }
+.aurora-light .aurora-blob--sky { opacity: .5; }
+
+.glass {
+  background: linear-gradient(135deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .08));
+  border: 1px solid rgba(255, 255, 255, .34);
+  -webkit-backdrop-filter: blur(14px);
+  backdrop-filter: blur(14px);
+  box-shadow: 0 18px 50px -18px rgba(10, 40, 90, .45), inset 0 1px 0 rgba(255, 255, 255, .35);
+}
+
+.float-y { animation: float-y 7s ease-in-out infinite; }
+.float-y.delay-1 { animation-delay: -2.3s; }
+.float-y.delay-2 { animation-delay: -4.6s; }
+@keyframes float-y { 0%, 100% { transform: translate3d(0, 0, 0); } 50% { transform: translate3d(0, -10px, 0); } }
+
+.pulse-dot { position: relative; }
+.pulse-dot::after {
+  content: ''; position: absolute; inset: -4px; border-radius: 9999px;
+  border: 2px solid currentColor; opacity: .6;
+  animation: pulse-ring 2s ease-out infinite;
+}
+@keyframes pulse-ring { from { transform: scale(.6); opacity: .7; } to { transform: scale(1.8); opacity: 0; } }
+
+/* Cursor spotlight on cards: JS sets --mx/--my. */
+.spotlight { position: relative; overflow: hidden; isolation: isolate; }
+.spotlight::before {
+  content: ''; position: absolute; inset: 0; z-index: -1; opacity: 0; transition: opacity .3s;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 198, 50, .22), transparent 60%);
+}
+.spotlight:hover::before { opacity: 1; }
+
+/* Keyword marquee */
+.marquee { overflow: hidden; -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent); }
+.marquee-track { display: flex; width: max-content; gap: 2.5rem; animation: marquee 48s linear infinite; }
+.marquee:hover .marquee-track { animation-play-state: paused; }
+@keyframes marquee { to { transform: translate3d(-50%, 0, 0); } }
+
+/* How-we-work progress line */
+.steps { --p: 0; position: relative; }
+.steps::before { content: ''; position: absolute; left: 1.55rem; top: 1rem; bottom: 1rem; width: 2px; background: rgba(42, 103, 178, .18); }
+.steps::after { content: ''; position: absolute; left: 1.55rem; top: 1rem; width: 2px; height: calc((100% - 2rem) * var(--p)); background: linear-gradient(#FFC632, #2A67B2); box-shadow: 0 0 12px rgba(255, 198, 50, .7); }
+.step-num { transition: background .4s, color .4s, transform .4s; }
+.step.is-active .step-num { background: #FFC632; color: #1a1a1a; transform: scale(1.08); }
+
+/* Advisor */
+.advisor-option {
+  display: flex; align-items: center; justify-content: space-between; gap: 1rem; width: 100%; text-align: left;
+  padding: 1rem 1.25rem; border-radius: 1rem; border: 1.5px solid rgba(42, 103, 178, .18); background: #fff;
+  font-weight: 600; color: #1b3a63; transition: all .2s;
+}
+.advisor-option:hover, .advisor-option:focus-visible { border-color: #2A67B2; background: #F1F6FD; transform: translateX(4px); outline: none; }
+.advisor-step[hidden] { display: none; }
+
+.hero-wave { display: block; width: 100%; height: 60px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora-blob, .float-y, .pulse-dot::after, .marquee-track { animation: none !important; }
+}

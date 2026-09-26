@@ -76,6 +76,9 @@ $schemaList[] = array_filter([
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><?= View::e($fullTitle) ?></title>
     <meta name="description" content="<?= View::e($metaDescription) ?>">
+    <?php if (!empty($noindex)): ?>
+    <meta name="robots" content="noindex, nofollow">
+    <?php endif; ?>
     <link rel="canonical" href="<?= View::e($canonicalUrl) ?>">
 
     <?= SEO::openGraph([
@@ -126,5 +129,8 @@ $schemaList[] = array_filter([
     <?php endif; ?>
 
     <script src="<?= View::e(Asset::versioned('/assets/js/app.js')) ?>" defer></script>
+    <?php foreach (($pageScripts ?? []) as $pageScript): ?>
+    <script src="<?= View::e(Asset::versioned($pageScript)) ?>" defer></script>
+    <?php endforeach; ?>
 </body>
 </html>
