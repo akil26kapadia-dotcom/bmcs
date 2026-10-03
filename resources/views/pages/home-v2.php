@@ -25,18 +25,25 @@ foreach ($itCategories as $c) {
 }
 $networkLabels = array_slice($networkLabels, 0, 6);
 
-// Hero glass cards: the three flagship Tally services, if they exist.
-$bySlug = [];
-foreach ($tallyServices as $s) {
-    $bySlug[$s['slug']] = $s;
+// Hero vertical scroller: every category, Tally first, so nothing is
+// hidden behind a handful of hand-picked cards — this is the full list.
+$heroItems = [];
+if (!empty($tallyServices)) {
+    $heroItems[] = [
+        'name' => 'Tally Solutions',
+        'description' => 'TallyPrime sales, renewal, cloud, server, customization & support',
+        'href' => '/solutions/tally-solutions',
+        'icon' => 'coin',
+    ];
 }
-$heroCards = [];
-foreach (['tallyprime-sales', 'tally-on-cloud', 'tallyprime-server'] as $slug) {
-    if (isset($bySlug[$slug])) {
-        $heroCards[] = $bySlug[$slug];
-    }
+foreach ($itCategories as $c) {
+    $heroItems[] = [
+        'name' => $c['name'],
+        'description' => $c['description'] ?? '',
+        'href' => '/solutions/' . $c['slug'],
+        'icon' => $c['icon'] ?: 'network',
+    ];
 }
-$heroCards = $heroCards ?: array_slice($tallyServices, 0, 3);
 
 // Stats are shown only when real numbers are entered in Admin > Page Content.
 $stats = [];
@@ -139,30 +146,26 @@ $featureImage = $get('home_tally_feature_image', '');
             </div>
         </div>
 
-        <div class="lg:col-span-5 relative min-w-0">
-            <div class="space-y-4 max-w-md lg:ml-auto">
-                <?php foreach ($heroCards as $i => $card): ?>
-                    <a href="/services/<?= View::e($card['slug']) ?>" data-depth="<?= 10 + $i * 7 ?>"
-                       class="glass float-y delay-<?= $i ?> flex items-center gap-4 rounded-2xl p-4 pr-5 hover:bg-white/20 transition-colors group"
-                       data-animate="fade-left" data-delay="<?= 200 + $i * 120 ?>">
-                        <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gold-500 text-ink-900 shrink-0">
-                            <?= $icon($card['icon'] ?: 'coin', 'w-6 h-6') ?>
-                        </span>
-                        <span class="flex-1 min-w-0">
-                            <span class="block font-semibold leading-snug"><?= View::e($card['name']) ?></span>
-                            <span class="block text-sm text-white/75 truncate"><?= View::e($card['short_description'] ?? '') ?></span>
-                        </span>
-                        <span class="text-white/70 group-hover:text-gold-400 group-hover:translate-x-1 transition"><?= $icon('arrow-right', 'w-5 h-5') ?></span>
-                    </a>
-                <?php endforeach; ?>
-                <a href="/services" data-depth="24" class="glass float-y flex items-center gap-4 rounded-2xl p-4 pr-5 hover:bg-white/20 transition-colors group" data-animate="fade-left" data-delay="560">
-                    <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-white/20 shrink-0"><?= $icon('server', 'w-6 h-6') ?></span>
-                    <span class="flex-1">
-                        <span class="block font-semibold">Complete IT Services</span>
-                        <span class="block text-sm text-white/75">Servers, networking, CCTV, cloud &amp; AMC</span>
-                    </span>
-                    <span class="text-white/70 group-hover:text-gold-400 group-hover:translate-x-1 transition"><?= $icon('arrow-right', 'w-5 h-5') ?></span>
-                </a>
+        <div class="lg:col-span-5 relative min-w-0" data-animate="fade-left" data-delay="200">
+            <p class="text-xs font-semibold uppercase tracking-[0.16em] text-white/70 mb-3 lg:text-right">Everything we cover — hover to pause</p>
+            <div class="vmarquee max-w-md lg:ml-auto">
+                <div class="vmarquee-track" data-vmarquee>
+                    <?php for ($loop = 0; $loop < 2; $loop++): ?>
+                        <?php foreach ($heroItems as $item): ?>
+                            <a href="<?= View::e($item['href']) ?>" <?= $loop ? 'tabindex="-1" aria-hidden="true"' : '' ?>
+                               class="glass flex items-center gap-4 rounded-2xl p-4 pr-5 hover:bg-white/20 transition-colors group shrink-0">
+                                <span class="inline-flex items-center justify-center w-12 h-12 rounded-xl bg-gold-500 text-ink-900 shrink-0">
+                                    <?= $icon($item['icon'], 'w-6 h-6') ?>
+                                </span>
+                                <span class="flex-1 min-w-0">
+                                    <span class="block font-semibold leading-snug"><?= View::e($item['name']) ?></span>
+                                    <span class="block text-sm text-white/75 truncate"><?= View::e($item['description']) ?></span>
+                                </span>
+                                <span class="text-white/70 group-hover:text-gold-400 group-hover:translate-x-1 transition shrink-0"><?= $icon('arrow-right', 'w-5 h-5') ?></span>
+                            </a>
+                        <?php endforeach; ?>
+                    <?php endfor; ?>
+                </div>
             </div>
         </div>
     </div>
@@ -222,41 +225,7 @@ $featureImage = $get('home_tally_feature_image', '');
                     <h3 class="mt-6 font-semibold <?= $featured ? 'text-2xl lg:text-3xl text-white' : 'text-lg text-navy-950' ?>"><?= View::e($service['name']) ?></h3>
                     <p class="mt-3 leading-relaxed <?= $featured ? 'text-white/85 text-base lg:text-lg' : 'flex-1 text-sm text-ink-500' ?>"><?= View::e($service['short_description'] ?? '') ?></p>
                     <?php if ($featured): ?>
-                        <div class="tile-media relative mt-6 flex-1 min-h-[210px] rounded-2xl overflow-hidden">
-                            <?php if ($featureImage !== ''): ?>
-                                <img src="<?= View::e($featureImage) ?>" alt="" class="tile-photo" loading="lazy" decoding="async">
-                                <span class="absolute inset-0" style="background:linear-gradient(180deg,rgba(42,103,178,.15),rgba(42,103,178,.65))" aria-hidden="true"></span>
-                            <?php else: ?>
-                                <div class="tile-mock" aria-hidden="true">
-                                    <svg viewBox="0 0 400 220" class="w-full h-full" preserveAspectRatio="xMidYMid meet" fill="none">
-                                        <rect x="8" y="8" width="384" height="204" rx="18" fill="rgba(255,255,255,.12)" stroke="rgba(255,255,255,.4)"/>
-                                        <circle cx="30" cy="28" r="4.5" fill="#FFC632"/><circle cx="46" cy="28" r="4.5" fill="rgba(255,255,255,.55)"/><circle cx="62" cy="28" r="4.5" fill="rgba(255,255,255,.35)"/>
-                                        <rect x="90" y="23" width="120" height="10" rx="5" fill="rgba(255,255,255,.3)"/>
-                                        <g>
-                                            <rect class="mock-bar" x="28" y="90" width="22" height="90" rx="5" fill="rgba(255,255,255,.55)"/>
-                                            <rect class="mock-bar" x="60" y="70" width="22" height="110" rx="5" fill="#FFC632"/>
-                                            <rect class="mock-bar" x="92" y="105" width="22" height="75" rx="5" fill="rgba(255,255,255,.55)"/>
-                                            <rect class="mock-bar" x="124" y="60" width="22" height="120" rx="5" fill="#FFC632"/>
-                                            <rect class="mock-bar" x="156" y="85" width="22" height="95" rx="5" fill="rgba(255,255,255,.55)"/>
-                                            <rect class="mock-bar" x="188" y="50" width="22" height="130" rx="5" fill="#FFC632"/>
-                                        </g>
-                                        <path d="M232 150 C 262 140, 272 100, 300 108 S 340 60, 372 52" class="mock-line" stroke="#FFC632" stroke-width="3.5" stroke-linecap="round"/>
-                                        <circle cx="372" cy="52" r="5" fill="#fff"/>
-                                        <circle cx="300" cy="108" r="4" fill="rgba(255,255,255,.8)"/>
-                                        <circle cx="336" cy="172" r="19" stroke="rgba(255,255,255,.25)" stroke-width="7"/>
-                                        <circle cx="336" cy="172" r="19" class="mock-donut" stroke="#FFC632" stroke-width="7" stroke-linecap="round" transform="rotate(-90 336 172)"/>
-                                        <g fill="rgba(255,255,255,.55)">
-                                            <rect class="mock-skel" x="232" y="168" width="70" height="7" rx="3.5"/>
-                                            <rect class="mock-skel" x="232" y="182" width="52" height="7" rx="3.5"/>
-                                            <rect class="mock-skel" x="232" y="196" width="62" height="7" rx="3.5"/>
-                                        </g>
-                                    </svg>
-                                </div>
-                            <?php endif; ?>
-                            <span class="mock-chip mock-chip--1"><i></i>Invoices</span>
-                            <span class="mock-chip mock-chip--2"><i></i>VAT ready</span>
-                            <span class="mock-chip mock-chip--3"><i></i>Multi-user</span>
-                        </div>
+                        <?= View::capture('components/mock-illustration', ['image' => $featureImage, 'chips' => ['Invoices', 'VAT ready', 'Multi-user']]) ?>
                     <?php endif; ?>
 
                     <?php if ($featured): ?>
@@ -365,15 +334,25 @@ $featureImage = $get('home_tally_feature_image', '');
             'align' => 'center',
             'onDark' => true,
         ]) ?>
-        <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+        <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr">
             <?php foreach ($itCategories as $i => $category): ?>
-                <a href="/solutions/<?= View::e($category['slug']) ?>" class="glass-card spotlight group rounded-3xl p-7 block" data-animate="fade-up" data-delay="<?= ($i % 4) * 70 ?>">
-                    <span class="glass-icon inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 text-gold-400"><?= $icon($category['icon'] ?: 'network', 'w-7 h-7') ?></span>
-                    <h3 class="mt-5 font-semibold text-lg text-white"><?= View::e($category['name']) ?></h3>
-                    <p class="mt-2 text-sm text-white/85 leading-relaxed line-clamp-3"><?= View::e($category['description'] ?? '') ?></p>
+                <?php $featured = $i === 0; ?>
+                <a href="/solutions/<?= View::e($category['slug']) ?>"
+                   class="glass-card spotlight group rounded-3xl p-7 flex flex-col block <?= $featured ? 'it-feature lg:col-span-2 lg:row-span-2' : '' ?>"
+                   data-animate="fade-up" data-delay="<?= ($i % 4) * 70 ?>">
+                    <span class="glass-icon inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-white/20 text-gold-400 shrink-0"><?= $icon($category['icon'] ?: 'network', 'w-7 h-7') ?></span>
+                    <h3 class="mt-5 font-semibold <?= $featured ? 'text-2xl lg:text-3xl' : 'text-lg' ?> text-white"><?= View::e($category['name']) ?></h3>
+                    <p class="mt-2 leading-relaxed <?= $featured ? 'text-white/90 text-base lg:text-lg' : 'flex-1 text-sm text-white/85 line-clamp-3' ?>"><?= View::e($category['description'] ?? '') ?></p>
+                    <?php if ($featured): ?>
+                        <?= View::capture('components/mock-illustration', ['image' => $get('home_it_feature_image', ''), 'chips' => ['24/7 Monitoring', 'Certified Engineers', 'Secure by Design']]) ?>
+                    <?php endif; ?>
                     <span class="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-gold-400 group-hover:gap-3 transition-all">Explore <?= $icon('arrow-right', 'w-4 h-4') ?></span>
                 </a>
             <?php endforeach; ?>
+        </div>
+        <div class="mt-12 flex flex-wrap items-center justify-center gap-4">
+            <?= Html::button(['href' => '/services', 'label' => 'View All IT Services', 'variant' => 'secondary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us', 'Hello BMCS, I need help with IT services.', 'outline-light') ?>
         </div>
     </div>
 </section>

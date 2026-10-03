@@ -835,3 +835,18 @@
   .about-ring, .about-shine, .about-orbit, .about-dot, .about-photo { animation: none !important; }
   [data-reveal-mask]:not(.is-in) { clip-path: none !important; }
 }
+
+/* ---- Hero: vertical auto-scrolling category list ---- */
+.vmarquee {
+  position: relative; overflow: hidden; height: 460px;
+  -webkit-mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+  mask-image: linear-gradient(to bottom, transparent, #000 8%, #000 92%, transparent);
+}
+.vmarquee-track { display: flex; flex-direction: column; gap: 1rem; animation: vmarquee 34s linear infinite; }
+.vmarquee:hover .vmarquee-track, .vmarquee-track.is-paused { animation-play-state: paused; }
+@keyframes vmarquee { to { transform: translate3d(0, -50%, 0); } }
+@media (max-width: 1023px) { .vmarquee { height: 360px; } }
+@media (prefers-reduced-motion: reduce) { .vmarquee-track { animation: none; } }
+
+/* ---- IT services featured tile (parity with the Tally bento) ---- */
+.it-feature { background: linear-gradient(150deg, rgba(255, 255, 255, .22), rgba(255, 255, 255, .06)); }
