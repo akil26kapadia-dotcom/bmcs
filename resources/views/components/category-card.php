@@ -7,7 +7,7 @@ use App\Helpers\Icon;
 $category = $category ?? [];
 $delay = $delay ?? 0;
 ?>
-<a href="/solutions/<?= View::e($category['slug']) ?>" class="group card card-hover p-7 flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
+<a href="/solutions/<?= View::e($category['slug']) ?>" class="group card card-hover spotlight p-7 flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
     <span class="icon-badge">
         <?= Icon::svg($category['icon'] ?? 'network', 'w-6 h-6') ?>
     </span>

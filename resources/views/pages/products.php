@@ -14,26 +14,16 @@ $categories = $categories ?? [];
     ],
 ]) ?>
 
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0">
-        <?= View::capture('components/hero-image', ['alt' => "Dubai skyline at sunset with the Burj Khalifa"]) ?>
-        <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-navy-950/25"></div>
-    </div>
-    <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
-    <div class="relative container-custom py-16 md:py-20 text-center">
-        <span class="eyebrow-on-dark"><?= View::e(SiteConfig::get('products_hero_eyebrow', 'IT Distribution')) ?></span>
-        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white"><?= View::e(SiteConfig::get('products_hero_heading', 'IT Products & Distribution')) ?></h1>
-        <p class="mt-4 text-white/80 max-w-2xl mx-auto">
-            <?= View::e(SiteConfig::get('products_hero_subtext', 'BMCS supplies and configures the hardware businesses need — from servers and workstations to networking equipment and accessories.')) ?>
-        </p>
-    </div>
-</section>
+<?= View::capture('components/page-hero', [
+    'eyebrow' => SiteConfig::get('products_hero_eyebrow', 'IT Distribution'),
+    'title' => SiteConfig::get('products_hero_heading', 'IT Products & Distribution'),
+    'subtitle' => SiteConfig::get('products_hero_subtext', 'BMCS supplies and configures the hardware businesses need — from servers and workstations to networking equipment and accessories.'),
+]) ?>
 
 <section class="section-py bg-white">
-    <div class="container-custom grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="container-custom grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <?php foreach ($categories as $i => $category): ?>
-            <div class="group card card-hover p-7" data-animate="fade-up" data-delay="<?= ($i % 4) * 80 ?>">
+            <div class="group card card-hover spotlight p-7" data-animate="fade-up" data-delay="<?= ($i % 4) * 80 ?>">
                 <span class="icon-badge">
                     <?= Icon::svg($category['icon'], 'w-6 h-6') ?>
                 </span>
@@ -43,13 +33,16 @@ $categories = $categories ?? [];
         <?php endforeach; ?>
     </div>
 
-    <div class="mt-14 card p-8 md:p-10 text-center bg-ink-100/50 border-none">
-        <h2 class="text-xl md:text-2xl font-semibold text-navy-950"><?= View::e(SiteConfig::get('products_cta_heading', 'Looking for Specific Hardware?')) ?></h2>
-        <p class="mt-3 text-ink-500 max-w-xl mx-auto">
-            <?= View::e(SiteConfig::get('products_cta_subtext', "Tell us what your business needs and we'll help you source and configure the right equipment, at the right budget.")) ?>
-        </p>
-        <div class="mt-6">
-            <?= Html::button(['href' => '/contact', 'label' => 'Enquire About Products', 'variant' => 'primary', 'icon' => true]) ?>
+    <div class="mt-14 relative isolate overflow-hidden rounded-3xl p-8 md:p-12 text-center text-white">
+        <div class="aurora" aria-hidden="true"><span class="aurora-blob aurora-blob--sky"></span><span class="aurora-blob aurora-blob--yellow"></span></div>
+        <div class="relative">
+            <h2 class="text-xl md:text-2xl font-semibold text-white"><?= View::e(SiteConfig::get('products_cta_heading', 'Looking for Specific Hardware?')) ?></h2>
+            <p class="mt-3 text-white/85 max-w-xl mx-auto">
+                <?= View::e(SiteConfig::get('products_cta_subtext', "Tell us what your business needs and we'll help you source and configure the right equipment, at the right budget.")) ?>
+            </p>
+            <div class="mt-6">
+                <?= Html::button(['href' => '/contact', 'label' => 'Enquire About Products', 'variant' => 'primary', 'icon' => true]) ?>
+            </div>
         </div>
     </div>
 </section>

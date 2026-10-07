@@ -79,7 +79,7 @@ $postUrl = Url::full('blog/' . $post['slug']);
             'eyebrow' => 'Keep Reading',
             'title' => 'Related Articles',
         ]) ?>
-        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ($related as $i => $relatedPost): ?>
                 <?= View::capture('components/blog-card', ['post' => $relatedPost, 'delay' => $i * 80]) ?>
             <?php endforeach; ?>
@@ -88,11 +88,12 @@ $postUrl = Url::full('blog/' . $post['slug']);
 </section>
 <?php endif; ?>
 
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0 hero-grid opacity-40 pointer-events-none" aria-hidden="true"></div>
+<section class="cta-section relative isolate overflow-hidden text-white" data-spot>
+    <div class="aurora" aria-hidden="true"><span class="aurora-blob aurora-blob--sky"></span><span class="aurora-blob aurora-blob--deep"></span><span class="aurora-blob aurora-blob--yellow"></span></div>
+    <span class="cta-spot" aria-hidden="true"></span>
     <div class="relative container-custom py-16 text-center">
         <h2 class="text-2xl md:text-3xl font-semibold text-white">Have a Technology Question?</h2>
-        <div class="mt-6">
+        <div class="cta-btns mt-6">
             <?= Html::button(['href' => '/contact', 'label' => 'Talk to BMCS', 'variant' => 'primary', 'icon' => true]) ?>
         </div>
     </div>

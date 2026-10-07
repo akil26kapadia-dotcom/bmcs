@@ -11,7 +11,7 @@ $service = $service ?? [];
 $iconName = $service['icon'] ?? $icon ?? 'network';
 $delay = $delay ?? 0;
 ?>
-<a href="/services/<?= View::e($service['slug']) ?>" class="group card card-hover p-7 flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
+<a href="/services/<?= View::e($service['slug']) ?>" class="group card card-hover spotlight p-7 flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
     <span class="icon-badge">
         <?= Icon::svg($iconName, 'w-6 h-6') ?>
     </span>

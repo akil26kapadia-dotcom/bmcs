@@ -41,12 +41,13 @@ HTML;
     'items' => [['label' => 'Home', 'href' => '/'], ['label' => 'Privacy Policy', 'href' => null]],
 ]) ?>
 
+<?= View::capture('components/page-hero', ['eyebrow' => 'Legal', 'title' => 'Privacy Policy']) ?>
+
 <section class="section-py bg-white">
     <div class="container-custom max-w-3xl">
-        <h1 class="text-3xl md:text-4xl font-semibold text-navy-950">Privacy Policy</h1>
-        <p class="mt-3 text-sm text-ink-500">Last updated: <?= date('F Y') ?></p>
+        <p class="text-sm text-ink-500">Last updated: <?= date('F Y') ?></p>
 
-        <div class="mt-10 prose-blog max-w-none">
+        <div class="mt-6 prose-blog max-w-none">
             <?= SiteConfig::get('privacy_content') ?: $defaultContent ?>
 
             <h2>Contact Us</h2>

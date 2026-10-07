@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\View;
+use App\Helpers\Html;
 use App\Helpers\Icon;
 
 $categories = $categories ?? [];
@@ -13,22 +14,11 @@ $grouped = $grouped ?? [];
     ],
 ]) ?>
 
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0">
-        <?= View::capture('components/hero-image', ['alt' => "Dubai skyline at sunset with the Burj Khalifa"]) ?>
-        <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-navy-950/25"></div>
-    </div>
-    <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
-    <div class="relative container-custom py-16 md:py-20 text-center">
-        <span class="eyebrow-on-dark">What We Do</span>
-        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">Our Services</h1>
-        <p class="mt-4 text-white/80 max-w-2xl mx-auto">
-            A complete range of IT infrastructure, security, cloud, telecommunication and digital
-            services for businesses across Dubai and the UAE.
-        </p>
-    </div>
-</section>
+<?= View::capture('components/page-hero', [
+    'eyebrow' => 'What We Do',
+    'title' => 'Our Services',
+    'subtitle' => 'A complete range of IT infrastructure, security, cloud, telecommunication and digital services for businesses across Dubai and the UAE.',
+]) ?>
 
 <section class="section-py bg-white">
     <div class="container-custom">
@@ -41,7 +31,7 @@ $grouped = $grouped ?? [];
             <?php endforeach; ?>
         </div>
 
-        <div id="services-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div id="services-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php $i = 0; foreach ($grouped as $group): ?>
                 <?php foreach ($group['services'] as $service): $i++; ?>
                     <div data-filter-item="<?= View::e($group['category']['slug']) ?>">
@@ -57,15 +47,19 @@ $grouped = $grouped ?? [];
     </div>
 </section>
 
-<section class="section-py bg-ink-100/50">
-    <div class="container-custom text-center">
+<section class="cta-section relative isolate overflow-hidden text-white" data-spot>
+    <div class="aurora" aria-hidden="true"><span class="aurora-blob aurora-blob--sky"></span><span class="aurora-blob aurora-blob--deep"></span><span class="aurora-blob aurora-blob--yellow"></span></div>
+    <span class="cta-spot" aria-hidden="true"></span>
+    <div class="relative container-custom section-py text-center">
         <?= View::capture('components/section-heading', [
             'eyebrow' => 'Not Sure Where to Start?',
             'title' => 'Talk to Our Team About Your Requirements',
             'align' => 'center',
+            'onDark' => true,
         ]) ?>
-        <div class="mt-8">
-            <?= \App\Helpers\Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'primary', 'icon' => true]) ?>
+        <div class="cta-btns mt-8 flex flex-wrap items-center justify-center gap-4">
+            <?= Html::button(['href' => '/contact', 'label' => 'Talk to an Expert', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us') ?>
         </div>
     </div>
 </section>

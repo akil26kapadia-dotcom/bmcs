@@ -44,31 +44,29 @@ $schema = [
 ]) ?>
 
 <!-- HERO -->
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0">
-        <?= View::capture('components/hero-image', [
-            'alt' => $isTally ? 'Dubai business district, home of Bright Mind Computer Solutions TallyPrime services' : 'Dubai skyline at sunset with the Burj Khalifa',
-        ]) ?>
-        <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-navy-950/25"></div>
+<section class="relative isolate overflow-hidden text-white">
+    <div class="aurora" aria-hidden="true">
+        <span class="aurora-blob aurora-blob--sky"></span>
+        <span class="aurora-blob aurora-blob--deep"></span>
+        <span class="aurora-blob aurora-blob--yellow"></span>
     </div>
-    <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 md:py-20">
-        <div class="flex items-center gap-4">
-            <span class="inline-flex items-center justify-center w-14 h-14 rounded-xl bg-white/10 text-gold-400">
+        <div class="flex items-center gap-4" data-animate="fade-up">
+            <span class="inline-flex items-center justify-center w-14 h-14 rounded-2xl glass text-gold-400">
                 <?= Icon::svg($categoryIcon, 'w-7 h-7') ?>
             </span>
             <?php if ($category): ?>
                 <a href="/solutions/<?= View::e($category['slug']) ?>" class="eyebrow-on-dark hover:text-gold-300"><?= View::e($category['name']) ?></a>
             <?php endif; ?>
         </div>
-        <h1 class="mt-6 text-3xl md:text-5xl font-semibold text-white max-w-3xl"><?= View::e($service['name']) ?></h1>
-        <p class="mt-4 text-white/80 max-w-2xl text-lg"><?= View::e($service['short_description']) ?></p>
-        <div class="mt-8 flex flex-wrap gap-4">
+        <h1 class="mt-6 text-3xl md:text-5xl font-semibold tracking-tight text-white max-w-3xl" data-animate="fade-up" data-delay="80"><?= View::e($service['name']) ?></h1>
+        <p class="mt-4 text-white/85 max-w-2xl text-lg" data-animate="fade-up" data-delay="160"><?= View::e($service['short_description']) ?></p>
+        <div class="mt-8 flex flex-wrap gap-4" data-animate="fade-up" data-delay="240">
             <?= Html::button(['href' => '/contact', 'label' => 'Request a Quotation', 'variant' => 'primary', 'icon' => true]) ?>
             <?= Html::whatsappButton('WhatsApp Us', $waMessage) ?>
         </div>
     </div>
+    <svg class="hero-wave absolute bottom-0 inset-x-0 text-white" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 60V28C240 4 480 0 720 14s480 26 720 4v42z"/></svg>
 </section>
 
 <!-- INTRODUCTION -->
@@ -118,7 +116,7 @@ $schema = [
 
         <aside class="lg:col-span-1 space-y-6">
             <?php if (!empty($benefits)): ?>
-                <div class="card p-6">
+                <div class="card spotlight p-6">
                     <h3 class="font-semibold text-navy-950">Benefits</h3>
                     <ul class="mt-4 space-y-3">
                         <?php foreach ($benefits as $item): ?>
@@ -132,13 +130,13 @@ $schema = [
             <?php endif; ?>
 
             <?php if (!empty($service['technologies'])): ?>
-                <div class="card p-6">
+                <div class="card spotlight p-6">
                     <h3 class="font-semibold text-navy-950">Technology &amp; Solutions</h3>
                     <p class="mt-3 text-sm text-ink-500 leading-relaxed"><?= View::e($service['technologies']) ?></p>
                 </div>
             <?php endif; ?>
 
-            <div class="card p-6 bg-navy-950 border-none">
+            <div class="card spotlight p-6 bg-navy-950 border-none">
                 <h3 class="font-semibold text-white">Need this for your business?</h3>
                 <p class="mt-2 text-sm text-white/80">Tell us about your requirements and we'll recommend the right solution.</p>
                 <div class="mt-4 space-y-3">
@@ -159,7 +157,7 @@ $schema = [
             'eyebrow' => $isTally ? 'More Tally Solutions' : 'Related Services',
             'title' => $isTally ? 'Other Tally Services from BMCS' : 'You May Also Need',
         ]) ?>
-        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ($related as $i => $relatedService): ?>
                 <?= View::capture('components/service-card', [
                     'service' => $relatedService,
@@ -173,11 +171,12 @@ $schema = [
 <?php endif; ?>
 
 <!-- CTA -->
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0 hero-grid opacity-40 pointer-events-none" aria-hidden="true"></div>
+<section class="cta-section relative isolate overflow-hidden text-white" data-spot>
+    <div class="aurora" aria-hidden="true"><span class="aurora-blob aurora-blob--sky"></span><span class="aurora-blob aurora-blob--deep"></span><span class="aurora-blob aurora-blob--yellow"></span></div>
+    <span class="cta-spot" aria-hidden="true"></span>
     <div class="relative container-custom py-16 text-center">
         <h2 class="text-2xl md:text-3xl font-semibold text-white">Ready to Talk About <?= View::e($service['name']) ?>?</h2>
-        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
+        <div class="cta-btns mt-6 flex flex-wrap items-center justify-center gap-4">
             <?= Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
             <?= Html::whatsappButton('WhatsApp Us', $waMessage) ?>
         </div>

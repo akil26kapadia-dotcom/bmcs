@@ -13,23 +13,25 @@ $portfolio = $results['portfolio'] ?? [];
     'items' => [['label' => 'Home', 'href' => '/'], ['label' => 'Search', 'href' => null]],
 ]) ?>
 
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0">
-        <?= View::capture('components/hero-image', ['alt' => "Dubai skyline at sunset with the Burj Khalifa"]) ?>
-        <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-navy-950/25"></div>
+<section class="relative isolate overflow-hidden text-white">
+    <div class="aurora" aria-hidden="true">
+        <span class="aurora-blob aurora-blob--sky"></span>
+        <span class="aurora-blob aurora-blob--deep"></span>
+        <span class="aurora-blob aurora-blob--yellow"></span>
     </div>
-    <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 md:py-20 text-center">
-        <span class="eyebrow-on-dark">Search</span>
-        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">
+        <span class="inline-flex items-center gap-2.5 rounded-full glass px-4 py-2 text-xs sm:text-sm font-semibold tracking-wide" data-animate="fade-up">
+            <span class="pulse-dot w-2 h-2 rounded-full bg-gold-500 text-gold-500"></span>
+            Search
+        </span>
+        <h1 class="mt-5 text-3xl md:text-5xl font-semibold tracking-tight text-white" data-animate="fade-up" data-delay="80">
             <?= $term !== '' ? 'Results for &ldquo;' . View::e($term) . '&rdquo;' : 'Search BMCS' ?>
         </h1>
         <?php if ($term !== ''): ?>
-            <p class="mt-4 text-white/80"><?= $count ?> result<?= $count === 1 ? '' : 's' ?> found</p>
+            <p class="mt-4 text-white/85" data-animate="fade-up" data-delay="160"><?= $count ?> result<?= $count === 1 ? '' : 's' ?> found</p>
         <?php endif; ?>
 
-        <form action="/search" method="GET" class="mt-8 max-w-md mx-auto relative">
+        <form action="/search" method="GET" class="mt-8 max-w-md mx-auto relative" data-animate="fade-up" data-delay="240">
             <label for="site-search" class="sr-only">Search the site</label>
             <input type="search" id="site-search" name="q" value="<?= View::e($term) ?>" placeholder="Search services, portfolio, articles&hellip;"
                    class="w-full rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 pl-11 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500">
@@ -39,6 +41,7 @@ $portfolio = $results['portfolio'] ?? [];
             </svg>
         </form>
     </div>
+    <svg class="hero-wave absolute bottom-0 inset-x-0 text-white" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 60V28C240 4 480 0 720 14s480 26 720 4v42z"/></svg>
 </section>
 
 <section class="section-py bg-white">
@@ -53,7 +56,7 @@ $portfolio = $results['portfolio'] ?? [];
             <?php if (!empty($services)): ?>
                 <div class="mb-16">
                     <h2 class="text-xl font-semibold text-navy-950 mb-6">Services</h2>
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <?php foreach ($services as $i => $service): ?>
                             <?= View::capture('components/service-card', ['service' => $service, 'icon' => 'network', 'delay' => $i * 60]) ?>
                         <?php endforeach; ?>
@@ -64,7 +67,7 @@ $portfolio = $results['portfolio'] ?? [];
             <?php if (!empty($portfolio)): ?>
                 <div class="mb-16">
                     <h2 class="text-xl font-semibold text-navy-950 mb-6">Portfolio</h2>
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <?php foreach ($portfolio as $i => $project): ?>
                             <?= View::capture('components/portfolio-card', ['project' => $project, 'delay' => $i * 60]) ?>
                         <?php endforeach; ?>
@@ -75,7 +78,7 @@ $portfolio = $results['portfolio'] ?? [];
             <?php if (!empty($posts)): ?>
                 <div>
                     <h2 class="text-xl font-semibold text-navy-950 mb-6">Blog</h2>
-                    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         <?php foreach ($posts as $i => $post): ?>
                             <?= View::capture('components/blog-card', ['post' => $post, 'delay' => $i * 60]) ?>
                         <?php endforeach; ?>

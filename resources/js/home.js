@@ -163,16 +163,9 @@
     window.addEventListener('resize', function () { clearTimeout(resizeT); resizeT = setTimeout(function () { build(); draw(0); }, 200); });
   }
 
-  /* ---------------- Cursor spotlight on cards ---------------- */
-  document.addEventListener('mousemove', function (e) {
-    var el = e.target.closest ? e.target.closest('.spotlight, [data-spot]') : null;
-    if (!el) return;
-    var r = el.getBoundingClientRect();
-    el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
-    el.style.setProperty('--my', (e.clientY - r.top) + 'px');
-  }, { passive: true });
+  /* Cursor spotlight on .spotlight cards is handled sitewide in app.js. */
 
-  /* ---------------- Hero card parallax ---------------- */
+/* ---------------- Hero card parallax ---------------- */
   var parallaxItems = document.querySelectorAll('[data-depth]');
   if (parallaxItems.length && !reduced && window.matchMedia('(pointer: fine)').matches) {
     var heroSection = parallaxItems[0].closest('section');
@@ -226,46 +219,8 @@
     window.addEventListener('resize', onScrollSteps);
   }
 
-  /* ---------------- About photo: mask reveal, scroll parallax, mouse tilt ---------------- */
-  var mask = document.querySelector('[data-reveal-mask]');
-  if (mask) {
-    if ('IntersectionObserver' in window && !reduced) {
-      var mo = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { mask.classList.add('is-in'); mo.disconnect(); } }, { threshold: .25 });
-      mo.observe(mask.parentNode);
-    } else { mask.classList.add('is-in'); }
-  }
-  var pimg = document.querySelector('[data-parallax-y]');
-  if (pimg && !reduced) {
-    var onParallax = function () {
-      var r = pimg.parentNode.getBoundingClientRect(), vh = window.innerHeight;
-      if (r.bottom < 0 || r.top > vh) return;
-      var p = (r.top + r.height / 2 - vh / 2) / vh; // -1..1 around the viewport centre
-      pimg.style.translate = '0 ' + (p * -34).toFixed(1) + 'px';
-    };
-    onParallax();
-    window.addEventListener('scroll', onParallax, { passive: true });
-  }
-  var tilt = document.querySelector('[data-tilt]');
-  if (tilt && !reduced && window.matchMedia('(pointer: fine)').matches) {
-    var tiltHost = tilt.parentNode;
-    tiltHost.addEventListener('mousemove', function (e) {
-      var r = tiltHost.getBoundingClientRect();
-      var x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
-      tilt.style.transform = 'perspective(1000px) rotateY(' + (x * 9).toFixed(2) + 'deg) rotateX(' + (-y * 7).toFixed(2) + 'deg) scale(1.015)';
-    });
-    tiltHost.addEventListener('mouseleave', function () { tilt.style.transform = ''; });
-  }
-
-  /* ---------------- Scroll progress bar ---------------- */
-  var bar = document.querySelector('[data-scroll-progress]');
-  if (bar && !reduced) {
-    var onScrollBar = function () {
-      var max = document.documentElement.scrollHeight - window.innerHeight;
-      bar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0).toFixed(4) + ')';
-    };
-    onScrollBar();
-    window.addEventListener('scroll', onScrollBar, { passive: true });
-  }
+  /* Animated photo frame (reveal/parallax/tilt) and the scroll progress bar
+     are handled sitewide in app.js. */
 
   /* ---------------- Optional background video ---------------- */
   var video = document.querySelector('[data-hero-video]');

@@ -6,7 +6,7 @@ use App\Core\View;
 $project = $project ?? [];
 $delay = $delay ?? 0;
 ?>
-<a href="/portfolio/<?= View::e($project['slug']) ?>" class="group card card-hover overflow-hidden block h-full flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
+<a href="/portfolio/<?= View::e($project['slug']) ?>" class="group card card-hover spotlight overflow-hidden block h-full flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
     <div class="relative h-56 overflow-hidden shrink-0">
         <img src="<?= View::e($project['featured_image']) ?>"
              alt="<?= View::e($project['title']) ?>"

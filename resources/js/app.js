@@ -202,4 +202,61 @@
       observer.observe(el);
     });
   }
+
+  /* ---------------- Animated photo frame: reveal / parallax / tilt ---------------- */
+  /* Supports more than one per page (e.g. an About photo on several templates). */
+  document.querySelectorAll('[data-reveal-mask]').forEach(function (mask) {
+    if ('IntersectionObserver' in window && !reducedMotion) {
+      var mo = new IntersectionObserver(function (en) { if (en[0].isIntersecting) { mask.classList.add('is-in'); mo.disconnect(); } }, { threshold: .25 });
+      mo.observe(mask.parentNode);
+    } else { mask.classList.add('is-in'); }
+  });
+  if (!reducedMotion) {
+    var parallaxImgs = document.querySelectorAll('[data-parallax-y]');
+    if (parallaxImgs.length) {
+      var onParallax = function () {
+        parallaxImgs.forEach(function (pimg) {
+          var r = pimg.parentNode.getBoundingClientRect(), vh = window.innerHeight;
+          if (r.bottom < 0 || r.top > vh) return;
+          var p = (r.top + r.height / 2 - vh / 2) / vh;
+          pimg.style.translate = '0 ' + (p * -34).toFixed(1) + 'px';
+        });
+      };
+      onParallax();
+      window.addEventListener('scroll', onParallax, { passive: true });
+    }
+  }
+  if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    document.querySelectorAll('[data-tilt]').forEach(function (tilt) {
+      var tiltHost = tilt.parentNode;
+      tiltHost.addEventListener('mousemove', function (e) {
+        var r = tiltHost.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width - .5, y = (e.clientY - r.top) / r.height - .5;
+        tilt.style.transform = 'perspective(1000px) rotateY(' + (x * 9).toFixed(2) + 'deg) rotateX(' + (-y * 7).toFixed(2) + 'deg) scale(1.015)';
+      });
+      tiltHost.addEventListener('mouseleave', function () { tilt.style.transform = ''; });
+    });
+  }
+
+  /* ---------------- Scroll progress bar (sitewide) ---------------- */
+  var progressBar = document.querySelector('[data-scroll-progress]');
+  if (progressBar && !reducedMotion) {
+    var onScrollBar = function () {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progressBar.style.transform = 'scaleX(' + (max > 0 ? Math.min(1, window.scrollY / max) : 0).toFixed(4) + ')';
+    };
+    onScrollBar();
+    window.addEventListener('scroll', onScrollBar, { passive: true });
+  }
+
+  /* ---------------- Cursor spotlight on cards (sitewide) ---------------- */
+  if (!reducedMotion && window.matchMedia('(pointer: fine)').matches) {
+    document.addEventListener('mousemove', function (e) {
+      var el = e.target.closest ? e.target.closest('.spotlight, [data-spot]') : null;
+      if (!el) return;
+      var r = el.getBoundingClientRect();
+      el.style.setProperty('--mx', (e.clientX - r.left) + 'px');
+      el.style.setProperty('--my', (e.clientY - r.top) + 'px');
+    }, { passive: true });
+  }
 })();

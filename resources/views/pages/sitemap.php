@@ -24,10 +24,11 @@ $staticPages = [
     'items' => [['label' => 'Home', 'href' => '/'], ['label' => 'Sitemap', 'href' => null]],
 ]) ?>
 
+<?= View::capture('components/page-hero', ['eyebrow' => 'Site Index', 'title' => 'Sitemap']) ?>
+
 <section class="section-py bg-white">
     <div class="container-custom">
-        <h1 class="text-3xl md:text-4xl font-semibold text-navy-950 mb-12">Sitemap</h1>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
         <div>
             <h2 class="font-semibold text-navy-950 mb-4">Pages</h2>
             <ul class="space-y-2 text-sm">

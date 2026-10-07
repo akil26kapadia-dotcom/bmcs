@@ -104,8 +104,6 @@ $heroVideo = $get('home_hero_video', '');
 $featureImage = $get('home_tally_feature_image', '');
 ?>
 
-<div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
-
 <!-- ============================== HERO ============================== -->
 <section class="relative isolate overflow-hidden text-white lg:min-h-[680px] flex items-center">
     <div class="aurora" aria-hidden="true">

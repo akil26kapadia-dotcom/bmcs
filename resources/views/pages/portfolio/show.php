@@ -84,7 +84,7 @@ $technologies = array_filter(array_map('trim', explode(',', $project['technologi
         </div>
 
         <aside class="lg:col-span-1 space-y-6">
-            <div class="card p-6">
+            <div class="card spotlight p-6">
                 <h3 class="font-semibold text-navy-950">Project Details</h3>
                 <dl class="mt-4 space-y-4 text-sm">
                     <?php if (!empty($project['industry'])): ?>
@@ -114,7 +114,7 @@ $technologies = array_filter(array_map('trim', explode(',', $project['technologi
                 </dl>
             </div>
 
-            <div class="card p-6 bg-navy-950 border-none">
+            <div class="card spotlight p-6 bg-navy-950 border-none">
                 <h3 class="font-semibold text-white">Planning something similar?</h3>
                 <p class="mt-2 text-sm text-white/80">Tell us about your project and we'll help you scope it out.</p>
                 <div class="mt-4">
@@ -133,7 +133,7 @@ $technologies = array_filter(array_map('trim', explode(',', $project['technologi
             'eyebrow' => 'More Work',
             'title' => 'Related Projects',
         ]) ?>
-        <div class="mt-10 grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             <?php foreach ($related as $i => $relatedProject): ?>
                 <?= View::capture('components/portfolio-card', ['project' => $relatedProject, 'delay' => $i * 80]) ?>
             <?php endforeach; ?>

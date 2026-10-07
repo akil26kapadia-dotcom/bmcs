@@ -112,6 +112,8 @@ $schemaList[] = array_filter([
 
     <a href="#main-content" class="skip-link">Skip to content</a>
 
+    <div class="scroll-progress" data-scroll-progress aria-hidden="true"></div>
+
     <?= View::capture('components/navbar', ['currentPath' => $currentPath]) ?>
 
     <main id="main-content">

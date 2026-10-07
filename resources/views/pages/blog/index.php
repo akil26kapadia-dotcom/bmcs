@@ -16,21 +16,23 @@ if ($activeFilter) {
 ?>
 <?= View::capture('components/breadcrumbs', ['items' => $breadcrumbItems]) ?>
 
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0">
-        <?= View::capture('components/hero-image', ['alt' => "Dubai skyline at sunset with the Burj Khalifa"]) ?>
-        <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-navy-950/25"></div>
+<section class="relative isolate overflow-hidden text-white">
+    <div class="aurora" aria-hidden="true">
+        <span class="aurora-blob aurora-blob--sky"></span>
+        <span class="aurora-blob aurora-blob--deep"></span>
+        <span class="aurora-blob aurora-blob--yellow"></span>
     </div>
-    <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
     <div class="relative container-custom py-16 md:py-20 text-center">
-        <span class="eyebrow-on-dark">Insights</span>
-        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white"><?= View::e($heading) ?></h1>
-        <p class="mt-4 text-white/80 max-w-2xl mx-auto">
+        <span class="inline-flex items-center gap-2.5 rounded-full glass px-4 py-2 text-xs sm:text-sm font-semibold tracking-wide" data-animate="fade-up">
+            <span class="pulse-dot w-2 h-2 rounded-full bg-gold-500 text-gold-500"></span>
+            Insights
+        </span>
+        <h1 class="mt-5 text-3xl md:text-5xl font-semibold tracking-tight text-white" data-animate="fade-up" data-delay="80"><?= View::e($heading) ?></h1>
+        <p class="mt-4 text-white/85 max-w-2xl mx-auto text-lg" data-animate="fade-up" data-delay="160">
             Technology insights and updates from BMCS on IT infrastructure, networking, security, cloud and digital solutions.
         </p>
 
-        <form action="/blog" method="GET" class="mt-8 max-w-md mx-auto relative">
+        <form action="/blog" method="GET" class="mt-8 max-w-md mx-auto relative" data-animate="fade-up" data-delay="240">
             <label for="blog-search" class="sr-only">Search articles</label>
             <input type="search" id="blog-search" name="q" value="<?= View::e($search) ?>" placeholder="Search articles&hellip;"
                    class="w-full rounded-full border border-white/20 bg-white/10 text-white placeholder-white/50 pl-11 pr-4 py-3 text-sm focus:outline-none focus:ring-2 focus:ring-gold-500">
@@ -40,10 +42,11 @@ if ($activeFilter) {
             </svg>
         </form>
     </div>
+    <svg class="hero-wave absolute bottom-0 inset-x-0 text-white" viewBox="0 0 1440 60" preserveAspectRatio="none" aria-hidden="true"><path fill="currentColor" d="M0 60V28C240 4 480 0 720 14s480 26 720 4v42z"/></svg>
 </section>
 
 <section class="section-py bg-white">
-    <div class="container-custom grid lg:grid-cols-4 gap-12">
+    <div class="container-custom grid grid-cols-1 lg:grid-cols-4 gap-12">
         <div class="lg:col-span-3">
             <?php if (empty($posts)): ?>
                 <div class="card p-12 text-center">
@@ -52,7 +55,7 @@ if ($activeFilter) {
                     </p>
                 </div>
             <?php else: ?>
-                <div class="grid sm:grid-cols-2 gap-6">
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
                     <?php foreach ($posts as $i => $post): ?>
                         <?= View::capture('components/blog-card', ['post' => $post, 'delay' => ($i % 6) * 60]) ?>
                     <?php endforeach; ?>

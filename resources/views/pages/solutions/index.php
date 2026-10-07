@@ -1,6 +1,7 @@
 <?php
 
 use App\Core\View;
+use App\Helpers\Html;
 
 $categories = $categories ?? [];
 ?>
@@ -11,39 +12,29 @@ $categories = $categories ?? [];
     ],
 ]) ?>
 
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0">
-        <?= View::capture('components/hero-image', ['alt' => "Dubai skyline at sunset with the Burj Khalifa"]) ?>
-        <div class="absolute inset-0 bg-navy-600 mix-blend-multiply"></div>
-        <div class="absolute inset-0 bg-navy-950/25"></div>
-    </div>
-    <div class="absolute inset-0 hero-grid opacity-30 pointer-events-none" aria-hidden="true"></div>
-    <div class="relative container-custom py-16 md:py-20 text-center">
-        <span class="eyebrow-on-dark">Bright Mind Computer Solutions</span>
-        <h1 class="mt-4 text-3xl md:text-5xl font-semibold text-white">Solutions We Deliver in Dubai &amp; the UAE</h1>
-        <p class="mt-4 text-white/80 max-w-2xl mx-auto">
-            TallyPrime solutions and the IT services around them &mdash; networking, cloud, security,
-            telecommunication, Microsoft, IT support and digital. Explore the area most relevant to you.
-        </p>
-    </div>
-</section>
+<?= View::capture('components/page-hero', [
+    'eyebrow' => 'Bright Mind Computer Solutions',
+    'title' => 'Solutions We Deliver in Dubai & the UAE',
+    'subtitle' => 'TallyPrime solutions and the IT services around them — networking, cloud, security, telecommunication, Microsoft, IT support and digital. Explore the area most relevant to you.',
+]) ?>
 
 <section class="section-py bg-white">
-    <div class="container-custom grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+    <div class="container-custom grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
         <?php foreach ($categories as $i => $category): ?>
             <?= View::capture('components/category-card', ['category' => $category, 'delay' => ($i % 4) * 80]) ?>
         <?php endforeach; ?>
     </div>
 </section>
 
-<section class="relative bg-navy-950 overflow-hidden">
-    <div class="absolute inset-0 hero-grid opacity-40 pointer-events-none" aria-hidden="true"></div>
+<section class="cta-section relative isolate overflow-hidden text-white" data-spot>
+    <div class="aurora" aria-hidden="true"><span class="aurora-blob aurora-blob--sky"></span><span class="aurora-blob aurora-blob--deep"></span><span class="aurora-blob aurora-blob--yellow"></span></div>
+    <span class="cta-spot" aria-hidden="true"></span>
     <div class="relative container-custom py-16 text-center">
-        <h2 class="text-2xl md:text-3xl font-semibold text-white">Not Sure Which Solution Fits?</h2>
-        <p class="mt-3 text-white/80 max-w-xl mx-auto">Tell us about your business and we'll point you to the right service.</p>
-        <div class="mt-6 flex flex-wrap items-center justify-center gap-4">
-            <?= \App\Helpers\Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
-            <?= \App\Helpers\Html::whatsappButton('WhatsApp Us') ?>
+        <h2 class="text-2xl md:text-3xl font-semibold text-white"><span class="cta-word">Not</span> <span class="cta-word">Sure</span> <span class="cta-word">Which</span> <span class="cta-word">Solution</span> <span class="cta-word">Fits?</span></h2>
+        <p class="mt-3 text-white/85 max-w-xl mx-auto">Tell us about your business and we'll point you to the right service.</p>
+        <div class="cta-btns mt-6 flex flex-wrap items-center justify-center gap-4">
+            <?= Html::button(['href' => '/contact', 'label' => 'Book a Consultation', 'variant' => 'primary', 'icon' => true]) ?>
+            <?= Html::whatsappButton('WhatsApp Us') ?>
         </div>
     </div>
 </section>

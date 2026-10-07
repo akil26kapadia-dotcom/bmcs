@@ -6,7 +6,7 @@ use App\Helpers\Icon;
 $post = $post ?? [];
 $delay = $delay ?? 0;
 ?>
-<a href="/blog/<?= View::e($post['slug']) ?>" class="group card card-hover overflow-hidden block h-full flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
+<a href="/blog/<?= View::e($post['slug']) ?>" class="group card card-hover spotlight overflow-hidden block h-full flex flex-col" data-animate="fade-up" data-delay="<?= (int) $delay ?>">
     <?php if (!empty($post['featured_image'])): ?>
         <div class="h-48 overflow-hidden shrink-0">
             <img src="<?= View::e($post['featured_image']) ?>" alt="<?= View::e($post['title']) ?>"

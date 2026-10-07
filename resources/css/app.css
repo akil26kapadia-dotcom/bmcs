@@ -126,7 +126,7 @@
 
   /* --- Cards --- */
   .card {
-    @apply bg-white rounded-xl border border-ink-900/[0.06] shadow-card;
+    @apply bg-white rounded-2xl border border-ink-900/[0.06] shadow-card;
   }
 
   .card-hover {
