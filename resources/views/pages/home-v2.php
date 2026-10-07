@@ -209,7 +209,7 @@ $featureImage = $get('home_tally_feature_image', '');
             6 => 'lg:col-span-2',
         ];
         ?>
-        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr">
+        <div class="mt-14 grid sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:auto-rows-fr">
             <?php foreach ($tallyServices as $i => $service): ?>
                 <?php $featured = $i === 0; ?>
                 <a href="/services/<?= View::e($service['slug']) ?>"
@@ -334,7 +334,7 @@ $featureImage = $get('home_tally_feature_image', '');
             'align' => 'center',
             'onDark' => true,
         ]) ?>
-        <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 auto-rows-fr">
+        <div class="mt-14 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 lg:auto-rows-fr">
             <?php foreach ($itCategories as $i => $category): ?>
                 <?php $featured = $i === 0; ?>
                 <a href="/solutions/<?= View::e($category['slug']) ?>"
