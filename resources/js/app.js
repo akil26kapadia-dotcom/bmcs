@@ -64,13 +64,22 @@
   });
 
   /* ---------------- Mobile footer accordion ---------------- */
+  var footerDesktopMql = window.matchMedia('(min-width: 1024px)');
   document.querySelectorAll('[data-footer-toggle]').forEach(function (toggle) {
     var panel = document.getElementById(toggle.getAttribute('aria-controls'));
     if (!panel) return;
     toggle.addEventListener('click', function () {
+      if (footerDesktopMql.matches) return;
       var isOpen = panel.classList.contains('is-open');
-      panel.classList.toggle('is-open', !isOpen);
-      toggle.setAttribute('aria-expanded', String(!isOpen));
+      if (isOpen) {
+        panel.style.maxHeight = '0px';
+        panel.classList.remove('is-open');
+        toggle.setAttribute('aria-expanded', 'false');
+      } else {
+        panel.classList.add('is-open');
+        panel.style.maxHeight = panel.scrollHeight + 'px';
+        toggle.setAttribute('aria-expanded', 'true');
+      }
     });
   });
 

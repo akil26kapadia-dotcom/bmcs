@@ -47,8 +47,8 @@ try {
     <div class="section-blob w-96 h-96 -top-40 -left-20" aria-hidden="true"></div>
     <div class="section-blob w-96 h-96 -bottom-48 -right-24" aria-hidden="true"></div>
 
-    <div class="relative z-10 container-custom section-py !py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10">
-        <div class="lg:col-span-3">
+    <div class="relative z-10 container-custom section-py !py-16 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-x-10 gap-y-2 sm:gap-y-8 lg:gap-y-10">
+        <div class="lg:col-span-3 pb-6 border-b border-white/10 lg:border-0 lg:pb-0">
             <a href="/" class="flex items-center gap-3">
                 <img src="<?= View::e(\App\Helpers\SiteConfig::get('site_logo', '/assets/images/logo-mark.png')) ?>" alt="Bright Mind Computer Solutions logo" width="42" height="53" class="h-14 w-auto logo-glow">
                 <span class="leading-tight">
