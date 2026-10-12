@@ -63,6 +63,17 @@
     if (e.key === 'Escape') closeMenu();
   });
 
+  /* ---------------- Mobile footer accordion ---------------- */
+  document.querySelectorAll('[data-footer-toggle]').forEach(function (toggle) {
+    var panel = document.getElementById(toggle.getAttribute('aria-controls'));
+    if (!panel) return;
+    toggle.addEventListener('click', function () {
+      var isOpen = panel.classList.contains('is-open');
+      panel.classList.toggle('is-open', !isOpen);
+      toggle.setAttribute('aria-expanded', String(!isOpen));
+    });
+  });
+
   /* ---------------- Desktop dropdown / mega menu ---------------- */
   var dropdownToggles = document.querySelectorAll('[data-dropdown-toggle]');
 

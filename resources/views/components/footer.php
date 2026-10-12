@@ -73,42 +73,62 @@ try {
             <?php endif; ?>
         </div>
 
-        <div class="lg:col-span-3">
-            <h3 class="text-sm font-semibold text-white uppercase tracking-wide"><a href="/solutions/tally-solutions" class="hover:text-gold-400">Tally Solutions</a></h3>
-            <ul class="mt-5 space-y-3 text-sm">
-                <?php foreach ($tallyLinks as $link): ?>
-                    <li><a href="/services/<?= View::e($link['slug']) ?>" class="hover:text-gold-400"><?= View::e($link['name']) ?></a></li>
-                <?php endforeach; ?>
-            </ul>
+        <div class="lg:col-span-3 footer-col">
+            <button type="button" data-footer-toggle aria-expanded="false" aria-controls="footer-panel-tally" class="footer-toggle">
+                <span>Tally Solutions</span>
+                <svg class="w-4 h-4 footer-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="footer-panel-tally" data-footer-panel class="footer-panel">
+                <ul class="mt-5 space-y-3 text-sm pb-4">
+                    <?php foreach ($tallyLinks as $link): ?>
+                        <li><a href="/services/<?= View::e($link['slug']) ?>" class="hover:text-gold-400"><?= View::e($link['name']) ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
 
-        <div class="lg:col-span-2">
-            <h3 class="text-sm font-semibold text-white uppercase tracking-wide">IT Services</h3>
-            <ul class="mt-5 space-y-3 text-sm">
-                <?php foreach ($serviceLinks as $link): ?>
-                    <li><a href="/solutions/<?= View::e($link['slug']) ?>" class="hover:text-gold-400"><?= View::e($link['name']) ?></a></li>
-                <?php endforeach; ?>
-            </ul>
+        <div class="lg:col-span-2 footer-col">
+            <button type="button" data-footer-toggle aria-expanded="false" aria-controls="footer-panel-services" class="footer-toggle">
+                <span>IT Services</span>
+                <svg class="w-4 h-4 footer-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="footer-panel-services" data-footer-panel class="footer-panel">
+                <ul class="mt-5 space-y-3 text-sm pb-4">
+                    <?php foreach ($serviceLinks as $link): ?>
+                        <li><a href="/solutions/<?= View::e($link['slug']) ?>" class="hover:text-gold-400"><?= View::e($link['name']) ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
 
-        <div class="lg:col-span-2">
-            <h3 class="text-sm font-semibold text-white uppercase tracking-wide">Quick Links</h3>
-            <ul class="mt-5 space-y-3 text-sm">
-                <?php foreach ($quickLinks as $link): ?>
-                    <li><a href="<?= View::e($link['href']) ?>" class="hover:text-gold-400"><?= View::e($link['label']) ?></a></li>
-                <?php endforeach; ?>
-            </ul>
+        <div class="lg:col-span-2 footer-col">
+            <button type="button" data-footer-toggle aria-expanded="false" aria-controls="footer-panel-quicklinks" class="footer-toggle">
+                <span>Quick Links</span>
+                <svg class="w-4 h-4 footer-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="footer-panel-quicklinks" data-footer-panel class="footer-panel">
+                <ul class="mt-5 space-y-3 text-sm pb-4">
+                    <?php foreach ($quickLinks as $link): ?>
+                        <li><a href="<?= View::e($link['href']) ?>" class="hover:text-gold-400"><?= View::e($link['label']) ?></a></li>
+                    <?php endforeach; ?>
+                </ul>
+            </div>
         </div>
 
-        <div class="lg:col-span-2">
-            <h3 class="text-sm font-semibold text-white uppercase tracking-wide">Contact</h3>
-            <ul class="mt-5 space-y-3 text-sm">
-                <li><a href="tel:<?= View::e(preg_replace('/\s+/', '', $phone)) ?>" class="hover:text-gold-400"><?= View::e($phone) ?></a></li>
-                <li><a href="mailto:<?= View::e($email) ?>" class="hover:text-gold-400"><?= View::e($email) ?></a></li>
-                <?php if ($whatsapp): ?>
-                    <li><a href="https://wa.me/<?= View::e(preg_replace('/[^0-9]/', '', $whatsapp)) ?>" target="_blank" rel="noopener" class="hover:text-gold-400">WhatsApp: <?= View::e($whatsapp) ?></a></li>
-                <?php endif; ?>
-            </ul>
+        <div class="lg:col-span-2 footer-col footer-col--last">
+            <button type="button" data-footer-toggle aria-expanded="false" aria-controls="footer-panel-contact" class="footer-toggle">
+                <span>Contact</span>
+                <svg class="w-4 h-4 footer-chevron" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
+            </button>
+            <div id="footer-panel-contact" data-footer-panel class="footer-panel">
+                <ul class="mt-5 space-y-3 text-sm pb-4">
+                    <li><a href="tel:<?= View::e(preg_replace('/\s+/', '', $phone)) ?>" class="hover:text-gold-400"><?= View::e($phone) ?></a></li>
+                    <li><a href="mailto:<?= View::e($email) ?>" class="hover:text-gold-400"><?= View::e($email) ?></a></li>
+                    <?php if ($whatsapp): ?>
+                        <li><a href="https://wa.me/<?= View::e(preg_replace('/[^0-9]/', '', $whatsapp)) ?>" target="_blank" rel="noopener" class="hover:text-gold-400">WhatsApp: <?= View::e($whatsapp) ?></a></li>
+                    <?php endif; ?>
+                </ul>
+            </div>
         </div>
     </div>
 

@@ -292,6 +292,40 @@
   [data-mobile-menu] nav a:nth-child(8) { transition-delay: 0.4s; }
   [data-mobile-menu] nav a:nth-child(9) { transition-delay: 0.45s; }
 
+  /* --- Mobile footer accordion (desktop keeps everything open) --- */
+  .footer-col {
+    @apply border-b border-white/10 lg:border-0;
+  }
+  .footer-col--last {
+    @apply border-b-0 lg:border-0;
+  }
+  .footer-toggle {
+    @apply w-full flex items-center justify-between gap-3 py-4 text-sm font-semibold text-white uppercase tracking-wide text-left lg:pointer-events-none lg:py-0;
+  }
+  .footer-chevron {
+    @apply transition-transform duration-300 ease-premium text-white/60 lg:hidden;
+  }
+  .footer-toggle[aria-expanded="true"] .footer-chevron {
+    transform: rotate(180deg);
+  }
+  .footer-panel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .footer-panel.is-open {
+    grid-template-rows: 1fr;
+  }
+  .footer-panel > ul {
+    overflow: hidden;
+    min-height: 0;
+  }
+  @media (min-width: 1024px) {
+    .footer-panel {
+      grid-template-rows: 1fr !important;
+    }
+  }
+
   /* --- Site header --- */
   .site-header {
     @apply sticky top-0 z-50 bg-white/90 backdrop-blur-md border-b border-transparent transition-all duration-300 ease-premium;
