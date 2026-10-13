@@ -99,11 +99,20 @@ $whatsapp = SiteConfig::get('whatsapp_number');
                                     class="nav-link flex items-center gap-1 px-3 py-2 rounded-md text-sm font-medium whitespace-nowrap transition-colors
                                            <?= $isActive($item['href']) ? 'text-navy-950 is-active' : 'text-ink-700 hover:text-navy-950' ?>">
                                 <?= View::e($item['label']) ?>
+                                <?php if ($item['dropdown'] === 'tally-menu'): ?>
+                                    <span class="inline-flex items-center rounded-full bg-gold-500 text-navy-950 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 leading-none">New</span>
+                                <?php endif; ?>
                                 <svg class="w-3.5 h-3.5 transition-transform duration-300 ease-premium" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M5.23 7.21a.75.75 0 011.06.02L10 11.168l3.71-3.938a.75.75 0 111.08 1.04l-4.24 4.5a.75.75 0 01-1.08 0l-4.24-4.5a.75.75 0 01.02-1.06z" clip-rule="evenodd"/></svg>
                             </button>
                             <?php $isTallyMenu = $item['dropdown'] === 'tally-menu'; ?>
                             <div id="<?= View::e($item['dropdown']) ?>" data-dropdown-menu
                                  class="absolute left-1/2 -translate-x-1/2 mt-2 bg-white rounded-xl shadow-card-hover border border-ink-900/[0.06] p-6 grid gap-x-8 gap-y-1 <?= $isTallyMenu ? 'w-[24rem] grid-cols-1' : 'w-[36rem] grid-cols-2' ?>">
+                                <?php if ($isTallyMenu): ?>
+                                    <a href="/blog/tallyprime-7-2-uae-e-invoicing-upgrade-support"
+                                       class="block px-3 py-2.5 mb-1 rounded-lg text-sm font-semibold bg-gold-500/10 text-gold-700 hover:bg-gold-500/20">
+                                        🆕 TallyPrime 7.2 — e-Invoicing Update
+                                    </a>
+                                <?php endif; ?>
                                 <?php foreach ($isTallyMenu ? $tallyLinks : $serviceCategories as $cat): ?>
                                     <a href="<?= $isTallyMenu ? '/services/' : '/solutions/' ?><?= View::e($cat['slug']) ?>"
                                        class="block px-3 py-2.5 rounded-lg text-sm text-ink-700 hover:bg-navy-950/[0.04] hover:text-navy-950">
@@ -174,8 +183,11 @@ $whatsapp = SiteConfig::get('whatsapp_number');
         <nav class="mt-10 flex flex-col divide-y divide-white/10" aria-label="Mobile">
             <?php foreach ($navItems as $item): ?>
                 <a href="<?= View::e($item['href']) ?>" <?= !empty($item['open_new_tab']) ? 'target="_blank" rel="noopener"' : '' ?>
-                   class="py-4 text-lg font-medium <?= $isActive($item['href']) ? 'text-gold-400' : 'text-white' ?>">
+                   class="py-4 text-lg font-medium flex items-center gap-2 <?= $isActive($item['href']) ? 'text-gold-400' : 'text-white' ?>">
                     <?= View::e($item['label']) ?>
+                    <?php if (($item['dropdown'] ?? null) === 'tally-menu'): ?>
+                        <span class="inline-flex items-center rounded-full bg-gold-500 text-navy-950 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 leading-none">New</span>
+                    <?php endif; ?>
                 </a>
             <?php endforeach; ?>
             <a href="/search" class="py-4 text-lg font-medium <?= $isActive('/search') ? 'text-gold-400' : 'text-white' ?>">

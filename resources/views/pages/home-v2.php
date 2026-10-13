@@ -119,6 +119,12 @@ $featureImage = $get('home_tally_feature_image', '');
 
     <div class="relative container-custom w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-16 pb-28 md:pt-24 md:pb-36">
         <div class="lg:col-span-7 min-w-0">
+            <a href="/blog/tallyprime-7-2-uae-e-invoicing-upgrade-support"
+               class="flex w-fit items-center gap-2 rounded-full bg-gold-500/15 border border-gold-500/40 px-4 py-1.5 text-xs sm:text-sm font-semibold text-gold-300 hover:bg-gold-500/25 transition-colors mb-4" data-animate="fade-up">
+                <span class="inline-flex items-center rounded-full bg-gold-500 text-navy-950 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 leading-none">New</span>
+                TallyPrime 7.2 is here — see what's new
+                <svg class="w-3.5 h-3.5" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path fill-rule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.24a.75.75 0 010 1.08l-4.5 4.24a.75.75 0 01-1.06-.02z" clip-rule="evenodd"/></svg>
+            </a>
             <span class="inline-flex items-center gap-2.5 rounded-full glass px-4 py-2 text-xs sm:text-sm font-semibold tracking-wide" data-animate="fade-up">
                 <span class="pulse-dot w-2 h-2 rounded-full bg-gold-500 text-gold-500"></span>
                 <?= View::e($get('home_hero_eyebrow', 'Bright Mind Computer Solutions LLC')) ?>
