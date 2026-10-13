@@ -108,7 +108,7 @@ $whatsapp = SiteConfig::get('whatsapp_number');
                             <div id="<?= View::e($item['dropdown']) ?>" data-dropdown-menu
                                  class="absolute left-1/2 -translate-x-1/2 mt-2 bg-white rounded-xl shadow-card-hover border border-ink-900/[0.06] p-6 grid gap-x-8 gap-y-1 <?= $isTallyMenu ? 'w-[24rem] grid-cols-1' : 'w-[36rem] grid-cols-2' ?>">
                                 <?php if ($isTallyMenu): ?>
-                                    <a href="/blog/tallyprime-7-2-uae-e-invoicing-upgrade-support"
+                                    <a href="/tallyprime-7-2-uae-e-invoicing-upgrade"
                                        class="block px-3 py-2.5 mb-1 rounded-lg text-sm font-semibold bg-gold-500/10 text-gold-700 hover:bg-gold-500/20">
                                         🆕 TallyPrime 7.2 — e-Invoicing Update
                                     </a>

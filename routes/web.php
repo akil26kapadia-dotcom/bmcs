@@ -35,6 +35,7 @@ return function (Router $router): void {
     $router->get('/sitemap', [PageController::class, 'sitemapHtml']);
     $router->get('/sitemap.xml', [SitemapController::class, 'xml']);
     $router->get('/products', [PageController::class, 'products']);
+    $router->get('/tallyprime-7-2-uae-e-invoicing-upgrade', [PageController::class, 'tallyPrime72']);
 
     $router->get('/services', [ServiceController::class, 'index']);
     $router->get('/services/{slug}', [ServiceController::class, 'show']);

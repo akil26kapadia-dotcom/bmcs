@@ -119,7 +119,7 @@ $featureImage = $get('home_tally_feature_image', '');
 
     <div class="relative container-custom w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center pt-16 pb-28 md:pt-24 md:pb-36">
         <div class="lg:col-span-7 min-w-0">
-            <a href="/blog/tallyprime-7-2-uae-e-invoicing-upgrade-support"
+            <a href="/tallyprime-7-2-uae-e-invoicing-upgrade"
                class="flex w-fit items-center gap-2 rounded-full bg-gold-500/15 border border-gold-500/40 px-4 py-1.5 text-xs sm:text-sm font-semibold text-gold-300 hover:bg-gold-500/25 transition-colors mb-4" data-animate="fade-up">
                 <span class="inline-flex items-center rounded-full bg-gold-500 text-navy-950 text-[9px] font-bold uppercase tracking-wide px-1.5 py-0.5 leading-none">New</span>
                 TallyPrime 7.2 is here — see what's new

@@ -61,4 +61,12 @@ class PageController extends Controller
             'categories' => ProductCategory::allOrdered(),
         ]);
     }
+
+    public function tallyPrime72(Request $request): void
+    {
+        $this->view('pages/tallyprime-7-2', [
+            'title' => 'TallyPrime 7.2 UAE – e-Invoicing Features, Upgrade & Support',
+            'description' => 'TallyPrime 7.2 adds UAE e-Invoicing registration for Corporate Tax companies, bulk exchange, status tracking and VAT details. Bright Mind helps you upgrade in Dubai.',
+        ]);
+    }
 }
